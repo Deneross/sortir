@@ -1,0 +1,20 @@
+{% set currentLogo = logo|default('logo1') %}
+
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex justify-content-start align-items-end gap-3" href="">
+        <img src="{{ asset('images/' ~ currentLogo ~ '.png') }}" alt="logo {{ app_name }}"
+             width="150" height="145" class="d-inline-block align-text-top ">
+        <p class="mb-3">{{ app_name }}</p></a>
+
+    {% if app.user %}
+        <div class="d-flex justify-content-end align-self-end gap-3 mx-5 mb-4">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="nav-link" href="">Administration</a>
+            {% endif %}
+            <a class="nav-link" href="">Accueil</a>
+            <a class="nav-link" href="">Mon profil</a>
+            <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
+        </div>
+    {% endif %}
+</nav>
