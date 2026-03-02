@@ -64,9 +64,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $mail = null;
 
     #[ORM\Column]
-    private ?bool $administrateur = false;
-
-    #[ORM\Column]
     private ?bool $actif = true;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -207,18 +204,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMail(string $mail): static
     {
         $this->mail = $mail;
-
-        return $this;
-    }
-
-    public function isAdministrateur(): ?bool
-    {
-        return $this->administrateur;
-    }
-
-    public function setAdministrateur(bool $administrateur): static
-    {
-        $this->administrateur = $administrateur;
 
         return $this;
     }

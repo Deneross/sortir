@@ -28,7 +28,7 @@ class ParticipantFixtures extends Fixture implements DependentFixtureInterface
         $admin->setPrenom('Nistrateur');
         $admin->setTelephone('0102030405');
         $admin->setMail('admin@admin.com');
-        $admin->setCampus($campusDispo[1]);
+        $admin->setCampus($campusDispo[0]);
         $admin->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($admin);
@@ -41,9 +41,22 @@ class ParticipantFixtures extends Fixture implements DependentFixtureInterface
         $user->setPrenom('Cipant');
         $user->setTelephone('0102030405');
         $user->setMail('participant@participant.com');
-        $user->setCampus($campusDispo[2]);
+        $user->setCampus($campusDispo[1]);
 
         $manager->persist($user);
+
+        //Un utilisateur inactif
+        $inactif = new Participant();
+        $inactif->setPseudo('inactif');
+        $inactif->setPassword(password_hash('Inactif@123', PASSWORD_DEFAULT));
+        $inactif->setNom('Ina');
+        $inactif->setPrenom('Ctif');
+        $inactif->setTelephone('0102030405');
+        $inactif->setMail('inactif@inactif.com');
+        $inactif->setCampus($campusDispo[2]);
+        $inactif->setActif(false);
+
+        $manager->persist($inactif);
 
         for ($i = 0; $i < 10; $i++) {
             $participant = new Participant();
