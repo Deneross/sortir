@@ -27,14 +27,15 @@
                 <td>{{ sortie.nom }}</td>
                 <td>{{ sortie.dateHeureDebut | date('d/m/y H:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
-                <td>0 / {{ sortie.nbInscriptionMax }}</td>
+                <td>
+                    {{ sortie.inscrits|length }} / {{ sortie.nbInscriptionMax }}</td>
                 <td>{{ sortie.etat }}</td>
                 <td>
-{#                    {% if sortie.nbInscrit == sortie.nbInscriptionMax %}#}
-{#                        X#}
-{#                    {% endif %}#}
+                    {% if sortie.inscrits|length === sortie.nbInscriptionMax %}
+                        X
+                    {% endif %}
                 </td>
-                <td>sortie.createur</td>
+                <td>{{ sortie.organisateur.pseudo }}</td>
                 <td>
 {#                    {% if sortie.etat == "En cours" %}#}
 {#                        #}

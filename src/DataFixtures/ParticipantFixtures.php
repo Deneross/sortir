@@ -69,6 +69,10 @@ class ParticipantFixtures extends Fixture implements DependentFixtureInterface
             $participant->setCampus($campusDispo[rand(0, count($campusDispo) - 1)]);
 
             $manager->persist($participant);
+            $this->addReference('participant_' . $i, $participant);
+            $this->addReference('organisateur_' . $i, $participant);
+
+
         }
 
         $manager->flush();
