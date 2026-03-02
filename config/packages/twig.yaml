@@ -1,5 +1,9 @@
 twig:
     file_name_pattern: '*.twig'
+    form_theme: ['bootstrap_5_layout.html.twig']
+    globals:
+        app_plublic_images_directory: '%app.public_images_directory%'
+        app_name: 'Sortir.com'
 
 when@test:
     twig:
