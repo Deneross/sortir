@@ -42,6 +42,7 @@ class SortieFixtures extends Fixture
             $sortie->setDateLimiteInscription(\DateTimeImmutable::createFromMutable($dateLimite));
             $sortie->setNbInscriptionMax($faker->numberBetween(2, 200));
             $sortie->setInfosSortie($faker->text(200));
+            $sortie->setPublished($faker->boolean(70));
 
             $manager->persist($sortie);
         }

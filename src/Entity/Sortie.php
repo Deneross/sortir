@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use function Symfony\Component\Clock\now;
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 #[ORM\Table(name: 'sortie')]
@@ -55,6 +56,32 @@ class Sortie
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $infosSortie = null;
 
+    #[ORM\Column(options: ['default' => false])]
+    #[Assert\NotNull]
+    private ?bool $published = false;
+
+    public function getEtat(): string
+    {
+        $now = new \DateTimeImmutable('now');
+
+        if (!$this->published) {
+            return "En création";
+        }
+
+        if (!$this->dateHeureDebut || !$this->dateLimiteInscription) {
+            return 'Invalide';
+        }
+
+        if ($now >= $this->dateHeureDebut) {
+            return 'En cours';
+        }
+
+        if ($now > $this->dateLimiteInscription) {
+            return 'Clôturée';
+        }
+
+        return 'Ouverte';
+    }
 
     public function getId(): ?int
     {
@@ -124,6 +151,18 @@ class Sortie
     public function setInfosSortie(?string $infosSortie): static
     {
         $this->infosSortie = $infosSortie;
+        return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): static
+    {
+        $this->published = $published;
+
         return $this;
     }
 }

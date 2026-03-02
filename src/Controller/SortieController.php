@@ -4,21 +4,31 @@ namespace App\Controller;
 
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/sortie')]
+#[Route('/Sortie')]
 final class SortieController extends AbstractController
 {
     #[Route('/', name: 'sortie_liste', methods: ['GET'])]
-    public function list(SortieRepository $sortieRepository): Response
+    public function list(Request $request, SortieRepository $sortieRepository): Response
     {
         //va chercher les sorties dans la bdd
-        $sorties = $sortieRepository->findAll();
+        $page = max(1, (int) $request->query->get('page', 1));
+        $limit = 10;
+
+        $paginator = $sortieRepository->findLastEvents($page, $limit);
+
+        $total = count($paginator);
+        $pages = (int) ceil($total / $limit);
 
         return $this->render('sortie/list.html.twig', [
             //passe les sorties à twig pour affichage
-            'sorties' => $sorties,
+            'sorties' => $paginator,
+            'page' => $page,
+            'pages' => $pages,
+            'total' => $total,
         ]);
     }
 
