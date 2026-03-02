@@ -4,11 +4,14 @@ namespace App\Entity;
 
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_PSEUDO', fields: ['pseudo'])]
+#[UniqueEntity(fields: ['mail'], message: 'Un utilisateur est déjà connu à cette adresse mail.')]
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -16,6 +19,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: 'Le pseudo est obligatoire.')]
+    #[Assert\Length(min: 2, max: 180, minMessage: 'Le pseudo doit contenir au moins 2 caractères.', maxMessage: 'Le pseudo ne peut dépasser les 180 caractères')]
     #[ORM\Column(length: 180)]
     private ?string $pseudo = null;
 
@@ -29,28 +34,59 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8}$/',
+        message: 'Le mot de passe doit contenir au moins 8 caractères dont
+         un chiffre,
+         une lettre majuscule,
+         une lettre miniscule,
+         un caractère spécial.')]
     private ?string $password = null;
 
+    #[Assert\NotBlank(message: 'Le nom est obligatoire.')]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom doit contenir au moins 2 caractères.', maxMessage: 'Le nom ne peut dépasser les 255 caractères')]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank(message: 'Le prénom est obligatoire.')]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Le prénom doit contenir au moins 2 caractères.', maxMessage: 'Le prénom ne peut dépasser les 255 caractères')]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[Assert\NotBlank(message: 'Le téléphone est obligatoire.')]
+    #[Assert\Length(min: 9, max: 255, minMessage: 'Le téléphone doit contenir au moins 9 chiffres.', maxMessage: 'Le téléphone ne peut dépasser les 255 caractères')]
     #[ORM\Column(length: 255)]
     private ?string $telephone = null;
 
+    #[Assert\Email(message: 'L\'adresse mail est invalide.')]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'l\'addresse mail doit contenir au moins 2 charactères.', maxMessage: 'l\'addresse mail ne peut dépasser les 255 caractères')]
     #[ORM\Column(length: 255)]
     private ?string $mail = null;
 
     #[ORM\Column]
-    private ?bool $administrateur = null;
+    private ?bool $administrateur = false;
 
     #[ORM\Column]
-    private ?bool $actif = null;
+    private ?bool $actif = true;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nomFichierPhoto = null;
+
+    #[ORM\ManyToOne(inversedBy: 'affiliates')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Campus $campus = null;
+
+
+    public function __construct()
+    {
+        $this->roles = ['ROLE_PARTICIPANT'];
+    }
+
+    public function __toString(): string
+    {
+        return "$this->nom $this->prenom ($this->pseudo)";
+    }
+
 
     public function getId(): ?int
     {
@@ -76,7 +112,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->pseudo;
+        return (string)$this->pseudo;
     }
 
     /**
@@ -121,8 +157,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function __serialize(): array
     {
-        $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data = (array)$this;
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }
@@ -207,6 +243,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNomFichierPhoto(?string $nomFichierPhoto): static
     {
         $this->nomFichierPhoto = $nomFichierPhoto;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): static
+    {
+        $this->campus = $campus;
 
         return $this;
     }
