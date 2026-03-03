@@ -29,43 +29,63 @@
                 <td>{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
                 <td>
                     {{ sortie.inscrits|length }} / {{ sortie.nbInscriptionMax }}</td>
-                <td>{{ sortie.etat }}</td>
-                <td>
+                <td>{{ sortie.etat.label }}</td>
+                <td class="text-center">
                     {% if sortie.inscrits|length === sortie.nbInscriptionMax %}
                         X
                     {% endif %}
                 </td>
-                <td>{{ sortie.organisateur.pseudo }}</td>
                 <td>
-{#                    {% if sortie.etat == "En cours" %}#}
-{#                        #}
-{#                    {% endif %}#}
-                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}" title="Détail de la sortie">
+                    <a href="{{ path('app_participant_display') }}" title="Détails organisateur">
+                        {{ sortie.organisateur.pseudo }}
+                    </a>
+                </td>
+                <td>
+
+                    <a class="btn btn-group-sm btn-primary" href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                       title="Détail de la sortie">
                         Afficher
                     </a>
-                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}" title="S'inscrire à la sortie">
-                        S'inscrire / à faire
-                    </a>
-                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}" title="S'inscrire à la sortie">
-                        Se désister / à faire
-                    </a>
 
-                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" title="S'inscrire à la sortie">
-                        Modifier / à faire
-                    </a>
+                    {% if app.user and app.user.id == sortie.organisateur.id %}
+                        {% if sortie.published == true %}
+                            <a class="btn btn-group-sm btn-danger" href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                               title="Annuler la sortie">
+                                Annuler / à faire
+                            </a>
+                        {% else %}
+                            <a class="btn btn-group-sm btn-success" href="{{ path('sortie_edit', {'id': sortie.id}) }}"
+                               title="Modifier la sortie">
+                                Modifier / à faire
+                            </a>
 
-                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}" title="S'inscrire à la sortie">
-                        Publier / à faire
-                    </a>
+                            <a class="btn btn-group-sm btn-success" href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                               title="Publier la sortie">
+                                Publier / à faire
+                            </a>
 
-                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}" title="S'inscrire à la sortie">
-                        Supprimer / à faire
-                    </a>
+                            <a class="btn btn-group-sm btn-danger" href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                               title="Supprimer la sortie">
+                                Supprimer / à faire
+                            </a
+                        {% endif %}
+                    {% endif %}
 
-                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}" title="S'inscrire à la sortie">
-                        Annuler / à faire
-                    </a>
 
+
+                    {% if sortie.etat.value == 2 %}
+                        {% if app.user and app.user in sortie.inscrits %}
+                            <a class="btn btn-group-sm btn-primary" href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                               title="S'inscrire à la sortie">
+                                Se désister / à faire
+                            </a>
+                        {% else %}
+                            <a class="btn btn-group-sm btn-primary" href="{{ path('sortie_show', {'id': sortie.id}) }}"
+                               title="S'inscrire à la sortie">
+                                S'inscrire / à faire
+                            </a>
+                        {% endif %}
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

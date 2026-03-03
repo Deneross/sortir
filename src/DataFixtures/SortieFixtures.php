@@ -51,11 +51,11 @@ class SortieFixtures extends Fixture implements DependentFixtureInterface
             $nbInscrits = $faker->numberBetween(0, $inscriptionMax);
 
             for ($j = 1; $j <= $nbInscrits; $j++) {
-                $participant = $this->getReference('participant_' . $faker->numberBetween(1, 5), Participant::class);
+                $participant = $this->getReference('participant_' . $faker->numberBetween(1, 2), Participant::class);
                 $sortie->addInscrit($participant);
             }
 
-            $sortie->setOrganisateur($this->getReference('organisateur_' . $faker->numberBetween(1, 5), Participant::class));
+            $sortie->setOrganisateur($this->getReference('organisateur_' . $faker->numberBetween(1, 2), Participant::class));
 
             $campusNames = [
                 'SAINT-HERBLAIN',

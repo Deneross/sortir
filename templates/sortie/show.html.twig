@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ sortie.nom}} |{{ parent() }}>
+    {{ sortie.nom}} |{{ parent() }}
 {% endblock %}
 
 
@@ -56,7 +56,7 @@
 
                         <div class="row mb-2">
                             <div class="col-6 fw-bold">Campus</div>
-                            <div class="col-6">sortie.campus.nom</div>
+                            <div class="col-6">{{ sortie.campus.name }}</div>
                         </div>
 
                         <div class="row mb-2">
@@ -116,27 +116,20 @@
             </tr>
             </thead>
             <tbody>
-
-{#            {% for participant in sortie.participant %}#}
-{#                <tr>#}
-{#                    <td>#}
-{#                        <a href="{{ path('participant_show', {'id': participant.id}) }}" title="Détails participant">#}
-{#                            {{ sortie.participant.pseudo }}#}
-{#                        </a>#}
-{#                    </td>#}
-{#                    <td>{{ sortie.participant.Nom }}</td>#}
-{#                </tr>#}
-{#            {% else %}#}
-{#                <tr>#}
-{#                    <td colspan="5">Aucun participant trouvé</td>#}
-{#                </tr>#}
-{#            {% endfor %}#}
-            <tr>
-                <td>
-                    <a href="">JBL / à faire</a>
-                </td>
-                <td>Jean-Baptiste LAMARCK / à faire</td>
-            </tr>
+            {% for participant in sortie.inscrits %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_participant_display', {'id': participant.id}) }}" title="Détails participant">
+                            {{ participant.pseudo }}
+                        </a>
+                    </td>
+                    <td> {{ participant }} </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun participant trouvé</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
 

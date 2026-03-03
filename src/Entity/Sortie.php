@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use App\Enum\EtatSortie;
 use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use function Symfony\Component\Clock\now;
@@ -35,10 +37,10 @@ class Sortie
     #[Assert\GreaterThan('now', message: 'La date de début doit être supérieur à aujourd\'hui.')]
     private ?\DateTimeImmutable $dateHeureDebut = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     #[Assert\NotNull(message: 'La durée est obligatoire.')]
     #[Assert\Positive(message: 'La durée doit être un nombre positif.')]
-    private ?int $duree = null;
+    private ?int $duree = 1;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     #[Assert\NotNull(message: 'La date limite d’inscription est obligatoire.')]
@@ -76,32 +78,54 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
+    #[ORM\Column(options: ['default' => false])]
+    #[Assert\NotNull]
+    private ?bool $cancel = false;
+
+    #[ORM\Column(options: ['default' => false])]
+    #[Assert\NotNull]
+    private ?bool $Archived = false;
+
     public function __construct()
     {
         $this->inscrits = new ArrayCollection();
     }
 
-    public function getEtat(): string
+    public function getEtat(): EtatSortie
     {
-        $now = new \DateTimeImmutable('now');
+        $now = new \DateTimeImmutable();
 
-        if (!$this->published) {
-            return "En création";
+        if ($this->cancel) {
+            return EtatSortie::ANNULEE;
         }
 
-        if (!$this->dateHeureDebut || !$this->dateLimiteInscription) {
-            return 'Invalide';
+        if ($this->Archived) {
+            return EtatSortie::HISTORISEE;
+        }
+
+        if (!$this->published) {
+            return EtatSortie::EN_CREATION;
+        }
+
+        $fin = $this->dateHeureDebut->add(new \DateInterval("PT{$this->duree}M"));
+
+        if ($now > $fin) {
+            return EtatSortie::TERMINEE;
         }
 
         if ($now >= $this->dateHeureDebut) {
-            return 'En cours';
+            return EtatSortie::EN_COURS;
         }
 
-        if ($now > $this->dateLimiteInscription) {
-            return 'Clôturée';
+
+        $complet = $this->inscrits->count() >= $this->nbInscriptionMax;
+        $dateLimiteDepassee = $now > $this->dateLimiteInscription;
+
+        if ($complet || $dateLimiteDepassee) {
+            return EtatSortie::CLOTUREE;
         }
 
-        return 'Ouverte';
+        return EtatSortie::OUVERTE;
     }
 
     public function getId(): ?int
@@ -231,6 +255,30 @@ class Sortie
     public function setCampus(?Campus $campus): static
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function isCancel(): ?bool
+    {
+        return $this->cancel;
+    }
+
+    public function setCancel(bool $cancel): static
+    {
+        $this->cancel = $cancel;
+
+        return $this;
+    }
+
+    public function isArchived(): ?bool
+    {
+        return $this->Archived;
+    }
+
+    public function setArchived(bool $Archived): static
+    {
+        $this->Archived = $Archived;
 
         return $this;
     }
