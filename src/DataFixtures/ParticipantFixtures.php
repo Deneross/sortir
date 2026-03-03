@@ -31,7 +31,11 @@ class ParticipantFixtures extends Fixture implements DependentFixtureInterface
         $admin->setCampus($campusDispo[0]);
         $admin->setRoles(['ROLE_ADMIN']);
 
+
         $manager->persist($admin);
+
+        $this->addReference('participant_' . 1, $admin);
+        $this->addReference('organisateur_' . 1, $admin);
 
         //Un utilisateur par défaut disponible pour tester
         $user = new Participant();
@@ -43,7 +47,11 @@ class ParticipantFixtures extends Fixture implements DependentFixtureInterface
         $user->setMail('participant@participant.com');
         $user->setCampus($campusDispo[1]);
 
+
         $manager->persist($user);
+
+        $this->addReference('participant_' . 2, $user);
+        $this->addReference('organisateur_' . 2, $user);
 
         //Un utilisateur inactif
         $inactif = new Participant();
@@ -58,22 +66,22 @@ class ParticipantFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($inactif);
 
-        for ($i = 0; $i < 10; $i++) {
-            $participant = new Participant();
-            $participant->setPseudo($faker->userName());
-            $participant->setPassword(password_hash(($faker->password(8).'@'.rand(0,9)), PASSWORD_DEFAULT));
-            $participant->setNom($faker->lastName());
-            $participant->setPrenom($faker->firstName());
-            $participant->setTelephone($faker->phoneNumber());
-            $participant->setMail($faker->email());
-            $participant->setCampus($campusDispo[rand(0, count($campusDispo) - 1)]);
-
-            $manager->persist($participant);
-            $this->addReference('participant_' . $i, $participant);
-            $this->addReference('organisateur_' . $i, $participant);
-
-
-        }
+//        for ($i = 0; $i < 10; $i++) {
+//            $participant = new Participant();
+//            $participant->setPseudo($faker->userName());
+//            $participant->setPassword(password_hash(($faker->password(8).'@'.rand(0,9)), PASSWORD_DEFAULT));
+//            $participant->setNom($faker->lastName());
+//            $participant->setPrenom($faker->firstName());
+//            $participant->setTelephone($faker->phoneNumber());
+//            $participant->setMail($faker->email());
+//            $participant->setCampus($campusDispo[rand(0, count($campusDispo) - 1)]);
+//
+//            $manager->persist($participant);
+//            $this->addReference('participant_' . $i, $participant);
+//            $this->addReference('organisateur_' . $i, $participant);
+//
+//
+//        }
 
         $manager->flush();
     }
