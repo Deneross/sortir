@@ -18,10 +18,10 @@
                         </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="">Accueil</a>
+                        <a class="nav-link" href="{{ path('sortie_liste') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_participant_display') }}">Mon profil</a>
+                        <a class="nav-link" href="{{ path('app_participant_read') }}">Mon profil</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
