@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Sortie;
 use App\Repository\SortieRepository;
+use App\SortieService\Etat;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

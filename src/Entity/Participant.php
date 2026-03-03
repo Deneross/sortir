@@ -77,20 +77,19 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Sortie>
      */
     #[ORM\OneToMany(targetEntity: Sortie::class, mappedBy: 'organisateur')]
-    private Collection $sorties_organisateurs;
+    private Collection $sortiesOrganisateur;
 
     /**
      * @var Collection<int, Sortie>
      */
     #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'inscrits')]
-    private Collection $sorties_inscrits;
-
+    private Collection $sortiesInscrits;
 
     public function __construct()
     {
         $this->roles = ['ROLE_PARTICIPANT'];
-        $this->sorties_organisateurs = new ArrayCollection();
-        $this->sorties_inscrits = new ArrayCollection();
+        $this->sortiesOrganisateur = new ArrayCollection();
+        $this->sortiesInscrits = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -261,52 +260,57 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Sortie>
      */
-    public function getSortiesOrganisateurs(): Collection
+    public function getSortiesOrganisateur(): Collection
     {
-        return $this->sorties_organisateurs;
+        return $this->sortiesOrganisateur;
     }
 
-    public function addSortiesOrganisateurs(Sortie $sortie): static
+    public function addSortiesOrganisateur(Sortie $sortiesOrganisateur): static
     {
-        if (!$this->sorties_organisateurs->contains($sortie)) {
-            $this->sorties_organisateurs->add($sortie);
-            $sortie->setOrganisateur($this);
+        if (!$this->sortiesOrganisateur->contains($sortiesOrganisateur)) {
+            $this->sortiesOrganisateur->add($sortiesOrganisateur);
+            $sortiesOrganisateur->setOrganisateur($this);
         }
 
         return $this;
     }
 
-    public function removeSortiesOrganisateurs(Sortie $sortie): static
+    public function removeSortiesOrganisateur(Sortie $sortiesOrganisateur): static
     {
-        if ($this->sorties_organisateurs->removeElement($sortie)) {
-            if ($sortie->getOrganisateur() === $this) {
-                $sortie->setOrganisateur(null);
+        if ($this->sortiesOrganisateur->removeElement($sortiesOrganisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($sortiesOrganisateur->getOrganisateur() === $this) {
+                $sortiesOrganisateur->setOrganisateur(null);
             }
         }
 
         return $this;
     }
 
-
+    /**
+     * @return Collection<int, Sortie>
+     */
     public function getSortiesInscrits(): Collection
     {
-        return $this->sorties_inscrits;
+        return $this->sortiesInscrits;
     }
 
-    public function addSortieInscrits(Sortie $sortie): static
+    public function addSortiesInscrit(Sortie $sortiesInscrit): static
     {
-        if (!$this->sorties_inscrits->contains($sortie)) {
-            $this->sorties_inscrits->add($sortie);
-            $sortie->addInscrit($this);
+        if (!$this->sortiesInscrits->contains($sortiesInscrit)) {
+            $this->sortiesInscrits->add($sortiesInscrit);
+            $sortiesInscrit->addInscrit($this);
         }
+
         return $this;
     }
 
-    public function removeSortieInscrits(Sortie $sortie): static
+    public function removeSortiesInscrit(Sortie $sortiesInscrit): static
     {
-        if ($this->sorties_inscrits->removeElement($sortie)) {
-            $sortie->removeInscrit($this);
+        if ($this->sortiesInscrits->removeElement($sortiesInscrit)) {
+            $sortiesInscrit->removeInscrit($this);
         }
+
         return $this;
     }
 

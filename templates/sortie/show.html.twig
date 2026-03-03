@@ -119,7 +119,7 @@
             {% for participant in sortie.inscrits %}
                 <tr>
                     <td>
-                        <a href="{{ path('app_participant_display', {'id': participant.id}) }}" title="Détails participant">
+                        <a href="{{ path('app_participant_read') }}" title="Détails participant">
                             {{ participant.pseudo }}
                         </a>
                     </td>

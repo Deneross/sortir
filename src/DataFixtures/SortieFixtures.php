@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -47,6 +48,7 @@ class SortieFixtures extends Fixture implements DependentFixtureInterface
             $sortie->setNbInscriptionMax($inscriptionMax);
             $sortie->setInfosSortie($faker->text(200));
             $sortie->setPublished($faker->boolean(70));
+            $sortie->setEtat($this->getReference('etat_1', Etat::class));
 
             $nbInscrits = $faker->numberBetween(0, $inscriptionMax);
 
@@ -72,6 +74,6 @@ class SortieFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies(): array
     {
-        return [ParticipantFixtures::class, CampusFixtures::class];
+        return [ParticipantFixtures::class, CampusFixtures::class, EtatFixtures::class];
     }
 }

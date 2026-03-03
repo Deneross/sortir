@@ -29,7 +29,7 @@
                 <td>{{ sortie.dateLimiteInscription | date('d/m/Y') }}</td>
                 <td>
                     {{ sortie.inscrits|length }} / {{ sortie.nbInscriptionMax }}</td>
-                <td>{{ sortie.etat.label }}</td>
+                <td>{{ sortie.etat }}</td>
                 <td class="text-center">
                     {% if sortie.inscrits|length === sortie.nbInscriptionMax %}
                         X
@@ -73,7 +73,7 @@
 
 
 
-                    {% if sortie.etat.value == 2 %}
+                    {% if sortie.etat.id == 2 %}
                         {% if app.user and app.user in sortie.inscrits %}
                             <a class="btn btn-group-sm btn-primary" href="{{ path('sortie_show', {'id': sortie.id}) }}"
                                title="S'inscrire à la sortie">

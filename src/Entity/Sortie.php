@@ -2,16 +2,12 @@
 
 namespace App\Entity;
 
-use App\Enum\EtatSortie;
 use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use function Symfony\Component\Clock\now;
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 #[ORM\Table(name: 'sortie')]
@@ -64,16 +60,6 @@ class Sortie
     #[Assert\NotNull]
     private ?bool $published = false;
 
-    #[ORM\ManyToOne(inversedBy: 'sorties')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Participant $organisateur = null;
-
-    /**
-     * @var Collection<int, Participant>
-     */
-    #[ORM\ManyToMany(targetEntity: Participant::class, inversedBy: 'sorties')]
-    #[ORM\JoinTable(name: 'sortie_participant')]
-    private Collection $inscrits;
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
@@ -87,47 +73,25 @@ class Sortie
     #[Assert\NotNull]
     private ?bool $Archived = false;
 
+    #[ORM\ManyToOne(inversedBy: 'sortiesOrganisateur')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Participant $organisateur = null;
+
+    /**
+     * @var Collection<int, Participant>
+     */
+    #[ORM\ManyToMany(targetEntity: Participant::class, inversedBy: 'sortiesInscrits')]
+    private Collection $inscrits;
+
+    #[ORM\ManyToOne(inversedBy: 'sortiesEtat')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Etat $etat = null;
+
     public function __construct()
     {
         $this->inscrits = new ArrayCollection();
     }
 
-    public function getEtat(): EtatSortie
-    {
-        $now = new \DateTimeImmutable();
-
-        if ($this->cancel) {
-            return EtatSortie::ANNULEE;
-        }
-
-        if ($this->Archived) {
-            return EtatSortie::HISTORISEE;
-        }
-
-        if (!$this->published) {
-            return EtatSortie::EN_CREATION;
-        }
-
-        $fin = $this->dateHeureDebut->add(new \DateInterval("PT{$this->duree}M"));
-
-        if ($now > $fin) {
-            return EtatSortie::TERMINEE;
-        }
-
-        if ($now >= $this->dateHeureDebut) {
-            return EtatSortie::EN_COURS;
-        }
-
-
-        $complet = $this->inscrits->count() >= $this->nbInscriptionMax;
-        $dateLimiteDepassee = $now > $this->dateLimiteInscription;
-
-        if ($complet || $dateLimiteDepassee) {
-            return EtatSortie::CLOTUREE;
-        }
-
-        return EtatSortie::OUVERTE;
-    }
 
     public function getId(): ?int
     {
@@ -212,43 +176,6 @@ class Sortie
         return $this;
     }
 
-    public function getOrganisateur(): ?Participant
-    {
-        return $this->organisateur;
-    }
-
-    public function setOrganisateur(?Participant $organisateur): static
-    {
-        $this->organisateur = $organisateur;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Participant>
-     */
-    public function getInscrits(): Collection
-    {
-        return $this->inscrits;
-    }
-
-    public function addInscrit(Participant $inscrit): static
-    {
-        if (!$this->inscrits->contains($inscrit)) {
-            $this->inscrits->add($inscrit);
-            $inscrit->addSortieInscrits($this);
-        }
-        return $this;
-    }
-
-    public function removeInscrit(Participant $inscrit): static
-    {
-        if ($this->inscrits->removeElement($inscrit)) {
-            $inscrit->removeSortieInscrits($this);
-        }
-        return $this;
-    }
-
     public function getCampus(): ?Campus
     {
         return $this->campus;
@@ -282,6 +209,53 @@ class Sortie
     {
         $this->Archived = $Archived;
 
+        return $this;
+    }
+
+    public function getOrganisateur(): ?Participant
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(?Participant $organisateur): static
+    {
+        $this->organisateur = $organisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participant>
+     */
+    public function getInscrits(): Collection
+    {
+        return $this->inscrits;
+    }
+
+    public function addInscrit(Participant $inscrit): static
+    {
+        if (!$this->inscrits->contains($inscrit)) {
+            $this->inscrits->add($inscrit);
+        }
+
+        return $this;
+    }
+
+    public function removeInscrit(Participant $inscrit): static
+    {
+        $this->inscrits->removeElement($inscrit);
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
         return $this;
     }
 }
