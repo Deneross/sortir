@@ -72,6 +72,7 @@ class Sortie
      * @var Collection<int, Participant>
      */
     #[ORM\ManyToMany(targetEntity: Participant::class, inversedBy: 'sorties')]
+    #[ORM\JoinTable(name: 'sortie_participant')]
     private Collection $inscrits;
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
@@ -235,15 +236,16 @@ class Sortie
     {
         if (!$this->inscrits->contains($inscrit)) {
             $this->inscrits->add($inscrit);
+            $inscrit->addSortieInscrits($this);
         }
-
         return $this;
     }
 
     public function removeInscrit(Participant $inscrit): static
     {
-        $this->inscrits->removeElement($inscrit);
-
+        if ($this->inscrits->removeElement($inscrit)) {
+            $inscrit->removeSortieInscrits($this);
+        }
         return $this;
     }
 

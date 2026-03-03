@@ -79,13 +79,20 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Sortie>
      */
     #[ORM\OneToMany(targetEntity: Sortie::class, mappedBy: 'organisateur')]
-    private Collection $sorties;
+    private Collection $sorties_organisateurs;
+
+    /**
+     * @var Collection<int, Sortie>
+     */
+    #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'inscrits')]
+    private Collection $sorties_inscrits;
 
 
     public function __construct()
     {
         $this->roles = ['ROLE_PARTICIPANT'];
-        $this->sorties = new ArrayCollection();
+        $this->sorties_organisateurs = new ArrayCollection();
+        $this->sorties_inscrits = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -256,30 +263,52 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Sortie>
      */
-    public function getSorties(): Collection
+    public function getSortiesOrganisateurs(): Collection
     {
-        return $this->sorties;
+        return $this->sorties_organisateurs;
     }
 
-    public function addSortie(Sortie $sortie): static
+    public function addSortiesOrganisateurs(Sortie $sortie): static
     {
-        if (!$this->sorties->contains($sortie)) {
-            $this->sorties->add($sortie);
+        if (!$this->sorties_organisateurs->contains($sortie)) {
+            $this->sorties_organisateurs->add($sortie);
             $sortie->setOrganisateur($this);
         }
 
         return $this;
     }
 
-    public function removeSortie(Sortie $sortie): static
+    public function removeSortiesOrganisateurs(Sortie $sortie): static
     {
-        if ($this->sorties->removeElement($sortie)) {
-            // set the owning side to null (unless already changed)
+        if ($this->sorties_organisateurs->removeElement($sortie)) {
             if ($sortie->getOrganisateur() === $this) {
                 $sortie->setOrganisateur(null);
             }
         }
 
+        return $this;
+    }
+
+
+    public function getSortiesInscrits(): Collection
+    {
+        return $this->sorties_inscrits;
+    }
+
+    public function addSortieInscrits(Sortie $sortie): static
+    {
+        if (!$this->sorties_inscrits->contains($sortie)) {
+            $this->sorties_inscrits->add($sortie);
+            $sortie->addInscrit($this);
+        }
+        return $this;
+    }
+
+    public function removeSortieInscrits(Sortie $sortie): static
+    {
+        if ($this->sorties_inscrits->removeElement($sortie)) {
+            $sortie->removeInscrit($this);
+        }
         return $this;
     }
 
