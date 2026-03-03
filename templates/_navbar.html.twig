@@ -1,18 +1,34 @@
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar navbar-expand-sm bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex justify-content-start align-items-end gap-3" href="">
-        <img src="{{ asset('images/' ~ rand_logo()) }}" alt="logo {{ app_name }}"
-             width="150" height="145" class="d-inline-block align-text-top ">
-        <p class="mb-3">{{ app_name }}</p></a>
-
-    {% if app.user %}
-        <div class="d-flex justify-content-end align-self-end gap-3 mx-5 mb-4">
-            {% if is_granted('ROLE_ADMIN') %}
-                <a class="nav-link" href="">Administration</a>
-            {% endif %}
-            <a class="nav-link" href="">Accueil</a>
-            <a class="nav-link" href="">Mon profil</a>
-            <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
+        <a class="navbar-brand d-flex justify-content-start align-items-end gap-3 " href="{{ path('sortie_liste') }}">
+            <img src="{{ asset('images/' ~ rand_logo()) }}" alt="logo {{ app_name }}"
+                 width="150" height="145" class="d-inline-block align-text-top ">
+            <p class="mb-sm-3 d-none d-sm-flex ">{{ app_name }}</p></a>
+        {% if app.user %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg"
+             aria-labelledby="navbarOffcanvasLgLabel">
+            <div class="offcanvas-body d-flex justify-content-end align-self-end gap-3 mx-md-5 mb-md-4">
+                <ul class="navbar-nav ">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Administration</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_participant_display') }}">Mon profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('app_logout') }}" class="nav-link">Se déconnecter</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     {% endif %}
+    </div>
 </nav>

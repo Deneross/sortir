@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}Mon profil{% endblock %}
+
+{% block section %}
+<div class="d-flex justify-content-center align-items-center row">
+    <div class="d-flex col-sm-12 col-md-3 justify-content-center align-content-around">
+        <img src="{{ img }}" alt="Image de profil de {{ participant.pseudo }}">
+    </div>
+    <div class="d-flex col-sm-12 col-md-8 justify-content-center align-content-around">
+        <h3 class="m-3">{{ participant.pseudo }}</h3>
+    </div>
+</div>
+
+{% endblock %}
