@@ -22,6 +22,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[Assert\NotBlank(message: 'Le pseudo est obligatoire.')]
+    #[Assert\NotNull(message: 'Le pseudo est obligatoire.')]
     #[Assert\Length(min: 2, max: 180, minMessage: 'Le pseudo doit contenir au moins 2 caractères.', maxMessage: 'Le pseudo ne peut dépasser les 180 caractères')]
     #[ORM\Column(length: 180)]
     private ?string $pseudo = null;
@@ -36,26 +37,22 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\Regex(
-        pattern: '/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8}$/',
-        message: 'Le mot de passe doit contenir au moins 8 caractères dont
-         un chiffre,
-         une lettre majuscule,
-         une lettre miniscule,
-         un caractère spécial.')]
     private ?string $password = null;
 
     #[Assert\NotBlank(message: 'Le nom est obligatoire.')]
+    #[Assert\NotNull(message: 'Le nom est obligatoire.')]
     #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom doit contenir au moins 2 caractères.', maxMessage: 'Le nom ne peut dépasser les 255 caractères')]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     #[Assert\NotBlank(message: 'Le prénom est obligatoire.')]
+    #[Assert\NotNull(message: 'Le prénom est obligatoire.')]
     #[Assert\Length(min: 2, max: 255, minMessage: 'Le prénom doit contenir au moins 2 caractères.', maxMessage: 'Le prénom ne peut dépasser les 255 caractères')]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
     #[Assert\NotBlank(message: 'Le téléphone est obligatoire.')]
+    #[Assert\NotNull(message: 'Le téléphone est obligatoire.')]
     #[Assert\Length(min: 9, max: 255, minMessage: 'Le téléphone doit contenir au moins 9 chiffres.', maxMessage: 'Le téléphone ne peut dépasser les 255 caractères')]
     #[ORM\Column(length: 255)]
     private ?string $telephone = null;
