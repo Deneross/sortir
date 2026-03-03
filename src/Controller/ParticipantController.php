@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/participant', name: 'app_participant')]
 final class ParticipantController extends AbstractController
 {
+    /******* Routes sur un participant connecté, faisant appel au service pour returner le user ********/
     #[Route('', name: '_read', methods: ['GET'])]
     public function index(
         FormParticipant $service
@@ -74,6 +75,30 @@ final class ParticipantController extends AbstractController
             'formParticipant' => $form,
             'participant' => $participant,
             'img' => $service->getProfilPicture($participant),
+        ]);
+    }
+
+    /******* Routes standard pour afficher les infos d'un participant ********/
+    #[Route('/{id}', name: '_show', requirements: ['id'=>'\d+'] ,methods: ['GET'])]
+    public function display(
+        FormParticipant $service,
+        int $id,
+        ParticipantRepository $repo,
+    ): Response
+    {
+        $participantCo = $repo->find($id);
+
+        if(!$participantCo){
+            throw new ParticipantNotFound(
+                'Aucun participant correspondant',
+                Response::HTTP_NOT_FOUND
+            );
+        }
+
+        return $this->render('participant/base.html.twig', [
+            'form' => 'participant/form_readonly.html.twig',
+            'participant' => $participantCo,
+            'img' => $service->getProfilPicture($participantCo),
         ]);
     }
 }
