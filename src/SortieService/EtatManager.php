@@ -4,6 +4,7 @@ namespace App\SortieService;
 
 use App\Entity\Sortie;
 use App\Enum\EtatSortie;
+use App\Exception\EtatError;
 use App\Repository\EtatRepository;
 
 class EtatManager
@@ -52,6 +53,12 @@ class EtatManager
     }
 
     public function getRightEtat(EtatSortie $etat): \App\Entity\Etat {
-        return $this->etatRepository->find($etat->value);
+        $etat = $this->etatRepository->find($etat->value);
+
+        if(!$etat){
+            throw new EtatError('L\'état transmis est introuvable');
+        }
+
+        return $etat;
     }
 }

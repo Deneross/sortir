@@ -14,27 +14,14 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class FormParticipant
+class ImgManager
 {
     public function __construct(
-        private readonly Security              $security,
         private readonly ContainerBagInterface $container,
         private readonly SluggerInterface      $slug)
     {
     }
 
-    public function getParticipant(): Participant
-    {
-        $user = $this->security->getUser();
-
-        if (!$user instanceof Participant) {
-            throw new ParticipantNotFound(
-                'Aucun participant connecté.'
-            );
-        }
-
-        return $user;
-    }
 
     public function getProfilPicture(Participant $p): ?string
     {

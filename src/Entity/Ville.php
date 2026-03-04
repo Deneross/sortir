@@ -29,7 +29,7 @@ class Ville
 
     #[ORM\ManyToOne(inversedBy: 'villesDeSortie')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Campus $Campus = null;
+    private ?Campus $campus = null;
 
     public function __construct()
     {
@@ -97,12 +97,12 @@ class Ville
 
     public function getCampus(): ?Campus
     {
-        return $this->Campus;
+        return $this->campus;
     }
 
-    public function setCampus(?Campus $Campus): static
+    public function setCampus(?Campus $campus): static
     {
-        $this->Campus = $Campus;
+        $this->campus = $campus;
 
         return $this;
     }

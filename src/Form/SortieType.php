@@ -8,6 +8,7 @@ use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Entity\Ville;
+use App\Repository\VilleRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -22,9 +23,12 @@ class SortieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $campus = $options['CampusToUseAsFilter'];
+
         /**
-         * Attention ce formulaire nécessite que dans le controller, on gère les affiliations au lieu
-         * Les champs lieux ne sont pas mapped, seul la ville est géré automatiquement à partir du Code Postal
+         * Attention ce formulaire a de la logique qui dépend du controller Sortie:
+         * Aucun champ du lieu n'est mapped, le mapping se fait dans le service LieuManager
+         * Une query est fait sur le code postal pour filter par le campus
          */
         $builder
             ->add('nom', TextType::class, [
@@ -70,6 +74,9 @@ class SortieType extends AbstractType
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'name',
+                'attr'=>[
+                    'disabled' => true,
+                ]
             ])
             ->add('lieuNom', TextType::class, [
                 'label' => 'Lieu',
@@ -90,6 +97,11 @@ class SortieType extends AbstractType
                 'choice_label' => 'codePostal',
                 'multiple' => false,
                 'mapped' => false,
+                'query_builder' => function (VilleRepository $repo) use ($campus) {
+                return $repo->createQueryBuilder('v')
+                    ->where('v.campus = :campus')
+                    ->setParameter('campus', $campus);
+                }
             ])
             ->add('lieuCoordonnees', TextType::class, [
                 'label' => 'Latitude / Longitude',
@@ -113,6 +125,7 @@ class SortieType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Sortie::class,
+            'CampusToUseAsFilter' => null,
         ]);
     }
 }

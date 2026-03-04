@@ -5,7 +5,8 @@ namespace App\Controller;
 use App\Exception\ParticipantNotFound;
 use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
-use App\Util\FormParticipant;
+use App\Util\FromUserToParticipant;
+use App\Util\ImgManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -21,11 +22,12 @@ final class ParticipantController extends AbstractController
     /******* Routes sur un participant connecté, faisant appel au service pour returner le user ********/
     #[Route('', name: '_read', methods: ['GET'])]
     public function index(
-        FormParticipant $service
+        ImgManager $service,
+        FromUserToParticipant $rightParticipant
     ): Response
     {
         try {
-            $participantCo = $service->getParticipant();
+            $participantCo = $rightParticipant->getParticipant();
         } catch (ParticipantNotFound $e) {
             $this->addFlash('danger', $e->getMessage());
             return $this->redirectToRoute('app_login');
@@ -40,14 +42,15 @@ final class ParticipantController extends AbstractController
 
     #[Route('/update', name: '_update', methods: ['GET', 'POST'])]
     public function update(
-        FormParticipant        $service,
+        ImgManager                  $service,
+        FromUserToParticipant $rightParticipant,
         UserPasswordHasherInterface $toHash,
-        EntityManagerInterface $em,
-        Request                $request
+        EntityManagerInterface      $em,
+        Request                     $request
     ): Response
     {
         try {
-            $participant = $service->getParticipant();
+            $participant = $rightParticipant->getParticipant();
             $campus = $participant->getCampus();
             $form = $this->createForm(ParticipantType::class, $participant);
             $form->handleRequest($request);
@@ -88,8 +91,8 @@ final class ParticipantController extends AbstractController
     /******* Routes standard pour afficher les infos d'un participant ********/
     #[Route('/{id}', name: '_show', requirements: ['id'=>'\d+'] ,methods: ['GET'])]
     public function display(
-        FormParticipant $service,
-        int $id,
+        ImgManager            $service,
+        int                   $id,
         ParticipantRepository $repo,
     ): Response
     {
