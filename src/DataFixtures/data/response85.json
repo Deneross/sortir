@@ -1,0 +1,1777 @@
+[
+    {
+        "code": "85001",
+        "nom": "L'Aiguillon-la-Presqu'île",
+        "codesPostaux": [
+            "85460"
+        ]
+    },
+    {
+        "code": "85002",
+        "nom": "L'Aiguillon-sur-Vie",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85003",
+        "nom": "Aizenay",
+        "codesPostaux": [
+            "85190"
+        ]
+    },
+    {
+        "code": "85004",
+        "nom": "Angles",
+        "codesPostaux": [
+            "85750"
+        ]
+    },
+    {
+        "code": "85005",
+        "nom": "Antigny",
+        "codesPostaux": [
+            "85120"
+        ]
+    },
+    {
+        "code": "85006",
+        "nom": "Apremont",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85008",
+        "nom": "Aubigny-Les Clouzeaux",
+        "codesPostaux": [
+            "85430"
+        ]
+    },
+    {
+        "code": "85009",
+        "nom": "Auchay-sur-Vendée",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85010",
+        "nom": "Avrillé",
+        "codesPostaux": [
+            "85440"
+        ]
+    },
+    {
+        "code": "85011",
+        "nom": "Barbâtre",
+        "codesPostaux": [
+            "85630"
+        ]
+    },
+    {
+        "code": "85012",
+        "nom": "La Barre-de-Monts",
+        "codesPostaux": [
+            "85550"
+        ]
+    },
+    {
+        "code": "85013",
+        "nom": "Bazoges-en-Paillers",
+        "codesPostaux": [
+            "85130"
+        ]
+    },
+    {
+        "code": "85014",
+        "nom": "Bazoges-en-Pareds",
+        "codesPostaux": [
+            "85390"
+        ]
+    },
+    {
+        "code": "85015",
+        "nom": "Beaufou",
+        "codesPostaux": [
+            "85170"
+        ]
+    },
+    {
+        "code": "85016",
+        "nom": "Beaulieu-sous-la-Roche",
+        "codesPostaux": [
+            "85190"
+        ]
+    },
+    {
+        "code": "85017",
+        "nom": "Beaurepaire",
+        "codesPostaux": [
+            "85500"
+        ]
+    },
+    {
+        "code": "85018",
+        "nom": "Beauvoir-sur-Mer",
+        "codesPostaux": [
+            "85230"
+        ]
+    },
+    {
+        "code": "85019",
+        "nom": "Bellevigny",
+        "codesPostaux": [
+            "85170"
+        ]
+    },
+    {
+        "code": "85020",
+        "nom": "Benet",
+        "codesPostaux": [
+            "85490"
+        ]
+    },
+    {
+        "code": "85022",
+        "nom": "Le Bernard",
+        "codesPostaux": [
+            "85560"
+        ]
+    },
+    {
+        "code": "85023",
+        "nom": "Bessay",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85024",
+        "nom": "Bois-de-Céné",
+        "codesPostaux": [
+            "85710"
+        ]
+    },
+    {
+        "code": "85025",
+        "nom": "La Boissière-de-Montaigu",
+        "codesPostaux": [
+            "85600"
+        ]
+    },
+    {
+        "code": "85026",
+        "nom": "La Boissière-des-Landes",
+        "codesPostaux": [
+            "85430"
+        ]
+    },
+    {
+        "code": "85028",
+        "nom": "Bouillé-Courdault",
+        "codesPostaux": [
+            "85420"
+        ]
+    },
+    {
+        "code": "85029",
+        "nom": "Bouin",
+        "codesPostaux": [
+            "85230"
+        ]
+    },
+    {
+        "code": "85031",
+        "nom": "Le Boupère",
+        "codesPostaux": [
+            "85510"
+        ]
+    },
+    {
+        "code": "85033",
+        "nom": "Bourneau",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85034",
+        "nom": "Bournezeau",
+        "codesPostaux": [
+            "85480"
+        ]
+    },
+    {
+        "code": "85035",
+        "nom": "Bretignolles-sur-Mer",
+        "codesPostaux": [
+            "85470"
+        ]
+    },
+    {
+        "code": "85036",
+        "nom": "La Bretonnière-la-Claye",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85038",
+        "nom": "Les Brouzils",
+        "codesPostaux": [
+            "85260"
+        ]
+    },
+    {
+        "code": "85039",
+        "nom": "La Bruffière",
+        "codesPostaux": [
+            "85530"
+        ]
+    },
+    {
+        "code": "85040",
+        "nom": "La Caillère-Saint-Hilaire",
+        "codesPostaux": [
+            "85410"
+        ]
+    },
+    {
+        "code": "85042",
+        "nom": "Chaillé-les-Marais",
+        "codesPostaux": [
+            "85450"
+        ]
+    },
+    {
+        "code": "85045",
+        "nom": "La Chaize-Giraud",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85046",
+        "nom": "La Chaize-le-Vicomte",
+        "codesPostaux": [
+            "85310"
+        ]
+    },
+    {
+        "code": "85047",
+        "nom": "Challans",
+        "codesPostaux": [
+            "85300"
+        ]
+    },
+    {
+        "code": "85049",
+        "nom": "Champagné-les-Marais",
+        "codesPostaux": [
+            "85450"
+        ]
+    },
+    {
+        "code": "85050",
+        "nom": "Le Champ-Saint-Père",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85051",
+        "nom": "Chantonnay",
+        "codesPostaux": [
+            "85110"
+        ]
+    },
+    {
+        "code": "85054",
+        "nom": "La Chapelle-Hermier",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85055",
+        "nom": "La Chapelle-Palluau",
+        "codesPostaux": [
+            "85670"
+        ]
+    },
+    {
+        "code": "85056",
+        "nom": "La Chapelle-Thémer",
+        "codesPostaux": [
+            "85210"
+        ]
+    },
+    {
+        "code": "85058",
+        "nom": "Chasnais",
+        "codesPostaux": [
+            "85400"
+        ]
+    },
+    {
+        "code": "85059",
+        "nom": "La Châtaigneraie",
+        "codesPostaux": [
+            "85120"
+        ]
+    },
+    {
+        "code": "85061",
+        "nom": "Château-Guibert",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85062",
+        "nom": "Châteauneuf",
+        "codesPostaux": [
+            "85710"
+        ]
+    },
+    {
+        "code": "85064",
+        "nom": "Chauché",
+        "codesPostaux": [
+            "85140"
+        ]
+    },
+    {
+        "code": "85065",
+        "nom": "Chavagnes-en-Paillers",
+        "codesPostaux": [
+            "85250"
+        ]
+    },
+    {
+        "code": "85066",
+        "nom": "Chavagnes-les-Redoux",
+        "codesPostaux": [
+            "85390"
+        ]
+    },
+    {
+        "code": "85067",
+        "nom": "Cheffois",
+        "codesPostaux": [
+            "85390"
+        ]
+    },
+    {
+        "code": "85070",
+        "nom": "Coëx",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85071",
+        "nom": "Commequiers",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85072",
+        "nom": "La Copechagnière",
+        "codesPostaux": [
+            "85260"
+        ]
+    },
+    {
+        "code": "85073",
+        "nom": "Corpe",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85074",
+        "nom": "La Couture",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85076",
+        "nom": "Cugand-la-Bernardière",
+        "codesPostaux": [
+            "85610"
+        ]
+    },
+    {
+        "code": "85077",
+        "nom": "Curzon",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85078",
+        "nom": "Damvix",
+        "codesPostaux": [
+            "85420"
+        ]
+    },
+    {
+        "code": "85080",
+        "nom": "Doix lès Fontaines",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85081",
+        "nom": "Dompierre-sur-Yon",
+        "codesPostaux": [
+            "85170"
+        ]
+    },
+    {
+        "code": "85082",
+        "nom": "Les Epesses",
+        "codesPostaux": [
+            "85590"
+        ]
+    },
+    {
+        "code": "85083",
+        "nom": "L'Épine",
+        "codesPostaux": [
+            "85740"
+        ]
+    },
+    {
+        "code": "85084",
+        "nom": "Essarts-en-Bocage",
+        "codesPostaux": [
+            "85140"
+        ]
+    },
+    {
+        "code": "85086",
+        "nom": "Falleron",
+        "codesPostaux": [
+            "85670"
+        ]
+    },
+    {
+        "code": "85087",
+        "nom": "Faymoreau",
+        "codesPostaux": [
+            "85240"
+        ]
+    },
+    {
+        "code": "85088",
+        "nom": "Le Fenouiller",
+        "codesPostaux": [
+            "85800"
+        ]
+    },
+    {
+        "code": "85089",
+        "nom": "La Ferrière",
+        "codesPostaux": [
+            "85280"
+        ]
+    },
+    {
+        "code": "85090",
+        "nom": "Sèvremont",
+        "codesPostaux": [
+            "85700"
+        ]
+    },
+    {
+        "code": "85092",
+        "nom": "Fontenay-le-Comte",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85093",
+        "nom": "Fougeré",
+        "codesPostaux": [
+            "85480"
+        ]
+    },
+    {
+        "code": "85094",
+        "nom": "Foussais-Payré",
+        "codesPostaux": [
+            "85240"
+        ]
+    },
+    {
+        "code": "85095",
+        "nom": "Froidfond",
+        "codesPostaux": [
+            "85300"
+        ]
+    },
+    {
+        "code": "85096",
+        "nom": "La Garnache",
+        "codesPostaux": [
+            "85710"
+        ]
+    },
+    {
+        "code": "85097",
+        "nom": "La Gaubretière",
+        "codesPostaux": [
+            "85130"
+        ]
+    },
+    {
+        "code": "85098",
+        "nom": "La Genétouze",
+        "codesPostaux": [
+            "85190"
+        ]
+    },
+    {
+        "code": "85099",
+        "nom": "Le Girouard",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85100",
+        "nom": "Givrand",
+        "codesPostaux": [
+            "85800"
+        ]
+    },
+    {
+        "code": "85101",
+        "nom": "Le Givre",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85102",
+        "nom": "Grand'Landes",
+        "codesPostaux": [
+            "85670"
+        ]
+    },
+    {
+        "code": "85103",
+        "nom": "Grosbreuil",
+        "codesPostaux": [
+            "85440"
+        ]
+    },
+    {
+        "code": "85104",
+        "nom": "Grues",
+        "codesPostaux": [
+            "85580"
+        ]
+    },
+    {
+        "code": "85105",
+        "nom": "Le Gué-de-Velluire",
+        "codesPostaux": [
+            "85770"
+        ]
+    },
+    {
+        "code": "85106",
+        "nom": "La Guérinière",
+        "codesPostaux": [
+            "85680"
+        ]
+    },
+    {
+        "code": "85108",
+        "nom": "L'Herbergement",
+        "codesPostaux": [
+            "85260"
+        ]
+    },
+    {
+        "code": "85109",
+        "nom": "Les Herbiers",
+        "codesPostaux": [
+            "85500"
+        ]
+    },
+    {
+        "code": "85110",
+        "nom": "L'Hermenault",
+        "codesPostaux": [
+            "85570"
+        ]
+    },
+    {
+        "code": "85111",
+        "nom": "L'Île-d'Elle",
+        "codesPostaux": [
+            "85770"
+        ]
+    },
+    {
+        "code": "85112",
+        "nom": "L'Île-d'Olonne",
+        "codesPostaux": [
+            "85340"
+        ]
+    },
+    {
+        "code": "85113",
+        "nom": "L'Île-d'Yeu",
+        "codesPostaux": [
+            "85350"
+        ]
+    },
+    {
+        "code": "85114",
+        "nom": "Jard-sur-Mer",
+        "codesPostaux": [
+            "85520"
+        ]
+    },
+    {
+        "code": "85115",
+        "nom": "La Jaudonnière",
+        "codesPostaux": [
+            "85110"
+        ]
+    },
+    {
+        "code": "85116",
+        "nom": "La Jonchère",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85117",
+        "nom": "Lairoux",
+        "codesPostaux": [
+            "85400"
+        ]
+    },
+    {
+        "code": "85118",
+        "nom": "Landeronde",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85119",
+        "nom": "Les Landes-Genusson",
+        "codesPostaux": [
+            "85130"
+        ]
+    },
+    {
+        "code": "85120",
+        "nom": "Landevieille",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85121",
+        "nom": "Le Langon",
+        "codesPostaux": [
+            "85370"
+        ]
+    },
+    {
+        "code": "85123",
+        "nom": "Liez",
+        "codesPostaux": [
+            "85420"
+        ]
+    },
+    {
+        "code": "85125",
+        "nom": "Loge-Fougereuse",
+        "codesPostaux": [
+            "85120"
+        ]
+    },
+    {
+        "code": "85126",
+        "nom": "Longèves",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85127",
+        "nom": "Longeville-sur-Mer",
+        "codesPostaux": [
+            "85560"
+        ]
+    },
+    {
+        "code": "85128",
+        "nom": "Luçon",
+        "codesPostaux": [
+            "85400"
+        ]
+    },
+    {
+        "code": "85129",
+        "nom": "Les Lucs-sur-Boulogne",
+        "codesPostaux": [
+            "85170"
+        ]
+    },
+    {
+        "code": "85130",
+        "nom": "Maché",
+        "codesPostaux": [
+            "85190"
+        ]
+    },
+    {
+        "code": "85131",
+        "nom": "Les Magnils-Reigniers",
+        "codesPostaux": [
+            "85400"
+        ]
+    },
+    {
+        "code": "85132",
+        "nom": "Maillé",
+        "codesPostaux": [
+            "85420"
+        ]
+    },
+    {
+        "code": "85133",
+        "nom": "Maillezais",
+        "codesPostaux": [
+            "85420"
+        ]
+    },
+    {
+        "code": "85134",
+        "nom": "Mallièvre",
+        "codesPostaux": [
+            "85590"
+        ]
+    },
+    {
+        "code": "85135",
+        "nom": "Mareuil-sur-Lay-Dissais",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85136",
+        "nom": "Marillet",
+        "codesPostaux": [
+            "85240"
+        ]
+    },
+    {
+        "code": "85137",
+        "nom": "Marsais-Sainte-Radégonde",
+        "codesPostaux": [
+            "85570"
+        ]
+    },
+    {
+        "code": "85138",
+        "nom": "Martinet",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85139",
+        "nom": "Le Mazeau",
+        "codesPostaux": [
+            "85420"
+        ]
+    },
+    {
+        "code": "85140",
+        "nom": "La Meilleraie-Tillay",
+        "codesPostaux": [
+            "85700"
+        ]
+    },
+    {
+        "code": "85141",
+        "nom": "Menomblet",
+        "codesPostaux": [
+            "85700"
+        ]
+    },
+    {
+        "code": "85142",
+        "nom": "La Merlatière",
+        "codesPostaux": [
+            "85140"
+        ]
+    },
+    {
+        "code": "85143",
+        "nom": "Mervent",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85144",
+        "nom": "Mesnard-la-Barotière",
+        "codesPostaux": [
+            "85500"
+        ]
+    },
+    {
+        "code": "85145",
+        "nom": "Monsireigne",
+        "codesPostaux": [
+            "85110"
+        ]
+    },
+    {
+        "code": "85146",
+        "nom": "Montaigu-Vendée",
+        "codesPostaux": [
+            "85600"
+        ]
+    },
+    {
+        "code": "85147",
+        "nom": "Montournais",
+        "codesPostaux": [
+            "85700"
+        ]
+    },
+    {
+        "code": "85148",
+        "nom": "Montreuil",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85149",
+        "nom": "Moreilles",
+        "codesPostaux": [
+            "85450"
+        ]
+    },
+    {
+        "code": "85151",
+        "nom": "Mortagne-sur-Sèvre",
+        "codesPostaux": [
+            "85290"
+        ]
+    },
+    {
+        "code": "85152",
+        "nom": "Les Achards",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85153",
+        "nom": "Mouchamps",
+        "codesPostaux": [
+            "85640"
+        ]
+    },
+    {
+        "code": "85154",
+        "nom": "Mouilleron-Saint-Germain",
+        "codesPostaux": [
+            "85390"
+        ]
+    },
+    {
+        "code": "85155",
+        "nom": "Mouilleron-le-Captif",
+        "codesPostaux": [
+            "85000"
+        ]
+    },
+    {
+        "code": "85156",
+        "nom": "Moutiers-les-Mauxfaits",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85157",
+        "nom": "Moutiers-sur-le-Lay",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85158",
+        "nom": "Mouzeuil-Saint-Martin",
+        "codesPostaux": [
+            "85370"
+        ]
+    },
+    {
+        "code": "85159",
+        "nom": "Nalliers",
+        "codesPostaux": [
+            "85370"
+        ]
+    },
+    {
+        "code": "85160",
+        "nom": "Nesmy",
+        "codesPostaux": [
+            "85310"
+        ]
+    },
+    {
+        "code": "85161",
+        "nom": "Nieul-le-Dolent",
+        "codesPostaux": [
+            "85430"
+        ]
+    },
+    {
+        "code": "85162",
+        "nom": "Rives-d'Autise",
+        "codesPostaux": [
+            "85240",
+            "85420"
+        ]
+    },
+    {
+        "code": "85163",
+        "nom": "Noirmoutier-en-l'Île",
+        "codesPostaux": [
+            "85330"
+        ]
+    },
+    {
+        "code": "85164",
+        "nom": "Notre-Dame-de-Monts",
+        "codesPostaux": [
+            "85690"
+        ]
+    },
+    {
+        "code": "85165",
+        "nom": "L'Oie",
+        "codesPostaux": [
+            "85140"
+        ]
+    },
+    {
+        "code": "85167",
+        "nom": "L'Orbrie",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85169",
+        "nom": "Palluau",
+        "codesPostaux": [
+            "85670"
+        ]
+    },
+    {
+        "code": "85171",
+        "nom": "Péault",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85172",
+        "nom": "Le Perrier",
+        "codesPostaux": [
+            "85300"
+        ]
+    },
+    {
+        "code": "85174",
+        "nom": "Petosse",
+        "codesPostaux": [
+            "85570"
+        ]
+    },
+    {
+        "code": "85175",
+        "nom": "Les Pineaux",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85176",
+        "nom": "Pissotte",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85177",
+        "nom": "Les Velluire-sur-Vendée",
+        "codesPostaux": [
+            "85770"
+        ]
+    },
+    {
+        "code": "85178",
+        "nom": "Le Poiré-sur-Vie",
+        "codesPostaux": [
+            "85170"
+        ]
+    },
+    {
+        "code": "85179",
+        "nom": "Poiroux",
+        "codesPostaux": [
+            "85440"
+        ]
+    },
+    {
+        "code": "85181",
+        "nom": "Pouillé",
+        "codesPostaux": [
+            "85570"
+        ]
+    },
+    {
+        "code": "85182",
+        "nom": "Pouzauges",
+        "codesPostaux": [
+            "85700"
+        ]
+    },
+    {
+        "code": "85184",
+        "nom": "Puy-de-Serre",
+        "codesPostaux": [
+            "85240"
+        ]
+    },
+    {
+        "code": "85185",
+        "nom": "Puyravault",
+        "codesPostaux": [
+            "85450"
+        ]
+    },
+    {
+        "code": "85186",
+        "nom": "La Rabatelière",
+        "codesPostaux": [
+            "85250"
+        ]
+    },
+    {
+        "code": "85187",
+        "nom": "Réaumur",
+        "codesPostaux": [
+            "85700"
+        ]
+    },
+    {
+        "code": "85188",
+        "nom": "La Réorthe",
+        "codesPostaux": [
+            "85210"
+        ]
+    },
+    {
+        "code": "85189",
+        "nom": "Notre-Dame-de-Riez",
+        "codesPostaux": [
+            "85270"
+        ]
+    },
+    {
+        "code": "85190",
+        "nom": "Rocheservière",
+        "codesPostaux": [
+            "85620"
+        ]
+    },
+    {
+        "code": "85191",
+        "nom": "La Roche-sur-Yon",
+        "codesPostaux": [
+            "85000"
+        ]
+    },
+    {
+        "code": "85192",
+        "nom": "Rochetrejoux",
+        "codesPostaux": [
+            "85510"
+        ]
+    },
+    {
+        "code": "85193",
+        "nom": "Rosnay",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85194",
+        "nom": "Les Sables-d'Olonne",
+        "codesPostaux": [
+            "85100",
+            "85180",
+            "85340"
+        ]
+    },
+    {
+        "code": "85196",
+        "nom": "Saint-André-Goule-d'Oie",
+        "codesPostaux": [
+            "85250"
+        ]
+    },
+    {
+        "code": "85197",
+        "nom": "Montréverd",
+        "codesPostaux": [
+            "85260"
+        ]
+    },
+    {
+        "code": "85198",
+        "nom": "Saint-Aubin-des-Ormeaux",
+        "codesPostaux": [
+            "85130"
+        ]
+    },
+    {
+        "code": "85199",
+        "nom": "Saint-Aubin-la-Plaine",
+        "codesPostaux": [
+            "85210"
+        ]
+    },
+    {
+        "code": "85200",
+        "nom": "Saint-Avaugourd-des-Landes",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85201",
+        "nom": "Saint-Benoist-sur-Mer",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85202",
+        "nom": "Sainte-Cécile",
+        "codesPostaux": [
+            "85110"
+        ]
+    },
+    {
+        "code": "85204",
+        "nom": "Saint-Christophe-du-Ligneron",
+        "codesPostaux": [
+            "85670"
+        ]
+    },
+    {
+        "code": "85205",
+        "nom": "Saint-Cyr-des-Gâts",
+        "codesPostaux": [
+            "85410"
+        ]
+    },
+    {
+        "code": "85206",
+        "nom": "Saint-Cyr-en-Talmondais",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85207",
+        "nom": "Saint-Denis-du-Payré",
+        "codesPostaux": [
+            "85580"
+        ]
+    },
+    {
+        "code": "85208",
+        "nom": "Saint-Denis-la-Chevasse",
+        "codesPostaux": [
+            "85170"
+        ]
+    },
+    {
+        "code": "85209",
+        "nom": "Saint-Étienne-de-Brillouet",
+        "codesPostaux": [
+            "85210"
+        ]
+    },
+    {
+        "code": "85210",
+        "nom": "Saint-Étienne-du-Bois",
+        "codesPostaux": [
+            "85670"
+        ]
+    },
+    {
+        "code": "85211",
+        "nom": "Sainte-Flaive-des-Loups",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85212",
+        "nom": "Sainte-Florence",
+        "codesPostaux": [
+            "85140"
+        ]
+    },
+    {
+        "code": "85213",
+        "nom": "Rives de l'Yon",
+        "codesPostaux": [
+            "85310"
+        ]
+    },
+    {
+        "code": "85214",
+        "nom": "Sainte-Foy",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85215",
+        "nom": "Saint-Fulgent",
+        "codesPostaux": [
+            "85250"
+        ]
+    },
+    {
+        "code": "85216",
+        "nom": "Sainte-Gemme-la-Plaine",
+        "codesPostaux": [
+            "85400"
+        ]
+    },
+    {
+        "code": "85218",
+        "nom": "Saint-Georges-de-Pointindoux",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85220",
+        "nom": "Saint-Germain-de-Prinçay",
+        "codesPostaux": [
+            "85110"
+        ]
+    },
+    {
+        "code": "85221",
+        "nom": "Saint-Gervais",
+        "codesPostaux": [
+            "85230"
+        ]
+    },
+    {
+        "code": "85222",
+        "nom": "Saint-Gilles-Croix-de-Vie",
+        "codesPostaux": [
+            "85800"
+        ]
+    },
+    {
+        "code": "85223",
+        "nom": "Saint-Jean-d'Hermine",
+        "codesPostaux": [
+            "85210"
+        ]
+    },
+    {
+        "code": "85226",
+        "nom": "Saint-Hilaire-de-Riez",
+        "codesPostaux": [
+            "85270"
+        ]
+    },
+    {
+        "code": "85227",
+        "nom": "Saint-Hilaire-des-Loges",
+        "codesPostaux": [
+            "85240"
+        ]
+    },
+    {
+        "code": "85229",
+        "nom": "Saint-Hilaire-de-Voust",
+        "codesPostaux": [
+            "85120"
+        ]
+    },
+    {
+        "code": "85231",
+        "nom": "Saint-Hilaire-la-Forêt",
+        "codesPostaux": [
+            "85440"
+        ]
+    },
+    {
+        "code": "85232",
+        "nom": "Saint-Hilaire-le-Vouhis",
+        "codesPostaux": [
+            "85480"
+        ]
+    },
+    {
+        "code": "85234",
+        "nom": "Saint-Jean-de-Monts",
+        "codesPostaux": [
+            "85160"
+        ]
+    },
+    {
+        "code": "85235",
+        "nom": "Saint-Juire-Champgillon",
+        "codesPostaux": [
+            "85210"
+        ]
+    },
+    {
+        "code": "85236",
+        "nom": "Saint-Julien-des-Landes",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85237",
+        "nom": "Saint-Laurent-de-la-Salle",
+        "codesPostaux": [
+            "85410"
+        ]
+    },
+    {
+        "code": "85238",
+        "nom": "Saint-Laurent-sur-Sèvre",
+        "codesPostaux": [
+            "85290"
+        ]
+    },
+    {
+        "code": "85239",
+        "nom": "Saint-Maixent-sur-Vie",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85240",
+        "nom": "Saint-Malô-du-Bois",
+        "codesPostaux": [
+            "85590"
+        ]
+    },
+    {
+        "code": "85242",
+        "nom": "Saint-Mars-la-Réorthe",
+        "codesPostaux": [
+            "85590"
+        ]
+    },
+    {
+        "code": "85243",
+        "nom": "Brem-sur-Mer",
+        "codesPostaux": [
+            "85470"
+        ]
+    },
+    {
+        "code": "85244",
+        "nom": "Saint-Martin-de-Fraigneau",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85245",
+        "nom": "Saint-Martin-des-Fontaines",
+        "codesPostaux": [
+            "85570"
+        ]
+    },
+    {
+        "code": "85246",
+        "nom": "Saint-Martin-des-Noyers",
+        "codesPostaux": [
+            "85140"
+        ]
+    },
+    {
+        "code": "85247",
+        "nom": "Saint-Martin-des-Tilleuls",
+        "codesPostaux": [
+            "85130"
+        ]
+    },
+    {
+        "code": "85248",
+        "nom": "Saint-Martin-Lars-en-Sainte-Hermine",
+        "codesPostaux": [
+            "85210"
+        ]
+    },
+    {
+        "code": "85250",
+        "nom": "Saint-Mathurin",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85251",
+        "nom": "Saint-Maurice-des-Noues",
+        "codesPostaux": [
+            "85120"
+        ]
+    },
+    {
+        "code": "85252",
+        "nom": "Saint-Maurice-le-Girard",
+        "codesPostaux": [
+            "85390"
+        ]
+    },
+    {
+        "code": "85254",
+        "nom": "Saint-Mesmin",
+        "codesPostaux": [
+            "85700"
+        ]
+    },
+    {
+        "code": "85255",
+        "nom": "Saint-Michel-en-l'Herm",
+        "codesPostaux": [
+            "85580"
+        ]
+    },
+    {
+        "code": "85256",
+        "nom": "Saint-Michel-le-Cloucq",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85259",
+        "nom": "Saint-Paul-en-Pareds",
+        "codesPostaux": [
+            "85500"
+        ]
+    },
+    {
+        "code": "85260",
+        "nom": "Saint-Paul-Mont-Penit",
+        "codesPostaux": [
+            "85670"
+        ]
+    },
+    {
+        "code": "85261",
+        "nom": "Sainte-Pexine",
+        "codesPostaux": [
+            "85320"
+        ]
+    },
+    {
+        "code": "85262",
+        "nom": "Saint-Philbert-de-Bouaine",
+        "codesPostaux": [
+            "85660"
+        ]
+    },
+    {
+        "code": "85264",
+        "nom": "Saint-Pierre-du-Chemin",
+        "codesPostaux": [
+            "85120"
+        ]
+    },
+    {
+        "code": "85265",
+        "nom": "Saint-Pierre-le-Vieux",
+        "codesPostaux": [
+            "85420"
+        ]
+    },
+    {
+        "code": "85266",
+        "nom": "Saint-Prouant",
+        "codesPostaux": [
+            "85110"
+        ]
+    },
+    {
+        "code": "85267",
+        "nom": "Sainte-Radégonde-des-Noyers",
+        "codesPostaux": [
+            "85450"
+        ]
+    },
+    {
+        "code": "85268",
+        "nom": "Saint-Révérend",
+        "codesPostaux": [
+            "85220"
+        ]
+    },
+    {
+        "code": "85269",
+        "nom": "Saint-Sigismond",
+        "codesPostaux": [
+            "85420"
+        ]
+    },
+    {
+        "code": "85273",
+        "nom": "Saint-Urbain",
+        "codesPostaux": [
+            "85230"
+        ]
+    },
+    {
+        "code": "85274",
+        "nom": "Saint-Valérien",
+        "codesPostaux": [
+            "85570"
+        ]
+    },
+    {
+        "code": "85276",
+        "nom": "Saint-Vincent-Sterlanges",
+        "codesPostaux": [
+            "85110"
+        ]
+    },
+    {
+        "code": "85277",
+        "nom": "Saint-Vincent-sur-Graon",
+        "codesPostaux": [
+            "85540"
+        ]
+    },
+    {
+        "code": "85278",
+        "nom": "Saint-Vincent-sur-Jard",
+        "codesPostaux": [
+            "85520"
+        ]
+    },
+    {
+        "code": "85280",
+        "nom": "Sallertaine",
+        "codesPostaux": [
+            "85300"
+        ]
+    },
+    {
+        "code": "85281",
+        "nom": "Sérigné",
+        "codesPostaux": [
+            "85200"
+        ]
+    },
+    {
+        "code": "85282",
+        "nom": "Sigournais",
+        "codesPostaux": [
+            "85110"
+        ]
+    },
+    {
+        "code": "85284",
+        "nom": "Soullans",
+        "codesPostaux": [
+            "85300"
+        ]
+    },
+    {
+        "code": "85285",
+        "nom": "Le Tablier",
+        "codesPostaux": [
+            "85310"
+        ]
+    },
+    {
+        "code": "85286",
+        "nom": "La Taillée",
+        "codesPostaux": [
+            "85450"
+        ]
+    },
+    {
+        "code": "85287",
+        "nom": "Tallud-Sainte-Gemme",
+        "codesPostaux": [
+            "85390"
+        ]
+    },
+    {
+        "code": "85288",
+        "nom": "Talmont-Saint-Hilaire",
+        "codesPostaux": [
+            "85440"
+        ]
+    },
+    {
+        "code": "85289",
+        "nom": "Terval",
+        "codesPostaux": [
+            "85120"
+        ]
+    },
+    {
+        "code": "85290",
+        "nom": "Thiré",
+        "codesPostaux": [
+            "85210"
+        ]
+    },
+    {
+        "code": "85291",
+        "nom": "Thorigny",
+        "codesPostaux": [
+            "85480"
+        ]
+    },
+    {
+        "code": "85292",
+        "nom": "Rives-du-Fougerais",
+        "codesPostaux": [
+            "85410"
+        ]
+    },
+    {
+        "code": "85293",
+        "nom": "Tiffauges",
+        "codesPostaux": [
+            "85130"
+        ]
+    },
+    {
+        "code": "85294",
+        "nom": "La Tranche-sur-Mer",
+        "codesPostaux": [
+            "85360"
+        ]
+    },
+    {
+        "code": "85295",
+        "nom": "Treize-Septiers",
+        "codesPostaux": [
+            "85600"
+        ]
+    },
+    {
+        "code": "85296",
+        "nom": "Treize-Vents",
+        "codesPostaux": [
+            "85590"
+        ]
+    },
+    {
+        "code": "85297",
+        "nom": "Triaize",
+        "codesPostaux": [
+            "85580"
+        ]
+    },
+    {
+        "code": "85298",
+        "nom": "Vairé",
+        "codesPostaux": [
+            "85150"
+        ]
+    },
+    {
+        "code": "85300",
+        "nom": "Venansault",
+        "codesPostaux": [
+            "85190"
+        ]
+    },
+    {
+        "code": "85301",
+        "nom": "Vendrennes",
+        "codesPostaux": [
+            "85250"
+        ]
+    },
+    {
+        "code": "85302",
+        "nom": "Chanverrie",
+        "codesPostaux": [
+            "85130",
+            "85500"
+        ]
+    },
+    {
+        "code": "85303",
+        "nom": "Vix",
+        "codesPostaux": [
+            "85770"
+        ]
+    },
+    {
+        "code": "85304",
+        "nom": "Vouillé-les-Marais",
+        "codesPostaux": [
+            "85450"
+        ]
+    },
+    {
+        "code": "85305",
+        "nom": "Vouvant",
+        "codesPostaux": [
+            "85120"
+        ]
+    },
+    {
+        "code": "85306",
+        "nom": "Xanton-Chassenon",
+        "codesPostaux": [
+            "85240"
+        ]
+    }
+]

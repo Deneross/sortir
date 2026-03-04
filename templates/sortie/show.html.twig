@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ sortie.nom}} |{{ parent() }}
+    {{ parent() }}{{ sortie.nom}}
 {% endblock %}
 
 
-{% block body %}
+{% block section %}
     {# todo: affiche tous les détails #}
     <h1 class="text-center mb-4">Afficher une sortie</h1>
 

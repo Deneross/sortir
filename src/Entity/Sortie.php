@@ -87,9 +87,16 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
 
+    /**
+     * @var Collection<int, Lieu>
+     */
+    #[ORM\ManyToMany(targetEntity: Lieu::class, inversedBy: 'sorties')]
+    private Collection $lieux;
+
     public function __construct()
     {
         $this->inscrits = new ArrayCollection();
+        $this->lieux = new ArrayCollection();
     }
 
 
@@ -256,6 +263,30 @@ class Sortie
     public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lieu>
+     */
+    public function getLieux(): Collection
+    {
+        return $this->lieux;
+    }
+
+    public function addLieux(Lieu $lieux): static
+    {
+        if (!$this->lieux->contains($lieux)) {
+            $this->lieux->add($lieux);
+        }
+
+        return $this;
+    }
+
+    public function removeLieux(Lieu $lieux): static
+    {
+        $this->lieux->removeElement($lieux);
+
         return $this;
     }
 }

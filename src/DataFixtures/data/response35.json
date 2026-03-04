@@ -1,0 +1,2331 @@
+[
+    {
+        "code": "35001",
+        "nom": "Acigné",
+        "codesPostaux": [
+            "35690"
+        ]
+    },
+    {
+        "code": "35002",
+        "nom": "Amanlis",
+        "codesPostaux": [
+            "35150"
+        ]
+    },
+    {
+        "code": "35003",
+        "nom": "Andouillé-Neuville",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35004",
+        "nom": "Val-Couesnon",
+        "codesPostaux": [
+            "35460",
+            "35560"
+        ]
+    },
+    {
+        "code": "35005",
+        "nom": "Arbrissel",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35006",
+        "nom": "Argentré-du-Plessis",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35007",
+        "nom": "Aubigné",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35008",
+        "nom": "Availles-sur-Seiche",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35009",
+        "nom": "Baguer-Morvan",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35010",
+        "nom": "Baguer-Pican",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35012",
+        "nom": "Bain-de-Bretagne",
+        "codesPostaux": [
+            "35470"
+        ]
+    },
+    {
+        "code": "35013",
+        "nom": "Bains-sur-Oust",
+        "codesPostaux": [
+            "35600"
+        ]
+    },
+    {
+        "code": "35014",
+        "nom": "Bais",
+        "codesPostaux": [
+            "35680"
+        ]
+    },
+    {
+        "code": "35015",
+        "nom": "Balazé",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35016",
+        "nom": "Baulon",
+        "codesPostaux": [
+            "35580"
+        ]
+    },
+    {
+        "code": "35017",
+        "nom": "La Baussaine",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35018",
+        "nom": "La Bazouge-du-Désert",
+        "codesPostaux": [
+            "35420"
+        ]
+    },
+    {
+        "code": "35019",
+        "nom": "Bazouges-la-Pérouse",
+        "codesPostaux": [
+            "35560"
+        ]
+    },
+    {
+        "code": "35021",
+        "nom": "Beaucé",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35022",
+        "nom": "Bécherel",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35023",
+        "nom": "Bédée",
+        "codesPostaux": [
+            "35137"
+        ]
+    },
+    {
+        "code": "35024",
+        "nom": "Betton",
+        "codesPostaux": [
+            "35830"
+        ]
+    },
+    {
+        "code": "35025",
+        "nom": "Billé",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35026",
+        "nom": "Bléruais",
+        "codesPostaux": [
+            "35750"
+        ]
+    },
+    {
+        "code": "35027",
+        "nom": "Boisgervilly",
+        "codesPostaux": [
+            "35360"
+        ]
+    },
+    {
+        "code": "35028",
+        "nom": "Boistrudan",
+        "codesPostaux": [
+            "35150"
+        ]
+    },
+    {
+        "code": "35029",
+        "nom": "Bonnemain",
+        "codesPostaux": [
+            "35270"
+        ]
+    },
+    {
+        "code": "35030",
+        "nom": "La Bosse-de-Bretagne",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35031",
+        "nom": "La Bouëxière",
+        "codesPostaux": [
+            "35340"
+        ]
+    },
+    {
+        "code": "35032",
+        "nom": "Bourgbarré",
+        "codesPostaux": [
+            "35230"
+        ]
+    },
+    {
+        "code": "35033",
+        "nom": "Bourg-des-Comptes",
+        "codesPostaux": [
+            "35890"
+        ]
+    },
+    {
+        "code": "35034",
+        "nom": "La Boussac",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35035",
+        "nom": "Bovel",
+        "codesPostaux": [
+            "35330"
+        ]
+    },
+    {
+        "code": "35037",
+        "nom": "Bréal-sous-Montfort",
+        "codesPostaux": [
+            "35310"
+        ]
+    },
+    {
+        "code": "35038",
+        "nom": "Bréal-sous-Vitré",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35039",
+        "nom": "Brécé",
+        "codesPostaux": [
+            "35530"
+        ]
+    },
+    {
+        "code": "35040",
+        "nom": "Breteil",
+        "codesPostaux": [
+            "35160"
+        ]
+    },
+    {
+        "code": "35041",
+        "nom": "Brie",
+        "codesPostaux": [
+            "35150"
+        ]
+    },
+    {
+        "code": "35042",
+        "nom": "Brielles",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35044",
+        "nom": "Broualan",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35045",
+        "nom": "Bruc-sur-Aff",
+        "codesPostaux": [
+            "35550"
+        ]
+    },
+    {
+        "code": "35046",
+        "nom": "Les Brulais",
+        "codesPostaux": [
+            "35330"
+        ]
+    },
+    {
+        "code": "35047",
+        "nom": "Bruz",
+        "codesPostaux": [
+            "35170"
+        ]
+    },
+    {
+        "code": "35049",
+        "nom": "Cancale",
+        "codesPostaux": [
+            "35260"
+        ]
+    },
+    {
+        "code": "35050",
+        "nom": "Cardroc",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35051",
+        "nom": "Cesson-Sévigné",
+        "codesPostaux": [
+            "35510"
+        ]
+    },
+    {
+        "code": "35052",
+        "nom": "Champeaux",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35054",
+        "nom": "Chanteloup",
+        "codesPostaux": [
+            "35150"
+        ]
+    },
+    {
+        "code": "35055",
+        "nom": "Chantepie",
+        "codesPostaux": [
+            "35135"
+        ]
+    },
+    {
+        "code": "35056",
+        "nom": "La Chapelle-aux-Filtzméens",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35057",
+        "nom": "La Chapelle-Bouëxic",
+        "codesPostaux": [
+            "35330"
+        ]
+    },
+    {
+        "code": "35058",
+        "nom": "La Chapelle-Chaussée",
+        "codesPostaux": [
+            "35630"
+        ]
+    },
+    {
+        "code": "35059",
+        "nom": "La Chapelle-des-Fougeretz",
+        "codesPostaux": [
+            "35520"
+        ]
+    },
+    {
+        "code": "35060",
+        "nom": "La Chapelle du Lou du Lac",
+        "codesPostaux": [
+            "35360"
+        ]
+    },
+    {
+        "code": "35061",
+        "nom": "La Chapelle-Erbrée",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35062",
+        "nom": "La Chapelle-Fleurigné",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35063",
+        "nom": "La Chapelle-Saint-Aubert",
+        "codesPostaux": [
+            "35140"
+        ]
+    },
+    {
+        "code": "35064",
+        "nom": "La Chapelle-de-Brain",
+        "codesPostaux": [
+            "35660"
+        ]
+    },
+    {
+        "code": "35065",
+        "nom": "La Chapelle-Thouarault",
+        "codesPostaux": [
+            "35590"
+        ]
+    },
+    {
+        "code": "35066",
+        "nom": "Chartres-de-Bretagne",
+        "codesPostaux": [
+            "35131"
+        ]
+    },
+    {
+        "code": "35067",
+        "nom": "Chasné-sur-Illet",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35068",
+        "nom": "Châteaubourg",
+        "codesPostaux": [
+            "35220"
+        ]
+    },
+    {
+        "code": "35069",
+        "nom": "Châteaugiron",
+        "codesPostaux": [
+            "35410"
+        ]
+    },
+    {
+        "code": "35070",
+        "nom": "Châteauneuf-d'Ille-et-Vilaine",
+        "codesPostaux": [
+            "35430"
+        ]
+    },
+    {
+        "code": "35071",
+        "nom": "Le Châtellier",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35072",
+        "nom": "Châtillon-en-Vendelais",
+        "codesPostaux": [
+            "35210"
+        ]
+    },
+    {
+        "code": "35075",
+        "nom": "Chauvigné",
+        "codesPostaux": [
+            "35490"
+        ]
+    },
+    {
+        "code": "35076",
+        "nom": "Chavagne",
+        "codesPostaux": [
+            "35310"
+        ]
+    },
+    {
+        "code": "35077",
+        "nom": "Chelun",
+        "codesPostaux": [
+            "35640"
+        ]
+    },
+    {
+        "code": "35078",
+        "nom": "Cherrueix",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35079",
+        "nom": "Chevaigné",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35080",
+        "nom": "Cintré",
+        "codesPostaux": [
+            "35310"
+        ]
+    },
+    {
+        "code": "35081",
+        "nom": "Clayes",
+        "codesPostaux": [
+            "35590"
+        ]
+    },
+    {
+        "code": "35082",
+        "nom": "Coësmes",
+        "codesPostaux": [
+            "35134"
+        ]
+    },
+    {
+        "code": "35084",
+        "nom": "Comblessac",
+        "codesPostaux": [
+            "35330"
+        ]
+    },
+    {
+        "code": "35085",
+        "nom": "Combourg",
+        "codesPostaux": [
+            "35270"
+        ]
+    },
+    {
+        "code": "35086",
+        "nom": "Combourtillé",
+        "codesPostaux": [
+            "35210"
+        ]
+    },
+    {
+        "code": "35087",
+        "nom": "Cornillé",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35088",
+        "nom": "Corps-Nuds",
+        "codesPostaux": [
+            "35150"
+        ]
+    },
+    {
+        "code": "35089",
+        "nom": "La Couyère",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35090",
+        "nom": "Crevin",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35091",
+        "nom": "Le Crouais",
+        "codesPostaux": [
+            "35290"
+        ]
+    },
+    {
+        "code": "35092",
+        "nom": "Cuguen",
+        "codesPostaux": [
+            "35270"
+        ]
+    },
+    {
+        "code": "35093",
+        "nom": "Dinard",
+        "codesPostaux": [
+            "35800"
+        ]
+    },
+    {
+        "code": "35094",
+        "nom": "Dingé",
+        "codesPostaux": [
+            "35440"
+        ]
+    },
+    {
+        "code": "35095",
+        "nom": "Dol-de-Bretagne",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35096",
+        "nom": "Domagné",
+        "codesPostaux": [
+            "35113"
+        ]
+    },
+    {
+        "code": "35097",
+        "nom": "Domalain",
+        "codesPostaux": [
+            "35680"
+        ]
+    },
+    {
+        "code": "35098",
+        "nom": "La Dominelais",
+        "codesPostaux": [
+            "35390"
+        ]
+    },
+    {
+        "code": "35099",
+        "nom": "Domloup",
+        "codesPostaux": [
+            "35410"
+        ]
+    },
+    {
+        "code": "35101",
+        "nom": "Dourdain",
+        "codesPostaux": [
+            "35450"
+        ]
+    },
+    {
+        "code": "35102",
+        "nom": "Drouges",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35103",
+        "nom": "Eancé",
+        "codesPostaux": [
+            "35640"
+        ]
+    },
+    {
+        "code": "35104",
+        "nom": "Epiniac",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35105",
+        "nom": "Erbrée",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35106",
+        "nom": "Ercé-en-Lamée",
+        "codesPostaux": [
+            "35620"
+        ]
+    },
+    {
+        "code": "35107",
+        "nom": "Ercé-près-Liffré",
+        "codesPostaux": [
+            "35340"
+        ]
+    },
+    {
+        "code": "35108",
+        "nom": "Essé",
+        "codesPostaux": [
+            "35150"
+        ]
+    },
+    {
+        "code": "35109",
+        "nom": "Étrelles",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35110",
+        "nom": "Feins",
+        "codesPostaux": [
+            "35440"
+        ]
+    },
+    {
+        "code": "35111",
+        "nom": "Le Ferré",
+        "codesPostaux": [
+            "35420"
+        ]
+    },
+    {
+        "code": "35114",
+        "nom": "Forges-la-Forêt",
+        "codesPostaux": [
+            "35640"
+        ]
+    },
+    {
+        "code": "35115",
+        "nom": "Fougères",
+        "codesPostaux": [
+            "35300"
+        ]
+    },
+    {
+        "code": "35116",
+        "nom": "La Fresnais",
+        "codesPostaux": [
+            "35111"
+        ]
+    },
+    {
+        "code": "35117",
+        "nom": "Gaël",
+        "codesPostaux": [
+            "35290"
+        ]
+    },
+    {
+        "code": "35118",
+        "nom": "Gahard",
+        "codesPostaux": [
+            "35490"
+        ]
+    },
+    {
+        "code": "35119",
+        "nom": "Gennes-sur-Seiche",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35120",
+        "nom": "Gévezé",
+        "codesPostaux": [
+            "35850"
+        ]
+    },
+    {
+        "code": "35121",
+        "nom": "Gosné",
+        "codesPostaux": [
+            "35140"
+        ]
+    },
+    {
+        "code": "35122",
+        "nom": "La Gouesnière",
+        "codesPostaux": [
+            "35350"
+        ]
+    },
+    {
+        "code": "35123",
+        "nom": "Goven",
+        "codesPostaux": [
+            "35580"
+        ]
+    },
+    {
+        "code": "35124",
+        "nom": "Grand-Fougeray",
+        "codesPostaux": [
+            "35390"
+        ]
+    },
+    {
+        "code": "35125",
+        "nom": "La Guerche-de-Bretagne",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35126",
+        "nom": "Guichen",
+        "codesPostaux": [
+            "35580"
+        ]
+    },
+    {
+        "code": "35127",
+        "nom": "Guignen",
+        "codesPostaux": [
+            "35580"
+        ]
+    },
+    {
+        "code": "35128",
+        "nom": "Guipel",
+        "codesPostaux": [
+            "35440"
+        ]
+    },
+    {
+        "code": "35130",
+        "nom": "Hédé-Bazouges",
+        "codesPostaux": [
+            "35630"
+        ]
+    },
+    {
+        "code": "35131",
+        "nom": "L'Hermitage",
+        "codesPostaux": [
+            "35590"
+        ]
+    },
+    {
+        "code": "35132",
+        "nom": "Hirel",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35133",
+        "nom": "Iffendic",
+        "codesPostaux": [
+            "35750"
+        ]
+    },
+    {
+        "code": "35134",
+        "nom": "Les Iffs",
+        "codesPostaux": [
+            "35630"
+        ]
+    },
+    {
+        "code": "35135",
+        "nom": "Irodouër",
+        "codesPostaux": [
+            "35850"
+        ]
+    },
+    {
+        "code": "35136",
+        "nom": "Janzé",
+        "codesPostaux": [
+            "35150"
+        ]
+    },
+    {
+        "code": "35137",
+        "nom": "Javené",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35138",
+        "nom": "Laignelet",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35139",
+        "nom": "Laillé",
+        "codesPostaux": [
+            "35890"
+        ]
+    },
+    {
+        "code": "35140",
+        "nom": "Lalleu",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35141",
+        "nom": "Landavran",
+        "codesPostaux": [
+            "35450"
+        ]
+    },
+    {
+        "code": "35142",
+        "nom": "Landéan",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35143",
+        "nom": "Landujan",
+        "codesPostaux": [
+            "35360"
+        ]
+    },
+    {
+        "code": "35144",
+        "nom": "Langan",
+        "codesPostaux": [
+            "35850"
+        ]
+    },
+    {
+        "code": "35145",
+        "nom": "Langon",
+        "codesPostaux": [
+            "35660"
+        ]
+    },
+    {
+        "code": "35146",
+        "nom": "Langouet",
+        "codesPostaux": [
+            "35630"
+        ]
+    },
+    {
+        "code": "35148",
+        "nom": "Lanrigan",
+        "codesPostaux": [
+            "35270"
+        ]
+    },
+    {
+        "code": "35149",
+        "nom": "Lassy",
+        "codesPostaux": [
+            "35580"
+        ]
+    },
+    {
+        "code": "35150",
+        "nom": "Lécousse",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35151",
+        "nom": "Lieuron",
+        "codesPostaux": [
+            "35550"
+        ]
+    },
+    {
+        "code": "35152",
+        "nom": "Liffré",
+        "codesPostaux": [
+            "35340"
+        ]
+    },
+    {
+        "code": "35153",
+        "nom": "Lillemer",
+        "codesPostaux": [
+            "35111"
+        ]
+    },
+    {
+        "code": "35154",
+        "nom": "Livré-sur-Changeon",
+        "codesPostaux": [
+            "35450"
+        ]
+    },
+    {
+        "code": "35155",
+        "nom": "Lohéac",
+        "codesPostaux": [
+            "35550"
+        ]
+    },
+    {
+        "code": "35156",
+        "nom": "Longaulnay",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35157",
+        "nom": "Le Loroux",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35159",
+        "nom": "Lourmais",
+        "codesPostaux": [
+            "35270"
+        ]
+    },
+    {
+        "code": "35160",
+        "nom": "Loutehel",
+        "codesPostaux": [
+            "35330"
+        ]
+    },
+    {
+        "code": "35161",
+        "nom": "Louvigné-de-Bais",
+        "codesPostaux": [
+            "35680"
+        ]
+    },
+    {
+        "code": "35162",
+        "nom": "Louvigné-du-Désert",
+        "codesPostaux": [
+            "35420"
+        ]
+    },
+    {
+        "code": "35163",
+        "nom": "Luitré-Dompierre",
+        "codesPostaux": [
+            "35133",
+            "35210"
+        ]
+    },
+    {
+        "code": "35164",
+        "nom": "Marcillé-Raoul",
+        "codesPostaux": [
+            "35560"
+        ]
+    },
+    {
+        "code": "35165",
+        "nom": "Marcillé-Robert",
+        "codesPostaux": [
+            "35240"
+        ]
+    },
+    {
+        "code": "35166",
+        "nom": "Marpiré",
+        "codesPostaux": [
+            "35220"
+        ]
+    },
+    {
+        "code": "35167",
+        "nom": "Martigné-Ferchaud",
+        "codesPostaux": [
+            "35640"
+        ]
+    },
+    {
+        "code": "35168",
+        "nom": "Val d'Anast",
+        "codesPostaux": [
+            "35330"
+        ]
+    },
+    {
+        "code": "35169",
+        "nom": "Maxent",
+        "codesPostaux": [
+            "35380"
+        ]
+    },
+    {
+        "code": "35170",
+        "nom": "Mecé",
+        "codesPostaux": [
+            "35450"
+        ]
+    },
+    {
+        "code": "35171",
+        "nom": "Médréac",
+        "codesPostaux": [
+            "35360"
+        ]
+    },
+    {
+        "code": "35172",
+        "nom": "Meillac",
+        "codesPostaux": [
+            "35270"
+        ]
+    },
+    {
+        "code": "35173",
+        "nom": "Melesse",
+        "codesPostaux": [
+            "35520"
+        ]
+    },
+    {
+        "code": "35174",
+        "nom": "Mellé",
+        "codesPostaux": [
+            "35420"
+        ]
+    },
+    {
+        "code": "35175",
+        "nom": "Mernel",
+        "codesPostaux": [
+            "35330"
+        ]
+    },
+    {
+        "code": "35176",
+        "nom": "Guipry-Messac",
+        "codesPostaux": [
+            "35480"
+        ]
+    },
+    {
+        "code": "35177",
+        "nom": "La Mézière",
+        "codesPostaux": [
+            "35520"
+        ]
+    },
+    {
+        "code": "35178",
+        "nom": "Mézières-sur-Couesnon",
+        "codesPostaux": [
+            "35140"
+        ]
+    },
+    {
+        "code": "35179",
+        "nom": "Miniac-Morvan",
+        "codesPostaux": [
+            "35540"
+        ]
+    },
+    {
+        "code": "35180",
+        "nom": "Miniac-sous-Bécherel",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35181",
+        "nom": "Le Minihic-sur-Rance",
+        "codesPostaux": [
+            "35870"
+        ]
+    },
+    {
+        "code": "35183",
+        "nom": "Mondevert",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35184",
+        "nom": "Montauban-de-Bretagne",
+        "codesPostaux": [
+            "35360"
+        ]
+    },
+    {
+        "code": "35185",
+        "nom": "Montautour",
+        "codesPostaux": [
+            "35210"
+        ]
+    },
+    {
+        "code": "35186",
+        "nom": "Mont-Dol",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35187",
+        "nom": "Monterfil",
+        "codesPostaux": [
+            "35160"
+        ]
+    },
+    {
+        "code": "35188",
+        "nom": "Montfort-sur-Meu",
+        "codesPostaux": [
+            "35160"
+        ]
+    },
+    {
+        "code": "35189",
+        "nom": "Montgermont",
+        "codesPostaux": [
+            "35760"
+        ]
+    },
+    {
+        "code": "35190",
+        "nom": "Monthault",
+        "codesPostaux": [
+            "35420"
+        ]
+    },
+    {
+        "code": "35191",
+        "nom": "Les Portes du Coglais",
+        "codesPostaux": [
+            "35460"
+        ]
+    },
+    {
+        "code": "35192",
+        "nom": "Montreuil-des-Landes",
+        "codesPostaux": [
+            "35210"
+        ]
+    },
+    {
+        "code": "35193",
+        "nom": "Montreuil-le-Gast",
+        "codesPostaux": [
+            "35520"
+        ]
+    },
+    {
+        "code": "35194",
+        "nom": "Montreuil-sous-Pérouse",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35195",
+        "nom": "Montreuil-sur-Ille",
+        "codesPostaux": [
+            "35440"
+        ]
+    },
+    {
+        "code": "35196",
+        "nom": "Mordelles",
+        "codesPostaux": [
+            "35310"
+        ]
+    },
+    {
+        "code": "35197",
+        "nom": "Mouazé",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35198",
+        "nom": "Moulins",
+        "codesPostaux": [
+            "35680"
+        ]
+    },
+    {
+        "code": "35199",
+        "nom": "Moussé",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35200",
+        "nom": "Moutiers",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35201",
+        "nom": "Muel",
+        "codesPostaux": [
+            "35290"
+        ]
+    },
+    {
+        "code": "35202",
+        "nom": "La Noë-Blanche",
+        "codesPostaux": [
+            "35470"
+        ]
+    },
+    {
+        "code": "35203",
+        "nom": "La Nouaye",
+        "codesPostaux": [
+            "35137"
+        ]
+    },
+    {
+        "code": "35204",
+        "nom": "Nouvoitou",
+        "codesPostaux": [
+            "35410"
+        ]
+    },
+    {
+        "code": "35205",
+        "nom": "Noyal-sous-Bazouges",
+        "codesPostaux": [
+            "35560"
+        ]
+    },
+    {
+        "code": "35206",
+        "nom": "Noyal-Châtillon-sur-Seiche",
+        "codesPostaux": [
+            "35230"
+        ]
+    },
+    {
+        "code": "35207",
+        "nom": "Noyal-sur-Vilaine",
+        "codesPostaux": [
+            "35530"
+        ]
+    },
+    {
+        "code": "35208",
+        "nom": "Orgères",
+        "codesPostaux": [
+            "35230"
+        ]
+    },
+    {
+        "code": "35210",
+        "nom": "Pacé",
+        "codesPostaux": [
+            "35740"
+        ]
+    },
+    {
+        "code": "35211",
+        "nom": "Paimpont",
+        "codesPostaux": [
+            "35380"
+        ]
+    },
+    {
+        "code": "35212",
+        "nom": "Pancé",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35214",
+        "nom": "Parcé",
+        "codesPostaux": [
+            "35210"
+        ]
+    },
+    {
+        "code": "35215",
+        "nom": "Parigné",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35216",
+        "nom": "Parthenay-de-Bretagne",
+        "codesPostaux": [
+            "35850"
+        ]
+    },
+    {
+        "code": "35217",
+        "nom": "Le Pertre",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35218",
+        "nom": "Le Petit-Fougeray",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35219",
+        "nom": "Pipriac",
+        "codesPostaux": [
+            "35550"
+        ]
+    },
+    {
+        "code": "35220",
+        "nom": "Piré-Chancé",
+        "codesPostaux": [
+            "35150",
+            "35680"
+        ]
+    },
+    {
+        "code": "35221",
+        "nom": "Pléchâtel",
+        "codesPostaux": [
+            "35470"
+        ]
+    },
+    {
+        "code": "35222",
+        "nom": "Pleine-Fougères",
+        "codesPostaux": [
+            "35610"
+        ]
+    },
+    {
+        "code": "35223",
+        "nom": "Plélan-le-Grand",
+        "codesPostaux": [
+            "35380"
+        ]
+    },
+    {
+        "code": "35224",
+        "nom": "Plerguer",
+        "codesPostaux": [
+            "35540"
+        ]
+    },
+    {
+        "code": "35225",
+        "nom": "Plesder",
+        "codesPostaux": [
+            "35720"
+        ]
+    },
+    {
+        "code": "35226",
+        "nom": "Pleugueneuc",
+        "codesPostaux": [
+            "35720"
+        ]
+    },
+    {
+        "code": "35227",
+        "nom": "Pleumeleuc",
+        "codesPostaux": [
+            "35137"
+        ]
+    },
+    {
+        "code": "35228",
+        "nom": "Pleurtuit",
+        "codesPostaux": [
+            "35730"
+        ]
+    },
+    {
+        "code": "35229",
+        "nom": "Pocé-les-Bois",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35230",
+        "nom": "Poilley",
+        "codesPostaux": [
+            "35420"
+        ]
+    },
+    {
+        "code": "35231",
+        "nom": "Poligné",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35232",
+        "nom": "Princé",
+        "codesPostaux": [
+            "35210"
+        ]
+    },
+    {
+        "code": "35233",
+        "nom": "Québriac",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35234",
+        "nom": "Quédillac",
+        "codesPostaux": [
+            "35290"
+        ]
+    },
+    {
+        "code": "35235",
+        "nom": "Rannée",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35236",
+        "nom": "Redon",
+        "codesPostaux": [
+            "35600"
+        ]
+    },
+    {
+        "code": "35237",
+        "nom": "Renac",
+        "codesPostaux": [
+            "35660"
+        ]
+    },
+    {
+        "code": "35238",
+        "nom": "Rennes",
+        "codesPostaux": [
+            "35000",
+            "35200",
+            "35700"
+        ]
+    },
+    {
+        "code": "35239",
+        "nom": "Retiers",
+        "codesPostaux": [
+            "35240"
+        ]
+    },
+    {
+        "code": "35240",
+        "nom": "Le Rheu",
+        "codesPostaux": [
+            "35650"
+        ]
+    },
+    {
+        "code": "35241",
+        "nom": "La Richardais",
+        "codesPostaux": [
+            "35780"
+        ]
+    },
+    {
+        "code": "35242",
+        "nom": "Rimou",
+        "codesPostaux": [
+            "35560"
+        ]
+    },
+    {
+        "code": "35243",
+        "nom": "Romagné",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35244",
+        "nom": "Romazy",
+        "codesPostaux": [
+            "35490"
+        ]
+    },
+    {
+        "code": "35245",
+        "nom": "Romillé",
+        "codesPostaux": [
+            "35850"
+        ]
+    },
+    {
+        "code": "35246",
+        "nom": "Roz-Landrieux",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35247",
+        "nom": "Roz-sur-Couesnon",
+        "codesPostaux": [
+            "35610"
+        ]
+    },
+    {
+        "code": "35248",
+        "nom": "Sains",
+        "codesPostaux": [
+            "35610"
+        ]
+    },
+    {
+        "code": "35249",
+        "nom": "Sainte-Anne-sur-Vilaine",
+        "codesPostaux": [
+            "35390"
+        ]
+    },
+    {
+        "code": "35250",
+        "nom": "Saint-Armel",
+        "codesPostaux": [
+            "35230"
+        ]
+    },
+    {
+        "code": "35251",
+        "nom": "Saint-Aubin-d'Aubigné",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35252",
+        "nom": "Saint-Aubin-des-Landes",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35253",
+        "nom": "Saint-Aubin-du-Cormier",
+        "codesPostaux": [
+            "35140"
+        ]
+    },
+    {
+        "code": "35255",
+        "nom": "Saint-Benoît-des-Ondes",
+        "codesPostaux": [
+            "35114"
+        ]
+    },
+    {
+        "code": "35256",
+        "nom": "Saint-Briac-sur-Mer",
+        "codesPostaux": [
+            "35800"
+        ]
+    },
+    {
+        "code": "35257",
+        "nom": "Maen Roch",
+        "codesPostaux": [
+            "35460"
+        ]
+    },
+    {
+        "code": "35258",
+        "nom": "Saint-Brieuc-des-Iffs",
+        "codesPostaux": [
+            "35630"
+        ]
+    },
+    {
+        "code": "35259",
+        "nom": "Saint-Broladre",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35260",
+        "nom": "Saint-Christophe-des-Bois",
+        "codesPostaux": [
+            "35210"
+        ]
+    },
+    {
+        "code": "35261",
+        "nom": "Saint-Christophe-de-Valains",
+        "codesPostaux": [
+            "35140"
+        ]
+    },
+    {
+        "code": "35262",
+        "nom": "Sainte-Colombe",
+        "codesPostaux": [
+            "35134"
+        ]
+    },
+    {
+        "code": "35263",
+        "nom": "Saint-Coulomb",
+        "codesPostaux": [
+            "35350"
+        ]
+    },
+    {
+        "code": "35264",
+        "nom": "Saint-Didier",
+        "codesPostaux": [
+            "35220"
+        ]
+    },
+    {
+        "code": "35265",
+        "nom": "Saint-Domineuc",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35266",
+        "nom": "Saint-Erblon",
+        "codesPostaux": [
+            "35230"
+        ]
+    },
+    {
+        "code": "35268",
+        "nom": "Saint-Ganton",
+        "codesPostaux": [
+            "35550"
+        ]
+    },
+    {
+        "code": "35270",
+        "nom": "Saint-Georges-de-Gréhaigne",
+        "codesPostaux": [
+            "35610"
+        ]
+    },
+    {
+        "code": "35271",
+        "nom": "Saint-Georges-de-Reintembault",
+        "codesPostaux": [
+            "35420"
+        ]
+    },
+    {
+        "code": "35272",
+        "nom": "Saint-Germain-du-Pinel",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35273",
+        "nom": "Saint-Germain-en-Coglès",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35274",
+        "nom": "Saint-Germain-sur-Ille",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35275",
+        "nom": "Saint-Gilles",
+        "codesPostaux": [
+            "35590"
+        ]
+    },
+    {
+        "code": "35276",
+        "nom": "Saint-Gondran",
+        "codesPostaux": [
+            "35630"
+        ]
+    },
+    {
+        "code": "35277",
+        "nom": "Saint-Gonlay",
+        "codesPostaux": [
+            "35750"
+        ]
+    },
+    {
+        "code": "35278",
+        "nom": "Saint-Grégoire",
+        "codesPostaux": [
+            "35760"
+        ]
+    },
+    {
+        "code": "35279",
+        "nom": "Saint-Guinoux",
+        "codesPostaux": [
+            "35430"
+        ]
+    },
+    {
+        "code": "35280",
+        "nom": "Saint-Hilaire-des-Landes",
+        "codesPostaux": [
+            "35140"
+        ]
+    },
+    {
+        "code": "35281",
+        "nom": "Saint-Jacques-de-la-Lande",
+        "codesPostaux": [
+            "35136"
+        ]
+    },
+    {
+        "code": "35282",
+        "nom": "Rives-du-Couesnon",
+        "codesPostaux": [
+            "35140"
+        ]
+    },
+    {
+        "code": "35283",
+        "nom": "Saint-Jean-sur-Vilaine",
+        "codesPostaux": [
+            "35220"
+        ]
+    },
+    {
+        "code": "35284",
+        "nom": "Saint-Jouan-des-Guérets",
+        "codesPostaux": [
+            "35430"
+        ]
+    },
+    {
+        "code": "35285",
+        "nom": "Saint-Just",
+        "codesPostaux": [
+            "35550"
+        ]
+    },
+    {
+        "code": "35286",
+        "nom": "Saint-Léger-des-Prés",
+        "codesPostaux": [
+            "35270"
+        ]
+    },
+    {
+        "code": "35287",
+        "nom": "Saint-Lunaire",
+        "codesPostaux": [
+            "35800"
+        ]
+    },
+    {
+        "code": "35288",
+        "nom": "Saint-Malo",
+        "codesPostaux": [
+            "35400"
+        ]
+    },
+    {
+        "code": "35289",
+        "nom": "Saint-Malo-de-Phily",
+        "codesPostaux": [
+            "35480"
+        ]
+    },
+    {
+        "code": "35290",
+        "nom": "Saint-Malon-sur-Mel",
+        "codesPostaux": [
+            "35750"
+        ]
+    },
+    {
+        "code": "35291",
+        "nom": "Saint-Marcan",
+        "codesPostaux": [
+            "35120"
+        ]
+    },
+    {
+        "code": "35292",
+        "nom": "Saint-Marc-le-Blanc",
+        "codesPostaux": [
+            "35460"
+        ]
+    },
+    {
+        "code": "35294",
+        "nom": "Sainte-Marie",
+        "codesPostaux": [
+            "35600"
+        ]
+    },
+    {
+        "code": "35295",
+        "nom": "Saint-Maugan",
+        "codesPostaux": [
+            "35750"
+        ]
+    },
+    {
+        "code": "35296",
+        "nom": "Saint-Médard-sur-Ille",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35297",
+        "nom": "Saint-Méen-le-Grand",
+        "codesPostaux": [
+            "35290"
+        ]
+    },
+    {
+        "code": "35299",
+        "nom": "Saint-Méloir-des-Ondes",
+        "codesPostaux": [
+            "35350"
+        ]
+    },
+    {
+        "code": "35300",
+        "nom": "Saint-M'Hervé",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35302",
+        "nom": "Saint-Onen-la-Chapelle",
+        "codesPostaux": [
+            "35290"
+        ]
+    },
+    {
+        "code": "35304",
+        "nom": "Saint-Ouen-des-Alleux",
+        "codesPostaux": [
+            "35140"
+        ]
+    },
+    {
+        "code": "35305",
+        "nom": "Saint-Péran",
+        "codesPostaux": [
+            "35380"
+        ]
+    },
+    {
+        "code": "35306",
+        "nom": "Saint-Père-Marc-en-Poulet",
+        "codesPostaux": [
+            "35430"
+        ]
+    },
+    {
+        "code": "35307",
+        "nom": "Saint-Pern",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35308",
+        "nom": "Mesnil-Roc'h",
+        "codesPostaux": [
+            "35720"
+        ]
+    },
+    {
+        "code": "35309",
+        "nom": "Saint-Rémy-du-Plain",
+        "codesPostaux": [
+            "35560"
+        ]
+    },
+    {
+        "code": "35310",
+        "nom": "Saint-Sauveur-des-Landes",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35311",
+        "nom": "Saint-Séglin",
+        "codesPostaux": [
+            "35330"
+        ]
+    },
+    {
+        "code": "35312",
+        "nom": "Saint-Senoux",
+        "codesPostaux": [
+            "35580"
+        ]
+    },
+    {
+        "code": "35314",
+        "nom": "Saint-Suliac",
+        "codesPostaux": [
+            "35430"
+        ]
+    },
+    {
+        "code": "35315",
+        "nom": "Saint-Sulpice-la-Forêt",
+        "codesPostaux": [
+            "35250"
+        ]
+    },
+    {
+        "code": "35316",
+        "nom": "Saint-Sulpice-des-Landes",
+        "codesPostaux": [
+            "35390"
+        ]
+    },
+    {
+        "code": "35317",
+        "nom": "Saint-Symphorien",
+        "codesPostaux": [
+            "35630"
+        ]
+    },
+    {
+        "code": "35318",
+        "nom": "Saint-Thual",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35319",
+        "nom": "Saint-Thurial",
+        "codesPostaux": [
+            "35310"
+        ]
+    },
+    {
+        "code": "35320",
+        "nom": "Saint-Uniac",
+        "codesPostaux": [
+            "35360"
+        ]
+    },
+    {
+        "code": "35321",
+        "nom": "Saulnières",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35322",
+        "nom": "Le Sel-de-Bretagne",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35324",
+        "nom": "La Selle-en-Luitré",
+        "codesPostaux": [
+            "35133"
+        ]
+    },
+    {
+        "code": "35325",
+        "nom": "La Selle-Guerchaise",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35326",
+        "nom": "Sens-de-Bretagne",
+        "codesPostaux": [
+            "35490"
+        ]
+    },
+    {
+        "code": "35327",
+        "nom": "Servon-sur-Vilaine",
+        "codesPostaux": [
+            "35530"
+        ]
+    },
+    {
+        "code": "35328",
+        "nom": "Sixt-sur-Aff",
+        "codesPostaux": [
+            "35550"
+        ]
+    },
+    {
+        "code": "35329",
+        "nom": "Sougeal",
+        "codesPostaux": [
+            "35610"
+        ]
+    },
+    {
+        "code": "35330",
+        "nom": "Taillis",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35331",
+        "nom": "Talensac",
+        "codesPostaux": [
+            "35160"
+        ]
+    },
+    {
+        "code": "35332",
+        "nom": "Teillay",
+        "codesPostaux": [
+            "35620"
+        ]
+    },
+    {
+        "code": "35333",
+        "nom": "Le Theil-de-Bretagne",
+        "codesPostaux": [
+            "35240"
+        ]
+    },
+    {
+        "code": "35334",
+        "nom": "Thorigné-Fouillard",
+        "codesPostaux": [
+            "35235"
+        ]
+    },
+    {
+        "code": "35335",
+        "nom": "Thourie",
+        "codesPostaux": [
+            "35134"
+        ]
+    },
+    {
+        "code": "35336",
+        "nom": "Le Tiercent",
+        "codesPostaux": [
+            "35460"
+        ]
+    },
+    {
+        "code": "35337",
+        "nom": "Tinténiac",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35338",
+        "nom": "Torcé",
+        "codesPostaux": [
+            "35370"
+        ]
+    },
+    {
+        "code": "35339",
+        "nom": "Trans-la-Forêt",
+        "codesPostaux": [
+            "35610"
+        ]
+    },
+    {
+        "code": "35340",
+        "nom": "Treffendel",
+        "codesPostaux": [
+            "35380"
+        ]
+    },
+    {
+        "code": "35342",
+        "nom": "Trémeheuc",
+        "codesPostaux": [
+            "35270"
+        ]
+    },
+    {
+        "code": "35343",
+        "nom": "Tresbœuf",
+        "codesPostaux": [
+            "35320"
+        ]
+    },
+    {
+        "code": "35345",
+        "nom": "Trévérien",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35346",
+        "nom": "Trimer",
+        "codesPostaux": [
+            "35190"
+        ]
+    },
+    {
+        "code": "35347",
+        "nom": "Val-d'Izé",
+        "codesPostaux": [
+            "35450"
+        ]
+    },
+    {
+        "code": "35350",
+        "nom": "Vergéal",
+        "codesPostaux": [
+            "35680"
+        ]
+    },
+    {
+        "code": "35351",
+        "nom": "Le Verger",
+        "codesPostaux": [
+            "35160"
+        ]
+    },
+    {
+        "code": "35352",
+        "nom": "Vern-sur-Seiche",
+        "codesPostaux": [
+            "35770"
+        ]
+    },
+    {
+        "code": "35353",
+        "nom": "Vezin-le-Coquet",
+        "codesPostaux": [
+            "35132"
+        ]
+    },
+    {
+        "code": "35354",
+        "nom": "Vieux-Viel",
+        "codesPostaux": [
+            "35610"
+        ]
+    },
+    {
+        "code": "35355",
+        "nom": "Vieux-Vy-sur-Couesnon",
+        "codesPostaux": [
+            "35490"
+        ]
+    },
+    {
+        "code": "35356",
+        "nom": "Vignoc",
+        "codesPostaux": [
+            "35630"
+        ]
+    },
+    {
+        "code": "35357",
+        "nom": "Villamée",
+        "codesPostaux": [
+            "35420"
+        ]
+    },
+    {
+        "code": "35358",
+        "nom": "La Ville-ès-Nonais",
+        "codesPostaux": [
+            "35430"
+        ]
+    },
+    {
+        "code": "35359",
+        "nom": "Visseiche",
+        "codesPostaux": [
+            "35130"
+        ]
+    },
+    {
+        "code": "35360",
+        "nom": "Vitré",
+        "codesPostaux": [
+            "35500"
+        ]
+    },
+    {
+        "code": "35361",
+        "nom": "Le Vivier-sur-Mer",
+        "codesPostaux": [
+            "35960"
+        ]
+    },
+    {
+        "code": "35362",
+        "nom": "Le Tronchet",
+        "codesPostaux": [
+            "35540"
+        ]
+    },
+    {
+        "code": "35363",
+        "nom": "Pont-Péan",
+        "codesPostaux": [
+            "35131"
+        ]
+    }
+]

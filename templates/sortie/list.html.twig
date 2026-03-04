@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Toutes les sorties | {{ parent() }}
+    {{ parent() }}Toutes les sorties
 {% endblock %}
 
 
-{% block body %}
+{% block section %}
     {# filtre #}
     {% include('_filter.html.twig') %}
     {# affiche les sorties #}

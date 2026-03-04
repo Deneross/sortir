@@ -32,10 +32,17 @@ class Campus
     #[ORM\OneToMany(targetEntity: Sortie::class, mappedBy: 'campus')]
     private Collection $sorties;
 
+    /**
+     * @var Collection<int, Ville>
+     */
+    #[ORM\OneToMany(targetEntity: Ville::class, mappedBy: 'Campus', orphanRemoval: true)]
+    private Collection $villesDeSortie;
+
     public function __construct()
     {
         $this->affiliates = new ArrayCollection();
         $this->sorties = new ArrayCollection();
+        $this->villesDeSortie = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,5 +125,35 @@ class Campus
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection<int, Ville>
+     */
+    public function getVillesDeSortie(): Collection
+    {
+        return $this->villesDeSortie;
+    }
+
+    public function addVillesDeSortie(Ville $villesDeSortie): static
+    {
+        if (!$this->villesDeSortie->contains($villesDeSortie)) {
+            $this->villesDeSortie->add($villesDeSortie);
+            $villesDeSortie->setCampus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVillesDeSortie(Ville $villesDeSortie): static
+    {
+        if ($this->villesDeSortie->removeElement($villesDeSortie)) {
+            // set the owning side to null (unless already changed)
+            if ($villesDeSortie->getCampus() === $this) {
+                $villesDeSortie->setCampus(null);
+            }
+        }
+
+        return $this;
     }
 }
