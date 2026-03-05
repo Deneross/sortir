@@ -116,4 +116,34 @@ class FormSubmission
 
         $this->em->flush();
     }
+
+    public function publishSortie(Sortie $sortie): void
+    {
+        $sortie->setPublished(true);
+        $this->etatService->settingEtat($sortie);
+        $this->em->persist($sortie);
+        $this->em->flush();
+    }
+
+    public function registerSortie(Sortie $sortie): void
+    {
+        $sortie->addInscrit($this->participantService->getParticipant());
+        $this->em->persist($sortie);
+        $this->em->flush();
+    }
+
+    public function unRegisterSortie(Sortie $sortie): void
+    {
+        $sortie->removeInscrit($this->participantService->getParticipant());
+        $this->em->persist($sortie);
+        $this->em->flush();
+    }
+
+    public function cancelSortie(Sortie $sortie): void
+    {
+        $sortie->setCancel(true);
+        $this->etatService->settingEtat($sortie);
+        $this->em->persist($sortie);
+        $this->em->flush();
+    }
 }

@@ -19,13 +19,14 @@ use App\SortieService\FormSubmission;
 use App\SortieService\LieuManager;
 use App\Util\FromUserToParticipant;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/Sortie')]
+#[Route('/sortie')]
 final class SortieController extends AbstractController
 {
     #[Route('/', name: 'sortie_liste', methods: ['GET'])]
@@ -97,6 +98,7 @@ final class SortieController extends AbstractController
         ]);
     }
 
+
     #[Route('/{id}/modifier', name: 'sortie_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(
         int            $id,
@@ -148,5 +150,45 @@ final class SortieController extends AbstractController
             'titleAndH1' => 'Mise à jour d\'une sortie',
             'allowRemove' => $update,
         ]);
+    }
+
+    #[Route("/{id}/publish",name: 'sortie_publish', requirements: ['id' => '\d+'], methods: ['POST'])]
+    public function publishSortie(int $id, FormSubmission $sortieService, SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $sortieService->publishSortie($sortie);
+
+        $this->addFlash('success','La sortie à été publié');
+        return $this->redirectToRoute('sortie_liste');
+    }
+
+    #[Route("/{id}/register",name: 'sortie_register', requirements: ['id' => '\d+'], methods: ['POST'])]
+    public function registerSortie(int $id, FormSubmission $sortieService, SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $sortieService->registerSortie($sortie);
+
+        $this->addFlash('success','Vous êtes inscrit à la sortie');
+        return $this->redirectToRoute('sortie_liste');
+    }
+
+    #[Route("/{id}/unregister",name: 'sortie_unregister', requirements: ['id' => '\d+'], methods: ['POST'])]
+    public function unRegisterSortie(int $id, FormSubmission $sortieService, SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $sortieService->unRegisterSortie($sortie);
+
+        $this->addFlash('success','Vous êtes retiré de la sortie');
+        return $this->redirectToRoute('sortie_liste');
+    }
+
+    #[Route("/{id}/cancel",name: 'sortie_cancel', requirements: ['id' => '\d+'], methods: ['POST'])]
+    public function cancelSortie(int $id, FormSubmission $sortieService, SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $sortieService->cancelSortie($sortie);
+
+        $this->addFlash('success','Vous avez annulé la sortie');
+        return $this->redirectToRoute('sortie_liste');
     }
 }

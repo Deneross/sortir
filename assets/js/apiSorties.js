@@ -72,7 +72,7 @@ class ApiSorties {
     async loadSorties() {
         try {
             const url = this.buildUrl();
-            const res = await fetch(url, { headers: { Accept: "application/json" } });
+            const res = await fetch(url, {headers: {Accept: "application/json"}});
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
             const json = await res.json();
@@ -83,13 +83,13 @@ class ApiSorties {
         } catch (e) {
             console.error(e);
             this.renderError();
-            this.renderPagination({ page: this.currentPage, pages: 1, total: 0 });
+            this.renderPagination({page: this.currentPage, pages: 1, total: 0});
         }
     }
 
     async loadCampus() {
         try {
-            const res = await fetch("/api/campus", { headers: { Accept: "application/json" } });
+            const res = await fetch("/api/campus", {headers: {Accept: "application/json"}});
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const campusList = await res.json();
             this.updateCampusFilter(campusList);
@@ -159,20 +159,26 @@ class ApiSorties {
             .join("");
     }
 
-    renderActions(actions, sortieId) {
-        if (!Array.isArray(actions) || actions.length === 0) {
-            return `<a class="btn btn-group-sm btn-primary" href="/sortie/${this.escapeHtml(sortieId)}">Afficher</a>`;
-        }
+    renderActions(actions) {
+        return actions.map(a => {
+            const label = this.escapeHtml(a.label);
+            const title = this.escapeHtml(a.title);
+            const href = this.escapeHtml(a.href);
+            const cls = this.escapeHtml(a.class || "btn btn-sm btn-primary");
+            const method = (a.method || "GET").toUpperCase();
 
-        return actions
-            .map((a) => {
-                const label = this.escapeHtml(a.label);
-                const title = this.escapeHtml(a.title);
-                const href = this.escapeHtml(a.href);
-                const cls = this.escapeHtml(a.class || "btn btn-sm btn-primary");
-                return `<a class="${cls}" href="${href}" title="${title}">${label}</a>`;
-            })
-            .join(" ");
+            if (method === "POST") {
+                const csrf = a.csrf ? `<input type="hidden" name="_token" value="${this.escapeHtml(a.csrf)}">` : "";
+                return `
+        <form action="${href}" method="post" style="display:inline">
+          ${csrf}
+          <button type="submit" class="${cls}" title="${title}">${label}</button>
+        </form>
+      `;
+            }
+
+            return `<a class="${cls}" href="${href}" title="${title}">${label}</a>`;
+        }).join(" ");
     }
 
     renderPagination(pagination) {
@@ -277,6 +283,9 @@ function mountSorties() {
 
 // Chargement normal
 document.addEventListener("DOMContentLoaded", mountSorties);
+
+// Retour arrière/avant (bfcache)
+window.addEventListener("pageshow", mountSorties);
 
 // à causer de Turbo actif
 document.addEventListener("turbo:load", mountSorties);

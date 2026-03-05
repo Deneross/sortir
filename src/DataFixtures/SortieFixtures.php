@@ -44,7 +44,7 @@ class SortieFixtures extends Fixture implements DependentFixtureInterface
 
             $activite = $faker->randomElement($activites);
 
-            $sortie->setNom($activite);
+            $sortie->setNom($activite . ' à ' . $i);
 
             $dateDebut = $faker->dateTimeBetween("-1 month", "+2 month");
             $sortie->setDateHeureDebut(\DateTimeImmutable::createFromMutable($dateDebut));
@@ -61,7 +61,10 @@ class SortieFixtures extends Fixture implements DependentFixtureInterface
             $nbInscrits = $faker->numberBetween(0, $inscriptionMax);
 
             for ($j = 1; $j <= $nbInscrits; $j++) {
-                $participant = $this->getReference('participant_' . $faker->numberBetween(1, 2), Participant::class);
+                $participant = $this->getReference('participant_' .
+//                    $faker->numberBetween(1, 2)
+                2
+                    , Participant::class);
                 $sortie->addInscrit($participant);
             }
 
@@ -81,8 +84,8 @@ class SortieFixtures extends Fixture implements DependentFixtureInterface
              * Calcul ensuite réel de l'état sinon j'ai des exceptions illogiques qui se produisent
              */
             $sortie->setPublished($faker->boolean(70));
-            $sortie->setArchived($faker->boolean(70));
-            $sortie->setCancel($faker->boolean(70));
+            $sortie->setArchived($faker->boolean(10));
+            $sortie->setCancel($faker->boolean(10));
             $this->etatService->settingEtat($sortie);
 
             $this->addReference('sortie' . $i, $sortie);

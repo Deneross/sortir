@@ -3,13 +3,16 @@
 namespace App\SortieService;
 
 use App\Entity\Participant;
+use App\Enum\EtatSortie;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 final class SortieSearchService
 {
-    public function __construct(private SortieRepository $sortieRepository) {}
+    public function __construct(private SortieRepository $sortieRepository)
+    {
+    }
 
     /**
      * Retourne toutes les sorties (non paginé)
@@ -47,15 +50,29 @@ final class SortieSearchService
      */
     private function applyFilters(QueryBuilder $qb, array $filters, ?Participant $user): void
     {
+        // 1) Historisée : jamais listée
+        $qb->andWhere('e.id != :etatHistorisee')
+            ->setParameter('etatHistorisee', EtatSortie::HISTORISEE->value);
+
+        // 2) En création : uniquement organisateur
+        if ($user) {
+            $qb->andWhere('(e.id != :etatCreation OR s.organisateur = :meVisibilite)')
+                ->setParameter('etatCreation', EtatSortie::EN_CREATION->value)
+                ->setParameter('meVisibilite', $user);
+        } else {
+            $qb->andWhere('e.id != :etatCreation')
+                ->setParameter('etatCreation', EtatSortie::EN_CREATION->value);
+        }
+
         // Campus id
         if (!empty($filters['campus'])) {
             $qb->andWhere('c.id = :campus')
-                ->setParameter('campus', (int) $filters['campus']);
+                ->setParameter('campus', (int)$filters['campus']);
         }
 
         // Recherche texte sur nom
         if (!empty($filters['search'])) {
-            $search = mb_strtolower(trim((string) $filters['search']));
+            $search = mb_strtolower(trim((string)$filters['search']));
             if ($search !== '') {
                 $qb->andWhere('LOWER(s.nom) LIKE :search')
                     ->setParameter('search', '%' . $search . '%');
