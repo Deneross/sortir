@@ -34,7 +34,7 @@ class SortieFixtures extends Fixture implements DependentFixtureInterface
 
             $activite = $faker->randomElement($activites);
 
-            $sortie->setNom($activite . ' à ' . $faker->city());
+            $sortie->setNom($activite);
 
             $dateDebut = $faker->dateTimeBetween("-1 month", "+2 month");
             $sortie->setDateHeureDebut(\DateTimeImmutable::createFromMutable($dateDebut));
