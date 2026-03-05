@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }}{{ sortie.nom}}
+    {{ parent() }}{{ sortie.nom }}
 {% endblock %}
 
 
 {% block section %}
-    {# todo: affiche tous les détails #}
     <h1 class="text-center mb-4">Afficher une sortie</h1>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <span class="badge {{ etatColor }}">{{ sortie.etat.libelle }}</span>
+    </div>
 
     <!-- infos 2 colonnes -->
     <div class="container mt-5">
@@ -26,14 +29,14 @@
                         </div>
 
                         <div class="row mb-2">
-                            <div class="col-6 fw-bold">Date et heure</div>
+                            <div class="col-6 fw-bold">Date et heure de la sortie</div>
                             <div class="col-6">
                                 {{ sortie.dateHeureDebut|date('d/m/Y H:i') }}
                             </div>
                         </div>
 
                         <div class="row mb-2">
-                            <div class="col-6 fw-bold">Date limite</div>
+                            <div class="col-6 fw-bold">Date limite d'inscription</div>
                             <div class="col-6">
                                 {{ sortie.dateLimiteInscription|date('d/m/Y H:i') }}
                             </div>
@@ -45,7 +48,7 @@
                         </div>
 
                         <div class="row mb-2">
-                            <div class="col-6 fw-bold">Durée (minutes)</div>
+                            <div class="col-6 fw-bold">Durée (en minutes)</div>
                             <div class="col-6">{{ sortie.duree }}</div>
                         </div>
 
@@ -59,33 +62,34 @@
                             <div class="col-6">{{ sortie.campus.name }}</div>
                         </div>
 
-                        <div class="row mb-2">
-                            <div class="col-6 fw-bold">Ville</div>
-                            <div class="col-6">sortie.lieu.ville</div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <div class="col-6 fw-bold">Lieu</div>
-                            <div class="col-6">sortie.lieu.nom</div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <div class="col-6 fw-bold">Rue</div>
-                            <div class="col-6">sortie.lieu.rue</div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <div class="col-6 fw-bold">Code postal</div>
-                            <div class="col-6">sortie.lieu.codePostal</div>
-                        </div>
-
-                        <div class="row mb-2">
-                            <div class="col-6 fw-bold">Latitude / Longitude</div>
-                            <div class="col-6">
-                                sortie.lieu.latitude / sortie.lieu.longitude
+                        {% for lieu in sortie.lieux %}
+                            <div class="row mb-2">
+                                <div class="col-6 fw-bold">Ville</div>
+                                <div class="col-6">{{ lieu.codePostal.name }}</div>
                             </div>
-                        </div>
 
+                            <div class="row mb-2">
+                                <div class="col-6 fw-bold">Lieu</div>
+                                <div class="col-6">{{ lieu.name }}</div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6 fw-bold">Rue</div>
+                                <div class="col-6">{{ lieu.rue }}</div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6 fw-bold">Code postal</div>
+                                <div class="col-6">{{ lieu.codePostal.codePostal }}</div>
+                            </div>
+
+                            {% if lieu.coordonneesGps %}
+                                <div class="row mb-2">
+                                    <div class="col-6 fw-bold">Latitude / Longitude</div>
+                                    <div class="col-6">{{ lieu.coordonneesGps }}</div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
 
                 </div>

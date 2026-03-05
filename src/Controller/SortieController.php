@@ -50,14 +50,14 @@ final class SortieController extends AbstractController
     }
 
     #[Route('/{id}', name: 'sortie_show', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function show($id, SortieRepository $sortieRepository): Response
+    public function show($id, SortieRepository $sortieRepository, EtatManager $etatService): Response
     {
         //va chercher la sotie dans la bdd en fonction de l'id
         $sortie = $sortieRepository->find($id);
 
         return $this->render('sortie/show.html.twig', [
-            //passe la sortie à twig pour affichage
             'sortie' => $sortie,
+            'etatColor' => $etatService->etatColorDisplay($sortie),
         ]);
     }
 

@@ -74,4 +74,25 @@ class EtatManager
             throw new EtatError($e->getMessage());
         }
     }
+
+    public function etatColorDisplay(Sortie $sortie): string{
+        switch ($sortie->getEtat()->getId()) {
+            case 1 :
+                return 'text-bg-info text-white';
+            case 2 :
+                return 'text-bg-primary';
+            case 3 :
+                return 'text-bg-secondary';
+            case 4 :
+                return 'text-bg-warning';
+            case 5 :
+                return 'text-bg-success';
+            case 6 :
+                return 'text-bg-danger';
+            case 7 :
+                return 'text-bg-dark';
+            default :
+                return 'text-bg-light';
+        }
+    }
 }
