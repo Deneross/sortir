@@ -13,6 +13,7 @@ use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
 use App\Util\FromUserToParticipant;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 
 class FormSubmission
@@ -20,8 +21,9 @@ class FormSubmission
     public function __construct(
         private readonly EtatManager           $etatService,
         private readonly FromUserToParticipant $participantService,
-        private readonly LieuRepository        $lieuRepo,
+        private readonly LieuManager        $lieuService,
         private readonly SortieRepository      $sortieRepo,
+        private readonly EntityManagerInterface $em,
     )
     {
     }
@@ -41,17 +43,25 @@ class FormSubmission
         }
     }
 
-    public function setSortieSpecificationsFromCreate(
-        Lieu          $lieu,
+    public function createSortie(
         Campus        $campus,
         FormInterface $form,
         Sortie        $sortie
     ): void
     {
         try {
+            //Gestion du lieu affilié à la sortie
+            $lieu = $this->lieuService->createLieuFromSortie($form);
+            $this->em->persist($lieu);
+
             $sortie->addLieux($lieu);
             $sortie->setCampus($campus);
-            $this->setSortieEtatFromCreate($sortie, $form);
+            $this->etatService->setSortieEtat($sortie, $form);
+
+            $this->em->persist($sortie);
+
+            $this->em->flush();
+
         } catch (EtatError $e) {
             throw new EtatError(
                 $e->getMessage(),
@@ -67,19 +77,22 @@ class FormSubmission
         return $sortie;
     }
 
-    private function setSortieEtatFromCreate(Sortie $sortie, FormInterface $form): void
-    {
-        try {
-            if ($form->get('publier')->isClicked()) {
-                $sortie->setEtat($this->etatService->getRightEtat(EtatSortie::OUVERTE));
-                $sortie->setPublished(true);
-            } else {
-                $sortie->setEtat($this->etatService->getRightEtat(EtatSortie::EN_CREATION));
-            }
-        } catch (EtatError $e) {
-            throw new EtatError(
-                $e->getMessage(),
-            );
+    public function removeSortie(Sortie $sortie): void {
+        //todo : gestion de la suppresion
+    }
+
+    public function updateSortie(Sortie $sortie, FormInterface $form): void {
+        //Réinitialise le statut publié
+        $sortie->setPublished(false);
+
+        foreach ($sortie->getLieux() as $lieu) {
+            $this->lieuService->ctrlAndReplaceLieuData($lieu, $form);
+            $this->em->persist($lieu);
         }
+
+        $this->etatService->setSortieEtat($sortie, $form);
+        $this->em->persist($sortie);
+
+        $this->em->flush();
     }
 }

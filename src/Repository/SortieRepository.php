@@ -49,7 +49,7 @@ class SortieRepository extends ServiceEntityRepository
             ->addSelect('camp')
             ->addSelect('et')
             ->leftJoin('s.organisateur', 'orga')
-            ->leftJoin('s.camp','camp')
+            ->leftJoin('s.campus','camp')
             ->leftJoin('s.etat', 'et')
             ->where('s.id = :id')
             ->setParameter('id', $id)

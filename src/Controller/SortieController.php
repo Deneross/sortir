@@ -62,10 +62,8 @@ final class SortieController extends AbstractController
 
     #[Route('/creer', name: 'sortie_create', methods: ['GET', 'POST'])]
     public function create(
-        Request                $request,
-        EntityManagerInterface $em,
-        FormSubmission         $sortieService,
-        LieuManager            $lieuService,
+        Request        $request,
+        FormSubmission $sortieService,
     ): Response
     {
 
@@ -79,21 +77,7 @@ final class SortieController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-
-                //Gestion du lieu affilié à la sortie
-                $lieu = $lieuService->createLieuFromSortie($form);
-                $em->persist($lieu);
-
-                //Gestion de la sortie avec toutes ses particularités
-                $sortieService->setSortieSpecificationsFromCreate(
-                    $lieu,
-                    $infoCampus,
-                    $form,
-                    $newSortie
-                );
-                $em->persist($newSortie);
-
-                $em->flush();
+                $sortieService->createSortie($infoCampus, $form, $newSortie);
 
                 $this->addFlash('success', 'La sortie est prête ! Découvrez en tous les détails ici');
                 return $this->redirectToRoute('sortie_show', ['id' => $newSortie->getId()]);
@@ -111,11 +95,10 @@ final class SortieController extends AbstractController
 
     #[Route('/{id}/modifier', name: 'sortie_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(
-        int $id,
-        Request $request,
-        EntityManagerInterface $em,
-        FormSubmission     $formSubmission,
-        LieuManager        $lieuManager,
+        int            $id,
+        Request        $request,
+        FormSubmission $formSubmission,
+        LieuManager    $lieuManager,
     ): Response
     {
         try {
@@ -132,12 +115,17 @@ final class SortieController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
 
-                foreach ($sortie->getLieux() as $lieu) {
-                    $lieuManager->ctrlAndReplaceLieuData($lieu, $form);
-                    $em->persist($lieu);
+                if ($form->get('supprimer')->isClicked()) {
+                    $formSubmission->removeSortie($sortie);
+
+                    $this->addFlash('warning', 'La sortie vient d\'être supprimée.');
+                    return $this->redirectToRoute('sortie_liste');
                 }
 
-                $em->persist($sortie);
+                $formSubmission->updateSortie($sortie, $form);
+
+                $this->addFlash('success', 'La sortie a bien été mise à jour !');
+                return $this->redirectToRoute('sortie_show', ['id' => $sortie->getId()]);
 
             }
 
@@ -147,7 +135,8 @@ final class SortieController extends AbstractController
         }
 
         return $this->render('sortie/create.html.twig', [
-            //todo:passer le formulaire à twig
+            'form' => $form,
+            'titleAndH1' => 'Mise à jour d\'une sortie'
         ]);
     }
 }

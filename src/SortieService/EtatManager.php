@@ -29,7 +29,7 @@ class EtatManager
         }
 
         if (!$sortie->isPublished()) {
-            return EtatSortie::EN_CREATION;
+            return EtatSortie::OUVERTE;
         }
 
         $fin = $sortie->getDateHeureDebut()->add(new \DateInterval("PT{$sortie->getDuree()}M"));
@@ -42,7 +42,6 @@ class EtatManager
             return EtatSortie::EN_COURS;
         }
 
-
         $complet = $sortie->getInscrits()->count() >= $sortie->getNbInscriptionMax();
         $dateLimiteDepassee = $now > $sortie->getDateLimiteInscription();
 
@@ -50,7 +49,7 @@ class EtatManager
             return EtatSortie::CLOTUREE;
         }
 
-        return EtatSortie::OUVERTE;
+        return EtatSortie::EN_CREATION;
     }
 
     public function getRightEtat(EtatSortie $etat): \App\Entity\Etat {
@@ -63,12 +62,14 @@ class EtatManager
         return $etat;
     }
 
-    public function setSortieEtatFromCreate(Sortie $sortie, FormInterface $form): void{
+    public function setSortieEtat(Sortie $sortie, FormInterface $form): void{
         if ($form->get('publier')->isClicked()) {
-            $sortie->setEtat($this->getRightEtat(EtatSortie::OUVERTE));
             $sortie->setPublished(true);
-        } else {
-            $sortie->setEtat($this->getRightEtat(EtatSortie::EN_CREATION));
+        }
+        try {
+            $sortie->setEtat($this->getRightEtat($this->getEtat($sortie)));
+        } catch (EtatError $e) {
+            throw new EtatError($e->getMessage());
         }
     }
 }
