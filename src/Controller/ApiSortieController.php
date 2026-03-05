@@ -139,6 +139,8 @@ final class ApiSortieController extends AbstractController
 
             $data[] = [
                 'id' => $s->getId(),
+                'campusId' => $s->getCampus()->getId(),
+                'campusName' => $s->getCampus()->getName(),
                 'nom' => $s->getNom(),
                 'dateHeureDebut' => $s->getDateHeureDebut()->format('Y-m-d H:i'),
                 'dateLimiteInscription' => $s->getDateLimiteInscription()->format('Y-m-d'),

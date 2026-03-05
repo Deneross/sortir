@@ -47,7 +47,7 @@ final class SortieSearchService
      */
     private function applyFilters(QueryBuilder $qb, array $filters, ?Participant $user): void
     {
-        // Campus (id)
+        // Campus id
         if (!empty($filters['campus'])) {
             $qb->andWhere('c.id = :campus')
                 ->setParameter('campus', (int) $filters['campus']);

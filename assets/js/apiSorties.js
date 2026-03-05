@@ -1,4 +1,4 @@
-class Sorties {
+class ApiSorties {
     tbodyId = "sortiesTable";
     paginationId = "pagination";
 
@@ -7,7 +7,9 @@ class Sorties {
 
     constructor() {
         this.bindEvent();
-        this.loadSorties(); // chargement initial
+        this.loadCampus();
+        this.loadSorties();
+
     }
 
     bindEvent() {
@@ -25,7 +27,7 @@ class Sorties {
             }
         });
 
-        // Optionnel : si tu veux relancer dès qu’on change un filtre
+        //relance dès qu’on change un filtre
         ["campus", "dateMin", "dateMax", "orga", "inscrit", "nonInscrit", "terminees"].forEach((id) => {
             const el = document.getElementById(id);
             if (!el) return;
@@ -33,6 +35,11 @@ class Sorties {
                 this.currentPage = 1;
                 this.loadSorties();
             });
+        });
+
+        document.getElementById("campus")?.addEventListener("change", () => {
+            this.currentPage = 1;
+            this.loadSorties();
         });
     }
 
@@ -78,6 +85,32 @@ class Sorties {
             this.renderError();
             this.renderPagination({ page: this.currentPage, pages: 1, total: 0 });
         }
+    }
+
+    async loadCampus() {
+        try {
+            const res = await fetch("/api/campus", { headers: { Accept: "application/json" } });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const campusList = await res.json();
+            this.updateCampusFilter(campusList);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    updateCampusFilter(campusList) {
+        const select = document.getElementById("campus");
+        if (!select) return;
+
+        // évite doublons si retour arrière / turbo
+        if (select.dataset.hydrated === "1") return;
+
+        const options = (Array.isArray(campusList) ? campusList : [])
+            .map(c => `<option value="${this.escapeHtml(c.id)}">${this.escapeHtml(c.name)}</option>`)
+            .join("");
+
+        select.insertAdjacentHTML("beforeend", options);
+        select.dataset.hydrated = "1";
     }
 
     updateTable(sorties) {
@@ -236,7 +269,7 @@ function mountSorties() {
     if (!tbody) return;
 
     if (!window.__sortiesInstance) {
-        window.__sortiesInstance = new Sorties();
+        window.__sortiesInstance = new ApiSorties();
     } else {
         window.__sortiesInstance.loadSorties();
     }
