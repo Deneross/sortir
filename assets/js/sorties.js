@@ -231,4 +231,20 @@ class Sorties {
     }
 }
 
-new Sorties();
+function mountSorties() {
+    const tbody = document.getElementById("sortiesTable");
+    if (!tbody) return;
+
+    if (!window.__sortiesInstance) {
+        window.__sortiesInstance = new Sorties();
+    } else {
+        window.__sortiesInstance.loadSorties();
+    }
+}
+
+// Chargement normal
+document.addEventListener("DOMContentLoaded", mountSorties);
+
+// à causer de Turbo actif
+document.addEventListener("turbo:load", mountSorties);
+document.addEventListener("turbo:render", mountSorties);
