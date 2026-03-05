@@ -124,6 +124,7 @@ class SortieType extends AbstractType
                 'label' => 'Publier',
                 'attr' => [
                     'class' => 'btn btn-primary',
+                    'onclick' => "return confirm('Une fois la sortie publiée, vous ne pourrez plus la modifier');"
                 ]
             ]);
         if ($update) {
@@ -131,6 +132,7 @@ class SortieType extends AbstractType
                 'label' => 'Supprimer',
                 'attr' => [
                     'class' => 'btn btn-danger',
+                    'onclick' => "return confirm('Cette action est irreversible, il ne sera pas possible de restaurer la sortie.');"
                 ]
             ]);
         }

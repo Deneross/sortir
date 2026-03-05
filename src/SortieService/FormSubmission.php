@@ -94,7 +94,12 @@ class FormSubmission
 
     public function removeSortie(Sortie $sortie): void
     {
-        //todo : gestion de la suppresion
+        foreach ($sortie->getLieux() as $lieu) {
+            $sortie->removeLieux($lieu);
+            $this->em->remove($lieu);
+        }
+        $this->em->remove($sortie);
+        $this->em->flush();
     }
 
     public function updateSortie(Campus $campus, Sortie $sortie, FormInterface $form): void
