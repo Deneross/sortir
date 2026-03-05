@@ -8,7 +8,10 @@ use App\Entity\Sortie;
 use App\Enum\EtatSortie;
 use App\Exception\EtatError;
 use App\Exception\ParticipantNotFound;
+use App\Exception\SortieNotFound;
 use App\Repository\EtatRepository;
+use App\Repository\LieuRepository;
+use App\Repository\SortieRepository;
 use App\Util\FromUserToParticipant;
 use Symfony\Component\Form\FormInterface;
 
@@ -16,7 +19,9 @@ class FormSubmission
 {
     public function __construct(
         private readonly EtatManager           $etatService,
-        private readonly FromUserToParticipant $participantService
+        private readonly FromUserToParticipant $participantService,
+        private readonly LieuRepository        $lieuRepo,
+        private readonly SortieRepository      $sortieRepo,
     )
     {
     }
@@ -52,6 +57,14 @@ class FormSubmission
                 $e->getMessage(),
             );
         }
+    }
+
+    public function getRightSortie(int $id) : Sortie {
+        $sortie = $this->sortieRepo->findWithJointure($id);
+        if (null === $sortie) {
+            throw new SortieNotFound();
+        }
+        return $sortie;
     }
 
     private function setSortieEtatFromCreate(Sortie $sortie, FormInterface $form): void

@@ -33,6 +33,20 @@ class SortieRepository extends ServiceEntityRepository
         return new Paginator($queryBuilder->getQuery());
     }
 
+    public function findWithJointure(int $id) : ?Sortie{
+        return $this->createQueryBuilder('s')
+            ->addSelect('orga')
+            ->addSelect('camp')
+            ->addSelect('et')
+            ->leftJoin('s.organisateur', 'orga')
+            ->leftJoin('s.camp','camp')
+            ->leftJoin('s.etat', 'et')
+            ->where('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return Sortie[] Returns an array of Sortie objects
     //     */

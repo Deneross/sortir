@@ -35,7 +35,7 @@ class Campus
     /**
      * @var Collection<int, Ville>
      */
-    #[ORM\OneToMany(targetEntity: Ville::class, mappedBy: 'Campus', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Ville::class, mappedBy: 'campus', orphanRemoval: true)]
     private Collection $villesDeSortie;
 
     public function __construct()

@@ -16,6 +16,16 @@ class LieuRepository extends ServiceEntityRepository
         parent::__construct($registry, Lieu::class);
     }
 
+    public function findWithJointure(int $id) : ?Lieu{
+        return $this->createQueryBuilder('l')
+            ->addSelect('cp')
+            ->leftJoin('l.codePostal', 'cp')
+            ->where('l.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return Lieu[] Returns an array of Lieu objects
     //     */

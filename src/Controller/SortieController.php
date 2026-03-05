@@ -6,7 +6,9 @@ use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Enum\EtatSortie;
 use App\Exception\EtatError;
+use App\Exception\LieuNotFound;
 use App\Exception\ParticipantNotFound;
+use App\Exception\SortieNotFound;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
@@ -109,12 +111,40 @@ final class SortieController extends AbstractController
 
     #[Route('/{id}/modifier', name: 'sortie_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(
-        int $id
+        int $id,
+        Request $request,
+        EntityManagerInterface $em,
+        FormSubmission     $formSubmission,
+        LieuManager        $lieuManager,
     ): Response
     {
-        //todo:aller chercher la sortie à modifier dans la bdd
+        try {
+            $sortie = $formSubmission->getRightSortie($id);
+            $infoCampus = $sortie->getCampus();
 
-        //todo: traiter le formulaire de modification de sortie
+            $form = $this->createForm(SortieType::class, $sortie, [
+                'CampusToUseAsFilter' => $infoCampus
+            ]);
+
+            $lieuManager->setLieuInput($form, $sortie);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                foreach ($sortie->getLieux() as $lieu) {
+                    $lieuManager->ctrlAndReplaceLieuData($lieu, $form);
+                    $em->persist($lieu);
+                }
+
+                $em->persist($sortie);
+
+            }
+
+        } catch (SortieNotFound|LieuNotFound $e) {
+            $this->addFlash('danger', $e->getMessage());
+            return $this->redirectToRoute('sortie_liste');
+        }
 
         return $this->render('sortie/create.html.twig', [
             //todo:passer le formulaire à twig
