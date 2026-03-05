@@ -66,13 +66,15 @@ final class SortieController extends AbstractController
         FormSubmission $sortieService,
     ): Response
     {
-
         try {
+            $update = false;
+
             $newSortie = $sortieService->initialSortie();
             $infoCampus = $newSortie->getCampus();
 
             $form = $this->createForm(SortieType::class, $newSortie, [
-                'CampusToUseAsFilter' => $infoCampus
+                'CampusToUseAsFilter' => $infoCampus,
+                'update' => $update,
             ]);
             $form->handleRequest($request);
 
@@ -87,10 +89,10 @@ final class SortieController extends AbstractController
             return $this->redirectToRoute('sortie_liste');
         }
 
-        return $this->render('sortie/create.html.twig', [
+        return $this->render('/sortie/form.html.twig', [
             'form' => $form,
             'titleAndH1' => 'Créer une sortie',
-            'allowRemove' => false,
+            'allowRemove' => $update,
         ]);
     }
 
@@ -103,11 +105,14 @@ final class SortieController extends AbstractController
     ): Response
     {
         try {
+            $update = true;
+
             $sortie = $formSubmission->getRightSortie($id);
             $infoCampus = $sortie->getCampus();
 
             $form = $this->createForm(SortieType::class, $sortie, [
-                'CampusToUseAsFilter' => $infoCampus
+                'CampusToUseAsFilter' => $infoCampus,
+                'update' => $update,
             ]);
 
             $lieuManager->setLieuInput($form, $sortie);
@@ -135,10 +140,10 @@ final class SortieController extends AbstractController
             return $this->redirectToRoute('sortie_liste');
         }
 
-        return $this->render('sortie/create.html.twig', [
+        return $this->render('/sortie/form.html.twig', [
             'form' => $form,
             'titleAndH1' => 'Mise à jour d\'une sortie',
-            'allowRemove' => true,
+            'allowRemove' => $update,
         ]);
     }
 }

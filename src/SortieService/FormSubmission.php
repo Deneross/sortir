@@ -87,9 +87,6 @@ class FormSubmission
     {
         $sortie->setCampus($campus);
 
-        //Réinitialise le statut publié
-        $sortie->setPublished(false);
-
         foreach ($sortie->getLieux() as $lieu) {
             $this->lieuService->ctrlAndReplaceLieuData($lieu, $form);
             $this->em->persist($lieu);

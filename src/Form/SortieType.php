@@ -24,6 +24,7 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $campus = $options['CampusToUseAsFilter'];
+        $update = $options['update'];
 
         /**
          * Attention ce formulaire a de la logique qui dépend du controller Sortie:
@@ -52,43 +53,43 @@ class SortieType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('nbInscriptionMax', NumberType::class, [
-                'label'=>'Nombre de places',
-                'attr'=>[
-                    'min'=>1,
-                    'placeholder'=>1,
+                'label' => 'Nombre de places',
+                'attr' => [
+                    'min' => 1,
+                    'placeholder' => 1,
                 ]
-        ])
+            ])
             ->add('duree', NumberType::class, [
                 'label' => 'Durée (en minutes)',
-                'attr'=>[
-                    'min'=>60,
-                    'placeholder'=>60,
+                'attr' => [
+                    'min' => 60,
+                    'placeholder' => 60,
                 ]
             ])
             ->add('infosSortie', TextareaType::class, [
                 'label' => 'Description et infos',
-                'attr'=>[
+                'attr' => [
                     'placeholder' => 'Donnez plus d\'information sur votre sortie',
-                    'rows'=>5
+                    'rows' => 5
                 ]
             ])
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'name',
-                'attr'=>[
+                'attr' => [
                     'disabled' => true,
                 ]
             ])
             ->add('lieuNom', TextType::class, [
                 'label' => 'Lieu',
-                'attr'=>[
+                'attr' => [
                     'placeholder' => 'Indiquez où vous souhaitez organiser cette sortie',
                 ],
                 'mapped' => false,
             ])
             ->add('lieuRue', TextType::class, [
                 'label' => 'Rue',
-                'attr'=>[
+                'attr' => [
                     'placeholder' => 'Indiquez l\'adresse correspondante',
                 ],
                 'mapped' => false,
@@ -99,39 +100,40 @@ class SortieType extends AbstractType
                 'multiple' => false,
                 'mapped' => false,
                 'query_builder' => function (VilleRepository $repo) use ($campus) {
-                return $repo->createQueryBuilder('v')
-                    ->where('v.campus = :campus')
-                    ->setParameter('campus', $campus);
+                    return $repo->createQueryBuilder('v')
+                        ->where('v.campus = :campus')
+                        ->setParameter('campus', $campus);
                 }
             ])
             ->add('lieuCoordonnees', TextType::class, [
                 'label' => 'Latitude / Longitude',
-                'attr'=>[
+                'attr' => [
                     'placeholder' => '41.40338, 2.17403',
                 ],
                 'mapped' => false,
                 'required' => false,
                 'help' => 'Si vous le souhaitez, facilitez vos retrouvailles en indiquant les coordonées GPS du lieu de rencontre',
             ])
-            ->add('enregistrer', SubmitType::class,[
+            ->add('enregistrer', SubmitType::class, [
                 'label' => 'Enregistrer',
-                'attr'=>[
+                'attr' => [
                     'class' => 'btn btn-info text-white',
                 ]
             ])
-            ->add('publier', SubmitType::class,[
+            ->add('publier', SubmitType::class, [
                 'label' => 'Publier',
-                'attr'=>[
+                'attr' => [
                     'class' => 'btn btn-primary',
                 ]
-            ])
-            ->add('supprimer', SubmitType::class,[
+            ]);
+        if ($update) {
+            $builder->add('supprimer', SubmitType::class, [
                 'label' => 'Supprimer',
-                'attr'=>[
+                'attr' => [
                     'class' => 'btn btn-danger',
                 ]
-            ])
-        ;
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -139,6 +141,7 @@ class SortieType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Sortie::class,
             'CampusToUseAsFilter' => null,
+            'update' => false,
         ]);
     }
 }
