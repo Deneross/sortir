@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Administration{% endblock %}
+
+{% block section %}
+
+    <div>
+        <img src="{{ asset('images/bienvenue.gif') }}" alt="Bienvenue administrateur"
+             class="img-fluid rounded mx-auto d-block">
+    </div>
+    <h1 class="d-flex justify-content-center align-content-around mt-1">Que souhaitez-vous faire :</h1>
+    <section>
+        <nav class="navbar bg-body-tertiary">
+            <form class="container-fluid justify-content-center gap-2">
+
+
+
+                <a href="">
+                    <button class="btn btn-outline-success" type="button">
+                        Consulter la liste des participants
+                    </button>
+                </a>
+
+                <a href="">
+                    <button class="btn btn-outline-success" type="button">
+                        Inscrire un nouveau participant
+                    </button>
+                </a>
+
+                        <a href="{{ path('app_ville_create') }}">
+                            <button class="btn btn-outline-success" type="button">
+                                Ajouter une ville
+                            </button>
+                        </a>
+
+                        <a href="{{ path('app_campus_create') }}">
+                            <button class="btn btn-outline-success" type="button">
+                                Ajouter un campus
+                            </button>
+                        </a>
+
+            </form>
+        </nav>
+    </section>
+
+{% endblock %}

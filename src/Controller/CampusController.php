@@ -27,7 +27,7 @@ final class CampusController extends AbstractController
             $em->flush();
 
             $this->addFlash('success','Votre campus est créé. N\'oubliez pas d\'y ajouter vos participants pour qu\'ils puissent créer des sorties.');
-            return $this->redirectToRoute('sortie_liste');
+            return $this->redirectToRoute('app_adminapp_adminanduser_index');
         }
 
         return $this->render('campus/create.html.twig', [

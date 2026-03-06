@@ -42,7 +42,7 @@ final class VilleController extends AbstractController
             $em->flush();
 
             $this->addFlash('success','Votre ville a été ajoutée à la liste');
-            return $this->redirectToRoute('sortie_liste');
+            return $this->redirectToRoute('app_adminapp_adminanduser_index');
         }
 
         return $this->render('ville/create.html.twig', [
