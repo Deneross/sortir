@@ -13,6 +13,8 @@ use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Util\FromUserToParticipant;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Env\Request;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Component\Form\FormInterface;
 
 class FormSubmission
@@ -139,9 +141,12 @@ class FormSubmission
         $this->em->flush();
     }
 
-    public function cancelSortie(Sortie $sortie): void
+    public function cancelSortie(Sortie $sortie, String $motif): void
     {
         $sortie->setCancel(true);
+
+        $sortie->setMotif($motif);
+
         $this->etatService->settingEtat($sortie);
         $this->em->persist($sortie);
         $this->em->flush();

@@ -104,6 +104,13 @@
                     </p>
                 </div>
 
+                <!-- Si Annulée -->
+                {% if sortie.motif %}
+                    <div class="alert alert-danger">
+                        <strong>Motif d'annulation :</strong> {{ sortie.motif }}
+                    </div>
+                {% endif %}
+
             </div>
         </div>
 

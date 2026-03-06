@@ -8,8 +8,10 @@ use App\Enum\EtatSortie;
 use App\Exception\EtatError;
 use App\Exception\LieuNotFound;
 use App\Exception\ParticipantNotFound;
+use App\Exception\SortieAlreadyClosed;
 use App\Exception\SortieIllegalUpdate;
 use App\Exception\SortieNotFound;
+use App\Form\CancelSortieType;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
@@ -20,6 +22,7 @@ use App\SortieService\LieuManager;
 use App\Util\FromUserToParticipant;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use PHPUnit\Framework\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -182,13 +185,44 @@ final class SortieController extends AbstractController
         return $this->redirectToRoute('sortie_liste');
     }
 
-    #[Route("/{id}/cancel",name: 'sortie_cancel', requirements: ['id' => '\d+'], methods: ['POST'])]
-    public function cancelSortie(int $id, FormSubmission $sortieService, SortieRepository $sortieRepository): Response
-    {
+    #[Route('/{id}/cancel', name: 'sortie_cancel', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function cancelSortie(
+        int $id,
+        Request $request,
+        FormSubmission $sortieService,
+        SortieRepository $sortieRepository,
+        EtatManager $etatService
+    ): Response {
         $sortie = $sortieRepository->find($id);
-        $sortieService->cancelSortie($sortie);
 
-        $this->addFlash('success','Vous avez annulé la sortie');
-        return $this->redirectToRoute('sortie_liste');
+        if (!$sortie) {
+            throw $this->createNotFoundException('Sortie introuvable');
+        }
+
+        try {
+            if ($sortie->getEtat()->getLibelle() === 'Clôturée') {
+                throw new SortieAlreadyClosed();
+            }
+
+            $form = $this->createForm(CancelSortieType::class, $sortie);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $sortieService->cancelSortie($sortie, $sortie->getMotif());
+
+                $this->addFlash('success', 'Vous avez annulé la sortie');
+
+                return $this->redirectToRoute('sortie_liste');
+            }
+        } catch (SortieAlreadyClosed $e) {
+            $this->addFlash('danger', $e->getMessage());
+            return $this->redirectToRoute('sortie_liste');
+        }
+
+        return $this->render('sortie/cancel.html.twig', [
+            'form' => $form->createView(),
+            'sortie' => $sortie,
+            'etatColor' => $etatService->etatColorDisplay($sortie),
+        ]);
     }
 }

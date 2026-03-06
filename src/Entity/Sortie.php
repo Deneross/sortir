@@ -93,6 +93,9 @@ class Sortie
     #[ORM\ManyToMany(targetEntity: Lieu::class, inversedBy: 'sorties')]
     private Collection $lieux;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $motif = null;
+
     public function __construct()
     {
         $this->inscrits = new ArrayCollection();
@@ -286,6 +289,18 @@ class Sortie
     public function removeLieux(Lieu $lieux): static
     {
         $this->lieux->removeElement($lieux);
+
+        return $this;
+    }
+
+    public function getMotif(): ?string
+    {
+        return $this->motif;
+    }
+
+    public function setMotif(?string $motif): static
+    {
+        $this->motif = $motif;
 
         return $this;
     }

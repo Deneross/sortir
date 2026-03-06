@@ -162,7 +162,7 @@ final class ApiSortieController extends AbstractController
                         'label' => 'Annuler',
                         'class' => 'btn btn-group-sm btn-danger',
                         'href' => $cancelUrl,
-                        'method' => 'POST',  //attention post
+                        'method' => 'Get',  //attention post
                         'csrf' => $this->csrf->getToken('sortie_cancel'.$s->getId())->getValue(),
                     ];
                 }
