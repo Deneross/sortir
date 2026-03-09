@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}Gérer les participants
+{% endblock %}
+
+{% block section %}
+    <h1>Gérer les participants</h1>
+    <table class="table-sm table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Pseudo</th>
+            <th scope="col">Mail</th>
+            <th scope="col">Campus</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody id="participantsTable">
+        {% for participant in participants %}
+            <tr>
+                <td>{{ participant.pseudo }}</td>
+                <td> {{ participant.mail }} </td>
+                <td> {{ participant.campus.name }} </td>
+                <td> {{ participant.telephone }} </td>
+                <td>
+                    <a href="{{ path('app_participant_update') }}">Modifier</a>
+                    <a href="">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun participant trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <a href="">
+            <button class="btn btn-outline-success" type="button">
+                Inscrire un nouveau participant
+            </button>
+        </a>
+    </div>
+{% endblock %}
+

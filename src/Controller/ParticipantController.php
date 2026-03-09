@@ -56,14 +56,13 @@ final class ParticipantController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                //Je perdais le campus à la soumission à cause du disbled, je le réinjecte ici.
+                //Je perdais le campus à la soumission à cause du disabled, je le réinjecte ici.
                 $participant->setCampus($campus);
 
                 //Gestion du maj mdp si le champ a été rempli
                 $pwdChanged = $form->get('newPassword')->getData();
                 if (!empty($pwdChanged)) {
                     $participant->setPassword($toHash->hashPassword($participant, $pwdChanged));
-
                 }
 
                 //Appel au service pour gérer la supression ou l'import d'image

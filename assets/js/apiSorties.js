@@ -7,15 +7,18 @@ class ApiSorties {
 
     constructor() {
         this.bindEvent();
-        this.loadCampus();
-        this.loadSorties();
+        this.init();
+    }
 
+    async init() {
+        await this.loadCampus();
+        await this.loadSorties();
     }
 
     bindEvent() {
         document.getElementById("btnSearch")?.addEventListener("click", (e) => {
             e.preventDefault();
-            this.currentPage = 1; // nouvelle recherche => retour page 1
+            this.currentPage = 1;
             this.loadSorties();
         });
 
@@ -27,19 +30,14 @@ class ApiSorties {
             }
         });
 
-        //relance dès qu’on change un filtre
         ["campus", "dateMin", "dateMax", "orga", "inscrit", "nonInscrit", "terminees"].forEach((id) => {
             const el = document.getElementById(id);
             if (!el) return;
+
             el.addEventListener("change", () => {
                 this.currentPage = 1;
                 this.loadSorties();
             });
-        });
-
-        document.getElementById("campus")?.addEventListener("change", () => {
-            this.currentPage = 1;
-            this.loadSorties();
         });
     }
 
@@ -61,7 +59,6 @@ class ApiSorties {
         if (document.getElementById("nonInscrit")?.checked) params.set("nonInscrit", "1");
         if (document.getElementById("terminees")?.checked) params.set("terminees", "1");
 
-        // pagination
         params.set("page", String(this.currentPage));
         params.set("limit", String(this.limit));
 
@@ -72,25 +69,26 @@ class ApiSorties {
     async loadSorties() {
         try {
             const url = this.buildUrl();
-            const res = await fetch(url, {headers: {Accept: "application/json"}});
+            const res = await fetch(url, { headers: { Accept: "application/json" } });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
             const json = await res.json();
 
-            // API => { data: [...], pagination: {...} }
+            this.setDefaultCampus(json.userCampus);
             this.updateTable(json.data);
             this.renderPagination(json.pagination);
         } catch (e) {
             console.error(e);
             this.renderError();
-            this.renderPagination({page: this.currentPage, pages: 1, total: 0});
+            this.renderPagination({ page: this.currentPage, pages: 1, total: 0 });
         }
     }
 
     async loadCampus() {
         try {
-            const res = await fetch("/api/campus", {headers: {Accept: "application/json"}});
+            const res = await fetch("/api/campus", { headers: { Accept: "application/json" } });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
             const campusList = await res.json();
             this.updateCampusFilter(campusList);
         } catch (e) {
@@ -98,11 +96,19 @@ class ApiSorties {
         }
     }
 
+    setDefaultCampus(userCampus) {
+        const select = document.getElementById("campus");
+        if (!select || !userCampus?.id) return;
+
+        if (!select.value) {
+            select.value = String(userCampus.id);
+        }
+    }
+
     updateCampusFilter(campusList) {
         const select = document.getElementById("campus");
         if (!select) return;
 
-        // évite doublons si retour arrière / turbo
         if (select.dataset.hydrated === "1") return;
 
         const options = (Array.isArray(campusList) ? campusList : [])
@@ -127,21 +133,16 @@ class ApiSorties {
                 const nom = this.escapeHtml(s.nom);
                 const debut = this.escapeHtml(s.dateHeureDebut);
                 const cloture = this.escapeHtml(s.dateLimiteInscription);
-                const inscritsPlaces = `${this.escapeHtml(s.nbInscrits)} / ${this.escapeHtml(
-                    s.nbInscriptionMax
-                )}`;
+                const inscritsPlaces = `${this.escapeHtml(s.nbInscrits)} / ${this.escapeHtml(s.nbInscriptionMax)}`;
                 const etat = this.escapeHtml(s.etat);
 
-                // colonne "Inscrit" = X seulement si sortie complète
                 const inscritX = s.isFull ? "X" : "";
 
                 const orgaLink = s.organisateurUrl
-                    ? `<a href="${this.escapeHtml(s.organisateurUrl)}" title="Détails organisateur">${this.escapeHtml(
-                        s.organisateurPseudo
-                    )}</a>`
+                    ? `<a href="${this.escapeHtml(s.organisateurUrl)}" title="Détails organisateur">${this.escapeHtml(s.organisateurPseudo)}</a>`
                     : this.escapeHtml(s.organisateurPseudo);
 
-                const actionsHtml = this.renderActions(s.actions, s.id);
+                const actionsHtml = this.renderActions(s.actions);
 
                 return `
           <tr>
@@ -162,13 +163,16 @@ class ApiSorties {
     renderActions(actions) {
         return actions.map(a => {
             const label = this.escapeHtml(a.label);
-            const title = this.escapeHtml(a.title);
+            const title = this.escapeHtml(a.title || "");
             const href = this.escapeHtml(a.href);
             const cls = this.escapeHtml(a.class || "btn btn-sm btn-primary");
             const method = (a.method || "GET").toUpperCase();
 
             if (method === "POST") {
-                const csrf = a.csrf ? `<input type="hidden" name="_token" value="${this.escapeHtml(a.csrf)}">` : "";
+                const csrf = a.csrf
+                    ? `<input type="hidden" name="_token" value="${this.escapeHtml(a.csrf)}">`
+                    : "";
+
                 return `
         <form action="${href}" method="post" style="display:inline">
           ${csrf}
@@ -189,16 +193,15 @@ class ApiSorties {
         const pages = Number(pagination?.pages ?? 1);
         const total = Number(pagination?.total ?? 0);
 
-        // 0 ou 1 page => rien à afficher (ou tu peux afficher juste "1")
         if (pages <= 1) {
             container.innerHTML = total ? `<div class="text-muted">Page ${page} / ${pages}</div>` : "";
             return;
         }
 
-        // plage affichée (max 7 boutons)
         const maxButtons = 7;
         let start = Math.max(1, page - Math.floor(maxButtons / 2));
         let end = start + maxButtons - 1;
+
         if (end > pages) {
             end = pages;
             start = Math.max(1, end - maxButtons + 1);
@@ -237,11 +240,11 @@ class ApiSorties {
         html += `</div>`;
         container.innerHTML = html;
 
-        // listeners
         container.querySelectorAll("button[data-page]").forEach((b) => {
             b.addEventListener("click", () => {
                 const p = Number(b.dataset.page);
                 if (!Number.isFinite(p) || p < 1 || p === this.currentPage) return;
+
                 this.currentPage = p;
                 this.loadSorties();
             });
@@ -260,7 +263,7 @@ class ApiSorties {
     renderEmpty() {
         const tbody = document.getElementById(this.tbodyId);
         if (!tbody) return;
-        tbody.innerHTML = `<tr><td colspan="8">Aucune Sortie programmée</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8">Aucune sortie programmée</td></tr>`;
     }
 
     renderError() {
@@ -281,12 +284,7 @@ function mountSorties() {
     }
 }
 
-// Chargement normal
 document.addEventListener("DOMContentLoaded", mountSorties);
-
-// Retour arrière/avant (bfcache)
 window.addEventListener("pageshow", mountSorties);
-
-// à causer de Turbo actif
 document.addEventListener("turbo:load", mountSorties);
 document.addEventListener("turbo:render", mountSorties);
