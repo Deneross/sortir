@@ -44,6 +44,20 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
             ->getResult();
     }
 
+    public function findEmailsInBdd():array{
+        $dql = 'SELECT p.mail FROM App\Entity\Participant p';
+        $em = $this->getEntityManager();
+        $query = $em->createQuery($dql);
+        return $query->getResult();
+    }
+
+    public function findPseudosInBdd():array{
+        $dql = 'SELECT p.pseudo FROM App\Entity\Participant p';
+        $em = $this->getEntityManager();
+        $query = $em->createQuery($dql);
+        return $query->getResult();
+    }
+
 
     //    /**
     //     * @return Participant[] Returns an array of Participant objects

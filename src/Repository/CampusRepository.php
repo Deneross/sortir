@@ -16,6 +16,12 @@ class CampusRepository extends ServiceEntityRepository
         parent::__construct($registry, Campus::class);
     }
 
+    public function getOnlyCampusNames():array{
+        $dql = 'SELECT c.name FROM Campus c';
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getResult();
+    }
+
     //    /**
     //     * @return Campus[] Returns an array of Campus objects
     //     */
