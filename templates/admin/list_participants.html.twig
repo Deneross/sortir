@@ -15,11 +15,12 @@
             <th scope="col">Campus</th>
             <th scope="col">Téléphone</th>
             <th scope="col">Actions</th>
+            <th scope="col">Badge</th>
         </tr>
         </thead>
         <tbody id="participantsTable">
         {% for participant in participants %}
-            <tr>
+            <tr class="{% if not participant.actif %}table-secondary{% endif %}">
                 <td>{{ participant.pseudo }}</td>
                 <td> {{ participant.mail }} </td>
                 <td> {{ participant.campus.name }} </td>
@@ -27,6 +28,13 @@
                 <td>
                     <a href="{{ path('app_admin_admin_update',{id:participant.id}) }}">Modifier</a>
                     <a href="{{ path('app_admin_participant_disabled',{id:participant.id}) }}">Supprimer</a>
+                </td>
+                <td>
+                    {% if participant.actif %}
+                        <span class="badge bg-success">Actif</span>
+                    {% else %}
+                        <span class="badge bg-danger">Inactif</span>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
