@@ -211,10 +211,6 @@ final class SortieController extends AbstractController
     ): Response {
         $sortie = $sortieRepository->find($id);
 
-        if (!$sortie) {
-            throw $this->createNotFoundException('Sortie introuvable');
-        }
-
         try {
             if ($sortie->getEtat()->getLibelle() === 'Clôturée') {
                 throw new SortieAlreadyClosed();
@@ -227,7 +223,6 @@ final class SortieController extends AbstractController
                 $sortieService->cancelSortie($sortie, $sortie->getMotif());
 
                 $this->addFlash('success', 'Vous avez annulé la sortie');
-
                 return $this->redirectToRoute('sortie_liste');
             }
         } catch (SortieAlreadyClosed $e) {

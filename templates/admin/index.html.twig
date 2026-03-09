@@ -14,30 +14,23 @@
             <form class="container-fluid justify-content-center gap-2">
 
 
-
-                <a href="">
+                <a href="{{ path('app_admin_participants_show') }}">
                     <button class="btn btn-outline-success" type="button">
                         Consulter la liste des participants
                     </button>
                 </a>
 
-                <a href="">
+                <a href="{{ path('app_ville_create') }}">
                     <button class="btn btn-outline-success" type="button">
-                        Inscrire un nouveau participant
+                        Ajouter une ville
                     </button>
                 </a>
 
-                        <a href="{{ path('app_ville_create') }}">
-                            <button class="btn btn-outline-success" type="button">
-                                Ajouter une ville
-                            </button>
-                        </a>
-
-                        <a href="{{ path('app_campus_create') }}">
-                            <button class="btn btn-outline-success" type="button">
-                                Ajouter un campus
-                            </button>
-                        </a>
+                <a href="{{ path('app_campus_create') }}">
+                    <button class="btn btn-outline-success" type="button">
+                        Ajouter un campus
+                    </button>
+                </a>
 
             </form>
         </nav>

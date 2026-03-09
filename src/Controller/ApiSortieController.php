@@ -24,8 +24,10 @@ final class ApiSortieController extends AbstractController
         $page = max(1, $request->query->getInt('page', 1));
         $limit = max(1, $request->query->getInt('limit', 10));
 
+        $userCampusId = $user?->getCampus()?->getId();
+
         $filters = [
-            'campus' => $request->query->get('campus'),
+            'campus' => $request->query->get('campus') ?: $userCampusId,
             'search' => $request->query->get('search'),
             'dateMin' => $request->query->get('dateMin'),
             'dateMax' => $request->query->get('dateMax'),
@@ -195,6 +197,10 @@ final class ApiSortieController extends AbstractController
         }
 
         return $this->json([
+            'userCampus' => [
+                'id' => $s->getCampus()?->getId(),
+                'name' => $s->getCampus()?->getName(),
+            ],
             'data' => $data,
             'pagination' => [
                 'page' => $page,

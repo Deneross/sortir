@@ -1,0 +1,32 @@
+<div class="mb-4">
+
+    <h3 class="mb-3">Filtrer les participants</h3>
+
+    <form method="get" class="row g-2 align-items-center">
+
+        <div class="col-auto">
+            <label for="search" class="col-form-label">
+                Le nom contient
+            </label>
+        </div>
+
+        <div class="col-auto">
+            <input
+                type="text"
+                id="search"
+                name="search"
+                value="{{ search }}"
+                class="form-control"
+                placeholder="Rechercher..."
+            >
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-dark">
+                Rechercher
+            </button>
+        </div>
+
+    </form>
+
+</div>

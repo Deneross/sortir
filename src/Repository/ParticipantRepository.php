@@ -34,6 +34,16 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
         $this->getEntityManager()->flush();
     }
 
+    public function findBySearch(string $search): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('LOWER(p.nom) LIKE :search')
+            ->setParameter('search', '%' . mb_strtolower($search) . '%')
+            ->orderBy('p.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 
     //    /**
     //     * @return Participant[] Returns an array of Participant objects
