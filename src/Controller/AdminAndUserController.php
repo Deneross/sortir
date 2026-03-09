@@ -41,13 +41,23 @@ final class AdminAndUserController extends AbstractController
     }
 
     #[Route('/list_participants', name: '_participants_show', methods: ['GET'])]
-    public function showUsers(ParticipantRepository $participantRepository): Response
+    public function showUsers(
+        ParticipantRepository $participantRepository,
+        Request $request
+    ): Response
     {
-        $participants = $participantRepository->findAll();
+        $search = $request->query->get('search');
+
+        if (!empty($search)) {
+            $participants = $participantRepository->findBySearch($search);
+        } else {
+            $participants = $participantRepository->findAll();
+        }
 
         return $this->render('admin/list_participants.html.twig', [
             'participants' => $participants,
-            'titleAndH1' => 'Créer un participant',
+            'titleAndH1' => 'Liste des participants',
+            'search' => $search,
         ]);
     }
 
@@ -131,7 +141,7 @@ final class AdminAndUserController extends AbstractController
             throw $this->createNotFoundException('Participant introuvable');
         }
 
-        if (!$checkActifParticipant->isParticipantUnactif()) {
+        if (!$checkActifParticipant->isGivenParticipantInactif($participant)) {
             $participant->setActif(false);
             $em->flush();
 
