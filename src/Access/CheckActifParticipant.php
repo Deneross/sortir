@@ -18,7 +18,14 @@ class CheckActifParticipant
 
     public function isParticipantUnactif(): bool{
         $participantCo = $this->security->getUser();
+        return $this->controllerActif($participantCo);
+    }
 
+    public function isGivenParticipantInactif(Participant $participant): bool{
+        return $this->controllerActif($participant);
+    }
+
+    private function controllerActif(Participant $participantCo) : bool {
         //Valider qu'aucun inactif essai de se connecter
         if(!$participantCo->isActif()){
             //Si en plus il n'avait pas le bon rôle, on le lui change
@@ -30,11 +37,11 @@ class CheckActifParticipant
             //On sort direct en passant au controler que l'utilisateur est inactif
             return true;
 
-        /*
-        Si le premier if échoue, (ndlr: il est actif)
-        mais que le statut n'est pas le bon,
-        on le repasse au bon statut
-        */
+            /*
+            Si le premier if échoue, (ndlr: il est actif)
+            mais que le statut n'est pas le bon,
+            on le repasse au bon statut
+            */
         }elseif($participantCo->getRoles() === ['ROLE_USER'] ){
             $participantCo->setRoles(['ROLE_PARTICIPANT']);
             $this->em->persist($participantCo);
@@ -42,5 +49,4 @@ class CheckActifParticipant
         }
         return false;
     }
-
 }
