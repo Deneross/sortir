@@ -24,8 +24,8 @@
                 <td> {{ participant.campus.name }} </td>
                 <td> {{ participant.telephone }} </td>
                 <td>
-                    <a href="{{ path('app_participant_update') }}">Modifier</a>
-                    <a href="">Supprimer</a>
+                    <a href="{{ path('app_admin_admin_update',{id:participant.id}) }}">Modifier</a>
+                    <a href="{{ path('app_admin_participant_disabled',{id:participant.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}
@@ -36,9 +36,9 @@
         </tbody>
     </table>
 
-    <div>
-        <a href="">
-            <button class="btn btn-outline-success" type="button">
+    <div class="mt-4">
+        <a href="{{ path('app_admin_participant_create') }}">
+            <button class="btn btn-outline-success" type="button" >
                 Inscrire un nouveau participant
             </button>
         </a>

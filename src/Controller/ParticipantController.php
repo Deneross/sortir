@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Exception\ParticipantNotFound;
 use App\Form\ParticipantType;
+use App\ParticipantService\ParticipantService;
 use App\Repository\ParticipantRepository;
 use App\Util\FromUserToParticipant;
 use App\Util\ImgManager;
@@ -42,10 +43,9 @@ final class ParticipantController extends AbstractController
 
     #[Route('/update', name: '_update', methods: ['GET', 'POST'])]
     public function update(
+        ParticipantService $participantService,
         ImgManager                  $service,
         FromUserToParticipant       $rightParticipant,
-        UserPasswordHasherInterface $toHash,
-        EntityManagerInterface      $em,
         Request                     $request
     ): Response
     {
@@ -56,19 +56,8 @@ final class ParticipantController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                //Je perdais le campus à la soumission à cause du disabled, je le réinjecte ici.
-                $participant->setCampus($campus);
 
-                //Gestion du maj mdp si le champ a été rempli
-                $pwdChanged = $form->get('newPassword')->getData();
-                if (!empty($pwdChanged)) {
-                    $participant->setPassword($toHash->hashPassword($participant, $pwdChanged));
-                }
-
-                //Appel au service pour gérer la supression ou l'import d'image
-                $participant = $service->updateImg($participant, $form);
-
-                $em->flush();
+                $participantService->updateParticipant($form,$participant,$campus);
 
                 $this->addFlash('success', 'Ton profil vient d\'être mis à jour !');
                 return $this->redirectToRoute('app_participant_read');
