@@ -2,9 +2,11 @@
 
 namespace App\Util;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
 use App\Exception\CampusNotFound;
 use App\Repository\CampusRepository;
+use App\Repository\ParticipantRepository;
 use http\Exception\RuntimeException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -17,7 +19,7 @@ class UserImport
 {
     private const ALL_COLUMNS = [
         'pseudo',
-        'password',
+        'mot de passe',
         'nom',
         'prenom',
         'telephone',
@@ -31,6 +33,7 @@ class UserImport
         private readonly UserPasswordHasherInterface $hasher,
         private readonly Validation                  $validate,
         private readonly CampusRepository            $campusRepo,
+        private readonly ParticipantRepository       $participantRepo,
         private readonly string                      $fileDirectory = 'app.project_user_update_directory' . '/' . 'app.util.uploader'
     )
     {
@@ -43,45 +46,36 @@ class UserImport
         $this->injectFileInUploads($form);
         $data = fopen($this->fileDirectory, 'r');
 
-        //Pour ignorer la première ligne = entête
-        fgetcsv($data);
+        try {
+            $this->validateHeader(fgetcsv($data));
+        } catch (RuntimeException $e) {
+            throw new RuntimeException(
+                'Erreur de construction du fichier d\'import : ' .
+                $e->getMessage() .
+                ' Import annulé.'
+            );
+        }
 
         $ligneConcerned = 1;
 
+        //todo : mapper les donner
+        //todo : crer le tableau Resultat à deux tableau User et Erreur
+
         while (($row = fgetcsv($data)) !== false) {
-            $newUser = new Participant();
-            $newUser->setPseudo($row[0]);
-            $this->hasher->hashPassword($newUser, $row[1]);
-            $newUser->setNom($row[2]);
-            $newUser->setPrenom($row[3]);
-            $newUser->setTelephone($row[4]);
-            $newUser->setMail($row[5]);
-
-            $campusGiven = $this->campusRepo->findOneBy(['name' => $row[6]]);
-            if ($campusGiven) {
-                $newUser->setCampus($campusGiven);
-            } else {
-                throw new CampusNotFound('Le campus renseigné dans l\'import est introuvable');
-            }
-
-            switch ($row[7]) {
-                case 'inactif':
-                    $newUser->setActif(false);
-                    $newUser->setRoles(['ROLE_USER']);
-                    break;
-                case 'administrateur':
-                    $newUser->setRoles(['ROLE_ADMIN']);
-                    break;
-                default:
-                    $newUser->setRoles(['ROLE_PARTICIPANT']);
-            }
-
-            $users[] = $newUser;
+            //todo : boucler avec les erreurs et les users
         }
 
+        //todo : retourner le tableau Resultat
         return $users;
     }
 
+    public function endImportProcess(): void
+    {
+        unlink($this->fileDirectory);
+    }
+
+
+    /********* Mes méthode pour la bonne gestion de l'import *********/
     private function injectFileInUploads(FormInterface $form): void
     {
         $file = $form->get('file')->getData();
@@ -95,9 +89,41 @@ class UserImport
         }
     }
 
-    public function endImportProcess(): void
+    private function settingUser(array $data, array &$allPseudosGettingImported, array &$allEmailsGettingImported): Participant
     {
-        unlink($this->fileDirectory);
+        $newUser = new Participant();
+
+        //Gestion du pseudo
+        $pseudoGiven = $data['pseudo'];
+        $newUser->setPseudo($this->validationUnicPseudo($pseudoGiven, $allPseudosGettingImported));
+        $allPseudosGettingImported[] = $pseudoGiven;
+
+        $this->hasher->hashPassword($newUser, $data['mot de passe']);
+
+        $newUser->setNom(filter_var($data['nom'], FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $newUser->setPrenom(filter_var($data['prenom'], FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $newUser->setTelephone(filter_var($data['telephone'], FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+
+        //Gestion du mail/email
+        $emailGiven = $data['mail'];
+        $newUser->setMail($this->validationUnicEmail($emailGiven, $allEmailsGettingImported));
+        $allEmailsGettingImported[] = $pseudoGiven;
+
+        $newUser->setCampus($this->validationCampus($data['campus']));
+
+        switch ($data['role']) {
+            case 'inactif':
+                $newUser->setActif(false);
+                $newUser->setRoles(['ROLE_USER']);
+                break;
+            case 'administrateur':
+                $newUser->setRoles(['ROLE_ADMIN']);
+                break;
+            default:
+                $newUser->setRoles(['ROLE_PARTICIPANT']);
+        }
+
+        return $newUser;
     }
 
 
@@ -121,5 +147,56 @@ class UserImport
                 ' Toutes les colonnes à l\'exception de la dernière doivent être renseignée.'
             );
         }
+    }
+
+    private function validationUnicEmail(string $emailGiven, array $emailsGettingImported): string
+    {
+        $startErrorMessage = 'Erreur d\'unicité sur l\'adresse mail ! ';
+        if ($this->participantRepo->findOneBy(['email' => $emailGiven])) {
+            throw new RuntimeException(
+                $startErrorMessage .
+                'Un utilisateur avec la même adresse mail existe déjà.'
+            );
+        }
+
+        foreach ($emailsGettingImported as $email) {
+            if ($email === $emailGiven) {
+                throw new RuntimeException(
+                    $startErrorMessage .
+                    'L\'adresse mail est déjà utilisé sur une autre ligne.'
+                );
+            }
+        }
+        return $emailGiven;
+    }
+
+    private function validationUnicPseudo(string $pseudoGiven, array $pseudosGettingImported): string
+    {
+        $startErrorMessage = 'Erreur d\'unicité sur le pseudo ! ';
+        if ($this->participantRepo->findOneBy(['pseudo' => $pseudoGiven])) {
+            throw new RuntimeException(
+                $startErrorMessage .
+                'Un utilisateur avec le même pseudo existe déjà.'
+            );
+        }
+
+        foreach ($pseudosGettingImported as $pseudo) {
+            if ($pseudo === $pseudoGiven) {
+                throw new RuntimeException(
+                    $startErrorMessage .
+                    'Le pseudo est déjà utilisé sur une autre ligne.'
+                );
+            }
+        }
+        return $pseudoGiven;
+    }
+
+    private function validationCampus(string $campusGiven): Campus
+    {
+        $campus = $this->campusRepo->findOneBy(['name' => $campusGiven]);
+        if (!$campus) {
+            throw new RuntimeException('Ce Campus n\'existe pas');
+        }
+        return $campus;
     }
 }
