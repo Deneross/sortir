@@ -32,7 +32,7 @@
     </tbody>
 </table>
 
-{# ERRORS du CREAET #}
+{# ERRORS du CREATE #}
         {% if (formCreate.vars.errors | length) > 0 %}
             <div class="alert alert-danger m-2">
                 {% for error in formCreate.vars.errors %}
@@ -53,6 +53,7 @@
     </thead>
     <tbody>
 
+    {# todo : tout éclater et partir comme sur le modifier pour qu'on puisse le soumettre à chaque fois. Créer ensuite un JS pour les alert. #}
     {# CREATE #}
     {{ form_start(formCreate) }}
     <tr>

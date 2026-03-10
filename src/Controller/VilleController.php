@@ -29,7 +29,6 @@ final class VilleController extends AbstractController
         $villeId = $request->query->get('ville');
         $ville = $villeRepository->findOneBy(['id' => $villeId]);
 
-
         return $this->json([
             'codePostal' => $ville?->getCodePostal(),
         ]);
@@ -69,7 +68,7 @@ final class VilleController extends AbstractController
             $id = $request->request->get('ville_edit_id');
             $ville = $villeRepo->find($id);
 
-            if(!$ville) {
+            if (!$ville) {
                 throw $this->createNotFoundException('La ville n\'existe pas');
             }
 
@@ -90,7 +89,7 @@ final class VilleController extends AbstractController
             $id = $request->request->get('ville_delete_id');
             $ville = $villeRepo->find($id);
 
-            if(!$ville) {
+            if (!$ville) {
                 throw $this->createNotFoundException('La ville n\'existe pas');
             }
 
@@ -132,5 +131,4 @@ final class VilleController extends AbstractController
         }
         return $this->redirectToRoute('app_ville_admin');
     }
-
 }
