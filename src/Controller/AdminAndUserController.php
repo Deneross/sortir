@@ -39,7 +39,7 @@ final class AdminAndUserController extends AbstractController
     {
         $flash = $session->getFlashBag();
 
-        if ($flash->peek("success") === []) {
+        if ($flash->peek("success") === [] && $flash->peek("warning") === []) {
             $this->addFlash('success', 'Bienvenue administrateur ' . $this->getUser()->getPseudo() . ' !');
         }
 
@@ -49,7 +49,7 @@ final class AdminAndUserController extends AbstractController
     #[Route('/list_participants', name: '_participants_show', methods: ['GET'])]
     public function showUsers(
         ParticipantRepository $participantRepository,
-        Request $request
+        Request               $request
     ): Response
     {
         $search = $request->query->get('search');
@@ -105,9 +105,9 @@ final class AdminAndUserController extends AbstractController
 
     #[Route('/create_participant', name: '_participant_create', methods: ['GET', 'POST'])]
     public function createUser(
-        ParticipantService    $participantService,
+        ParticipantService     $participantService,
         EntityManagerInterface $em,
-        Request               $request,
+        Request                $request,
 
     ): Response
     {
@@ -133,12 +133,12 @@ final class AdminAndUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/disabled_participant', name: '_participant_disabled',requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/disabled_participant', name: '_participant_disabled', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function disabledUser(
-        CheckActifParticipant $checkActifParticipant,
-        ParticipantRepository $participantRepository,
+        CheckActifParticipant  $checkActifParticipant,
+        ParticipantRepository  $participantRepository,
         EntityManagerInterface $em,
-        int $id,
+        int                    $id,
     ): Response
     {
         $participant = $participantRepository->find($id);
@@ -162,22 +162,23 @@ final class AdminAndUserController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/import', name: '_participants_import', methods: ['GET','POST'])]
+    #[Route('/import', name: '_participants_import', methods: ['GET', 'POST'])]
     public function importUsers(
         CampusRepository $campusRepo,
-        Request $request,
-        UserImport $import
-    ):Response{
-        $lancerImport = $this->createForm(ImportUsersType::class,null);
+        Request          $request,
+        UserImport       $import
+    ): Response
+    {
+        $lancerImport = $this->createForm(ImportUsersType::class, null);
         $lancerImport->handleRequest($request);
 
-        if($lancerImport->isSubmitted() && $lancerImport->isValid()){
+        if ($lancerImport->isSubmitted() && $lancerImport->isValid()) {
             $resultatImport = $import->readAndGiveDataOfUserImported($lancerImport);
 
             $usersToImport = $resultatImport['users'];
             $request->getSession()->set('import_users', $usersToImport);
 
-            foreach ($resultatImport['errors'] as $error){
+            foreach ($resultatImport['errors'] as $error) {
                 $this->addFlash('danger', $error);
             }
 
@@ -190,13 +191,15 @@ final class AdminAndUserController extends AbstractController
         ]);
     }
 
-    #[Route('/import/users', name: '_participants_import_validation', methods: ['GET','POST'])]
+    #[Route('/import/users', name: '_participants_import_validation', methods: ['GET', 'POST'])]
     public function validateImport(
-        Request $request,
+        Request                $request,
         EntityManagerInterface $em,
-    ):Response{
+        CampusRepository       $campusRepo,
+    ): Response
+    {
         $usersToImport = $request->getSession()->get('import_users');
-        if(!$usersToImport){
+        if (!$usersToImport) {
             $this->addFlash('danger', 'Aucun fichier d\'import disponible');
             return $this->redirectToRoute('app_admin_participants_import');
         }
@@ -205,11 +208,19 @@ final class AdminAndUserController extends AbstractController
 
             if ($request->request->has('confirm')) {
                 foreach ($usersToImport as $row) {
-                    $em->persist($row['userData']);
+                    $user = $row['userData'];
+                    /**
+                     * Petit souci de relation avec le campus qui est perdu avec la mise en session
+                     * Je lui réatribue le campus ici.
+                     */
+                    $campus = $campusRepo->findOneBy(['name' => $user->getCampus()->getName()]);
+                    $user->setCampus($campus);
+
+                    $em->persist($user);
                 }
                 $em->flush();
                 $this->addFlash('success', 'L\'import vient d\'être réalisé');
-            }else{
+            } else {
                 $this->addFlash('warning', 'L\'import a été annulé');
             }
             $request->getSession()->remove('import_users');
@@ -217,7 +228,7 @@ final class AdminAndUserController extends AbstractController
         }
 
         return $this->render('admin/import/validate.html.twig', [
-            'row' => $usersToImport,
+            'rows' => $usersToImport,
         ]);
     }
 

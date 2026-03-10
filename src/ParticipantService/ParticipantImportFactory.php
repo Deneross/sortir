@@ -12,7 +12,6 @@ class ParticipantImportFactory
 {
     private array $emailsInBdd;
     private array $pseudoInBdd;
-    private array $campusInBdd;
 
     public function __construct(
         private readonly CampusRepository      $campusRepo,
@@ -21,7 +20,6 @@ class ParticipantImportFactory
     {
         $this->emailsInBdd = $this->participantRepo->findEmailsInBdd();
         $this->pseudoInBdd = $this->participantRepo->findPseudosInBdd();
-        $this->campusInBdd = $this->campusRepo->getOnlyCampusNames();
     }
 
     public function settingUser(array $data, array &$allPseudosGettingImported, array &$allEmailsGettingImported): Participant
@@ -116,11 +114,10 @@ class ParticipantImportFactory
 
     private function validationCampus(string $campusGiven): Campus
     {
-        foreach ($this->campusInBdd as $campus) {
-            if ($campusGiven === $campus) {
-                return $this->campusRepo->findOneBy(['name' => $campus]);
-            }
+        $campus = $this->campusRepo->findOneBy(['name' => $campusGiven]);
+        if(!$campus) {
+            throw new RuntimeException('Ce Campus n\'existe pas');
         }
-        throw new RuntimeException('Ce Campus n\'existe pas');
+        return $campus;
     }
 }

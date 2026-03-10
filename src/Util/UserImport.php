@@ -8,6 +8,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserImport
@@ -37,7 +38,6 @@ class UserImport
         try {
             $data = fopen($this->fileDirectory(), 'r');
             try {
-               // $this->validateHeader(fgetcsv($data));
 
                 $ligneConcerned = 1;
 
@@ -49,11 +49,12 @@ class UserImport
                 $emailImport = [];
                 $pseudoImport = [];
 
-                while (($row = fgetcsv($data)) !== false) {
-                    $ligneConcerned++;
-                    try {
-                        //$this->validationUnmissingColumns($row, $ligneConcerned);
+                fgetcsv($data);
 
+                while (($row = fgetcsv($data, separator: ";", escape: "")) !== false) {
+                    $ligneConcerned++;
+
+                    try {
                         //mapper les donner colonne, ligne + prendre en compte le role qui peut être null
                         $row = array_pad($row, count(self::ALL_COLUMNS), null);
                         $mappedData = array_combine(self::ALL_COLUMNS, $row);
@@ -124,35 +125,12 @@ class UserImport
                 $this->container->get('app.name_user_update_file')
             );
         } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
-            throw new RuntimeException('Erreur à l\'enregistrement du fichier : '. $e->getMessage());
+            throw new RuntimeException('Erreur à l\'enregistrement du fichier : ' . $e->getMessage());
         }
     }
 
     private function endImportProcess(): void
     {
         unlink($this->fileDirectory());
-    }
-
-    /********* Mes règles de validation d'import *********/
-    private function validateHeader(array $headerGiven): void
-    {
-        $data = array_map('trim', $headerGiven);
-        if ($data !== self::ALL_COLUMNS) {
-            throw new RuntimeException(
-                'Vos entêtes d\'import semblent errronés.
-                Modifier le fichier en utilisant les colonnes suivantes : ' .
-                implode(', ', self::ALL_COLUMNS)
-            );
-        }
-    }
-
-    private function validationUnmissingColumns(mixed $row, int $nbLigneConcerned): void
-    {
-        if (count($row) < count(self::ALL_COLUMNS) - 1) {
-            throw new RuntimeException(
-                'Il vous manque des informations à la ligne ' . $nbLigneConcerned .
-                ' Toutes les colonnes à l\'exception de la dernière doivent être renseignée.'
-            );
-        }
     }
 }

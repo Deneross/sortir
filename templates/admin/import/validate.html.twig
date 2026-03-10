@@ -35,10 +35,10 @@
 
                 {% if 'ROLE_ADMIN' in user.roles %}
                     <td>Adminitrateur</td>
+                {% elseif 'ROLE_PARTICIPANT' in user.roles %}
+                    <td>Aucune particularité</td>
                 {% elseif 'ROLE_USER' in user.roles %}
                     <td>Inactif</td>
-                {% else %}
-                    <td>Aucune particularité</td>
                 {% endif %}
             </tr>
         {% endfor %}
