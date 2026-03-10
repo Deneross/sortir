@@ -2,24 +2,38 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 #[ORM\Table(name: 'sortie')]
+#[ApiResource(
+    operations:[
+        new Get(normalizationContext: ["groups" => "getSortieList"]),
+        new GetCollection(normalizationContext: ["groups" => "getSortieList"]),
+    ],
+    )
+]
 class Sortie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('getSortieList')]
     private ?int $id = null;
 
 
     #[ORM\Column(length: 180)]
+    #[Groups('getSortieList')]
     #[Assert\NotBlank(message: 'Le nom est obligatoire.')]
     #[Assert\Length(
         min: 3,
@@ -29,6 +43,7 @@ class Sortie
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    #[Groups('getSortieList')]
     #[Assert\NotNull(message: 'La date/heure de début est obligatoire.')]
     #[Assert\GreaterThan('now', message: 'La date de début doit être supérieur à aujourd\'hui.')]
     private ?\DateTimeImmutable $dateHeureDebut = null;
@@ -66,6 +81,7 @@ class Sortie
     private ?Campus $campus = null;
 
     #[ORM\Column(options: ['default' => false])]
+
     #[Assert\NotNull]
     private ?bool $cancel = false;
 
@@ -84,6 +100,7 @@ class Sortie
     private Collection $inscrits;
 
     #[ORM\ManyToOne(inversedBy: 'sortiesEtat')]
+    #[Groups('getSortieList')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
 

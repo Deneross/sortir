@@ -6,6 +6,7 @@ use App\Repository\EtatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: EtatRepository::class)]
 #[ORM\Table(name: 'etat')]
@@ -16,6 +17,7 @@ class Etat
     private ?int $id;
 
     #[ORM\Column(length: 20)]
+    #[Groups('getSortieList')]
     private ?string $libelle = null;
 
     /**
