@@ -56,18 +56,22 @@ final class VilleController extends AbstractController
         $formCreate->handleRequest($request);
 
         //Gestion de la création d'une ville
-        if ($formCreate->isSubmitted() && $formCreate->isValid() && $request->request->has('ville')) {
+        if ($formCreate->isSubmitted() && $formCreate->isValid()) {
             $em->persist($newVille);
             $em->flush();
 
-            $this->redirectDeTurbo('Votre ville a été ajoutée à la liste', $request, $villeRepo, $campus);
+            return $this->redirectDeTurbo('Votre ville a été ajoutée à la liste', $request, $villeRepo, $campus);
         }
 
         /*************************** Partie Update **************************/
-        if ($request->request->has('edit_ville_id')) {
+        if ($request->request->has('ville_edit_id')) {
             //Info de la ville que l'on a modifié
-            $id = $request->request->get('edit_ville_id');
+            $id = $request->request->get('ville_edit_id');
             $ville = $villeRepo->find($id);
+
+            if(!$ville) {
+                throw $this->createNotFoundException('La ville n\'existe pas');
+            }
 
             //Nouvelle donnée de la ville
             $ville->setCampus($campusRepo->find($request->request->get('ville_campus')));
@@ -77,20 +81,24 @@ final class VilleController extends AbstractController
             $em->persist($ville);
             $em->flush();
 
-            $this->redirectDeTurbo('Votre ville a bien été mise à jour', $request, $villeRepo, $campus);
+            return $this->redirectDeTurbo('Votre ville a bien été mise à jour', $request, $villeRepo, $campus);
         }
 
         /*************************** Partie Delete **************************/
-        if ($request->request->has('delete_ville_id')) {
+        if ($request->request->has('ville_delete_id')) {
             //Quelle ville est concernée par la suppression
-            $id = $request->request->get('delete_ville_id');
+            $id = $request->request->get('ville_delete_id');
             $ville = $villeRepo->find($id);
+
+            if(!$ville) {
+                throw $this->createNotFoundException('La ville n\'existe pas');
+            }
 
             //Check de BDD pour éviter les sorties orphelines
             if ($lieuRepo->canVilleBeDeleted($id)) {
                 $em->remove($ville);
                 $em->flush();
-                $this->redirectDeTurbo('Votre ville vient d\'être suprimée définitivement', $request, $villeRepo, $campus);
+                return $this->redirectDeTurbo('Votre ville vient d\'être suprimée définitivement', $request, $villeRepo, $campus);
             } else {
                 throw new \Exception('La ville est utilisé pour une sortie. Elle ne peut être supprimée', 403);
             }
@@ -107,7 +115,7 @@ final class VilleController extends AbstractController
         /*************************** Standard de la page **************************/
         return $this->render('ville/index.html.twig', [
             'villes' => $villes,
-            'formCreate' => $formCreate,
+            'formCreate' => $formCreate->createView(),
             'campus' => $campus,
         ]);
     }
@@ -115,10 +123,10 @@ final class VilleController extends AbstractController
     private function redirectDeTurbo(string $successMsg, Request $request, VilleRepository $villeRepo, array $campus): Response
     {
         $this->addFlash('success', $successMsg);
-        if ($request->request->has('Turbo-Frame')) {
+        if ($request->headers->has('Turbo-Frame')) {
             return $this->render('ville/index.html.twig', [
                 'villes' => $villeRepo->findAllVillesDesc(),
-                'formCreate' => $this->createForm(VilleType::class, new Ville()),
+                'formCreate' => $this->createForm(VilleType::class, new Ville())->createView(),
                 'campus' => $campus,
             ]);
         }

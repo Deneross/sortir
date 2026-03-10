@@ -21,7 +21,7 @@ class VilleType extends AbstractType
                     'hidden' => true,
                 ],
                 'attr' => [
-                    'class' => 'mt-5',
+                    'class' => 'mt-5'
                 ],
                 'class' => Campus::class,
                 'choice_label' => 'name',
@@ -31,12 +31,12 @@ class VilleType extends AbstractType
             ->add('name', TextType::class, [
                 'label_attr' => [
                     'hidden' => true,
-                ],
+                ]
             ])
             ->add('codePostal', TextType::class, [
                 'label_attr' => [
                     'hidden' => true,
-                ],
+                ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer',
@@ -51,6 +51,7 @@ class VilleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Ville::class,
+            'csrf_protection' => false,
         ]);
     }
 }

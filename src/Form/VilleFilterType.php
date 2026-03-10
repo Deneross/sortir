@@ -40,6 +40,7 @@ class VilleFilterType extends AbstractType
     {
         $resolver->setDefaults([
             'mapped' => false,
+            'csrf_protection' => false,
         ]);
     }
 }
