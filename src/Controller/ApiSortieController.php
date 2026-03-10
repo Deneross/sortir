@@ -24,10 +24,9 @@ final class ApiSortieController extends AbstractController
         $page = max(1, $request->query->getInt('page', 1));
         $limit = max(1, $request->query->getInt('limit', 10));
 
-        $userCampusId = $user?->getCampus()?->getId();
 
         $filters = [
-            'campus' => $request->query->get('campus') ?: $userCampusId,
+            'campus' => $request->query->get('campus'),
             'search' => $request->query->get('search'),
             'dateMin' => $request->query->get('dateMin'),
             'dateMax' => $request->query->get('dateMax'),
@@ -45,21 +44,14 @@ final class ApiSortieController extends AbstractController
         $data = [];
 
         foreach ($paginator as $s) {
+            $now = new \DateTimeImmutable();
+
             $nbInscrits = $s->getInscrits()->count();
             $maxPlaces = $s->getNbInscriptionMax();
             $isFull = $nbInscrits >= $maxPlaces;
 
-            $isUserInscrit = false;
-            $isOrga = false;
-
-            if ($user) {
-                $isUserInscrit = $s->getInscrits()->contains($user);
-                $isOrga = ($s->getOrganisateur()?->getId() === $user->getId());
-            }
-
-            $published = method_exists($s, 'isPublished')
-                ? (bool)$s->isPublished()
-                : (bool)$s->getPublished();
+            $isUserInscrit = $user ? $s->getInscrits()->contains($user) : false;
+            $isOrga = $user ? ($s->getOrganisateur()?->getId() === $user->getId()) : false;
 
             $showUrl = $this->generateUrl('sortie_show', ['id' => $s->getId()]);
             $editUrl = $this->generateUrl('sortie_edit', ['id' => $s->getId()]);
@@ -67,64 +59,38 @@ final class ApiSortieController extends AbstractController
             $registerUrl = $this->generateUrl('sortie_register', ['id' => $s->getId()]);
             $unRegisterUrl = $this->generateUrl('sortie_unregister', ['id' => $s->getId()]);
             $cancelUrl = $this->generateUrl('sortie_cancel', ['id' => $s->getId()]);
-
-
             $orgaUrl = $this->generateUrl('app_participant_show', ['id' => $s->getOrganisateur()->getId()]);
-
-
-            //Règles boutons
-            $now = new \DateTimeImmutable();
 
             $etatLibelle = mb_strtolower($s->getEtat()?->getLibelle() ?? '');
 
             $isCreation = $etatLibelle === 'en création';
             $isOuverte = $etatLibelle === 'ouverte';
             $isAnnulee = $etatLibelle === 'annulée';
-            $isHistorisee = $etatLibelle === 'historisée';
 
             $hasStarted = $s->getDateHeureDebut() <= $now;
             $deadlinePassed = $s->getDateLimiteInscription() < $now;
 
-            $nbInscrits = $s->getInscrits()->count();
-            $max = $s->getNbInscriptionMax();
-            $isFull = $nbInscrits >= $max;
-
-            $isUserInscrit = $user ? $s->getInscrits()->contains($user) : false;
-            $isOrga = $user ? ($s->getOrganisateur()?->getId() === $user->getId()) : false;
-
-
-            $actions = [];
-
-            // Afficher (toujours)
-            $actions[] = [
-                'key' => 'show',
-                'label' => 'Afficher',
-                'class' => 'btn btn-group-sm btn-primary',
-                'title' => 'Détail de la sortie',
-                'href' => $showUrl,
-                'method' => 'GET',
+            $actions = [
+                [
+                    'key' => 'show',
+                    'label' => 'Afficher',
+                    'class' => 'btn btn-group-sm btn-primary',
+                    'title' => 'Détail de la sortie',
+                    'href' => $showUrl,
+                    'method' => 'GET',
+                ]
             ];
 
-            $actions = [];
-            $actions[] = [
-                'key' => 'show',
-                'label' => 'Afficher',
-                'class' => 'btn btn-group-sm btn-primary',
-                'href' => $showUrl,
-                'method' => 'GET'
-            ];
-
-            if ($isAnnulee) {
-                // uniquement Afficher
-            } else {
+            if (!$isAnnulee) {
                 if ($isOrga && $isCreation) {
                     $actions[] = [
                         'key' => 'edit',
                         'label' => 'Modifier',
                         'class' => 'btn btn-group-sm btn-success',
                         'href' => $editUrl,
-                        'method' => 'GET'
+                        'method' => 'GET',
                     ];
+
                     $actions[] = [
                         'key' => 'publish',
                         'label' => 'Publier',
@@ -142,7 +108,7 @@ final class ApiSortieController extends AbstractController
                         'label' => "S'inscrire",
                         'class' => 'btn btn-group-sm btn-primary',
                         'href' => $registerUrl,
-                        'method' => 'POST',  //attention post
+                        'method' => 'POST',
                         'csrf' => $this->csrf->getToken('sortie_register'.$s->getId())->getValue(),
                     ];
                 }
@@ -153,19 +119,18 @@ final class ApiSortieController extends AbstractController
                         'label' => 'Se désister',
                         'class' => 'btn btn-group-sm btn-primary',
                         'href' => $unRegisterUrl,
-                        'method' => 'POST',  //attention post
+                        'method' => 'POST',
                         'csrf' => $this->csrf->getToken('sortie_unregister'.$s->getId())->getValue(),
                     ];
                 }
 
-                if ($isOrga && !$isCreation && !$hasStarted && !$isAnnulee) {
+                if ($isOrga && !$isCreation && !$hasStarted) {
                     $actions[] = [
                         'key' => 'cancel',
                         'label' => 'Annuler',
                         'class' => 'btn btn-group-sm btn-danger',
                         'href' => $cancelUrl,
-                        'method' => 'Get',  //attention post
-                        'csrf' => $this->csrf->getToken('sortie_cancel'.$s->getId())->getValue(),
+                        'method' => 'GET',
                     ];
                 }
             }
@@ -177,30 +142,20 @@ final class ApiSortieController extends AbstractController
                 'nom' => $s->getNom(),
                 'dateHeureDebut' => $s->getDateHeureDebut()->format('Y-m-d H:i'),
                 'dateLimiteInscription' => $s->getDateLimiteInscription()->format('Y-m-d'),
-
                 'nbInscrits' => $nbInscrits,
                 'nbInscriptionMax' => $maxPlaces,
-
                 'etat' => $s->getEtat()?->getLibelle(),
-
                 'organisateurId' => $s->getOrganisateur()->getId(),
                 'organisateurPseudo' => $s->getOrganisateur()->getPseudo(),
                 'organisateurUrl' => $orgaUrl,
-
                 'isUserInscrit' => $isUserInscrit,
                 'isFull' => $isFull,
                 'isOrga' => $isOrga,
-                'published' => $published,
-
                 'actions' => $actions,
             ];
         }
 
         return $this->json([
-            'userCampus' => [
-                'id' => $s->getCampus()?->getId(),
-                'name' => $s->getCampus()?->getName(),
-            ],
             'data' => $data,
             'pagination' => [
                 'page' => $page,

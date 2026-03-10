@@ -12,7 +12,9 @@
 
                     <div class="mb-3">
                         <label for="campus" class="form-label fw-bold">Campus</label>
-                        <select id="campus" class="form-select">
+                        <select id="campus" class="form-select"
+                                {# Je récupére l'id du campus de l'utilisateur connécté #}
+                                data-user-campus-id="{{ app.user and app.user.campus ? app.user.campus.id : '' }}">
                             <option value="">Tous les campus</option>
                         </select>
                     </div>

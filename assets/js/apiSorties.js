@@ -11,8 +11,8 @@ class ApiSorties {
     }
 
     async init() {
-        await this.loadCampus();
-        await this.loadSorties();
+       await this.loadCampus();
+       await this.loadSorties();
     }
 
     bindEvent() {
@@ -74,13 +74,26 @@ class ApiSorties {
 
             const json = await res.json();
 
-            this.setDefaultCampus(json.userCampus);
             this.updateTable(json.data);
             this.renderPagination(json.pagination);
         } catch (e) {
             console.error(e);
             this.renderError();
             this.renderPagination({ page: this.currentPage, pages: 1, total: 0 });
+        }
+    }
+
+    applyDefaultCampusFromDataset() {
+        const select = document.getElementById("campus");
+        if (!select) return;
+
+        const userCampusId = select.dataset.userCampusId;
+
+        if (!userCampusId) return;
+
+        // applique si rien sélectionné
+        if (select.value === "") {
+            select.value = String(userCampusId);
         }
     }
 
@@ -91,19 +104,12 @@ class ApiSorties {
 
             const campusList = await res.json();
             this.updateCampusFilter(campusList);
+            this.applyDefaultCampusFromDataset();
         } catch (e) {
             console.error(e);
         }
     }
 
-    setDefaultCampus(userCampus) {
-        const select = document.getElementById("campus");
-        if (!select || !userCampus?.id) return;
-
-        if (!select.value) {
-            select.value = String(userCampus.id);
-        }
-    }
 
     updateCampusFilter(campusList) {
         const select = document.getElementById("campus");
@@ -277,14 +283,7 @@ function mountSorties() {
     const tbody = document.getElementById("sortiesTable");
     if (!tbody) return;
 
-    if (!window.__sortiesInstance) {
-        window.__sortiesInstance = new ApiSorties();
-    } else {
-        window.__sortiesInstance.loadSorties();
-    }
+    window.__sortiesInstance = new ApiSorties();
 }
 
-document.addEventListener("DOMContentLoaded", mountSorties);
-window.addEventListener("pageshow", mountSorties);
 document.addEventListener("turbo:load", mountSorties);
-document.addEventListener("turbo:render", mountSorties);
