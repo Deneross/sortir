@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: 'sortie')]
 #[ApiResource(
     operations:[
-        new Get(normalizationContext: ["groups" => "getSortieList"]),
         new GetCollection(normalizationContext: ["groups" => "getSortieList"]),
     ],
     )
