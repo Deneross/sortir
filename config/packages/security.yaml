@@ -16,10 +16,17 @@ security:
             # Ensure dev tools and static assets are always allowed
             pattern: ^/(_profiler|_wdt|assets|build)/
             security: false
-        api:
-            pattern: ^/api
+        login:
+            pattern: ^/api-plateform/login
             stateless: true
-            security: false
+            json_login:
+                check_path: /api-plateform/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern: ^/api-plateform
+            stateless: true
+            jwt: ~
         main:
             lazy: true
             provider: app_user_provider
@@ -43,13 +50,18 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
+        - { path: ^/api-plateform/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api-plateform,       roles: IS_AUTHENTICATED_FULLY }
+
         - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/logout, roles: PUBLIC_ACCESS }
 
         - { path: ^/, roles: ROLE_PARTICIPANT }
 
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/campus, roles: ROLE_ADMIN }
         - { path: ^/ville/admin, roles: ROLE_ADMIN }
+
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_PARTICIPANT
