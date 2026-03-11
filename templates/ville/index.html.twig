@@ -7,8 +7,149 @@
 {% block section %}
     <h1 class="text-center">Gérer les villes</h1>
 
-    <turbo-frame id="villes_table">
-        {% include 'ville/_table.html.twig' %}
-    </turbo-frame>
+    {# FILTRES #}
+    <table class="sticky-top bg-light">
+        <thead>
+        <tr>
+            <th colspan="4">Filtrer les villes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <select name="ville_filter_campus" class="form-select form-select-sm" form="filters">
+                    <option value="-1"
+                        {% if campusFiltered == "-1" %} selected="selected" {% endif %}>
+                        Tous les campus
+                    </option>
+                    {% for leCampus in campus %}
+                        <option value="{{ leCampus.id }}"
+                            {% if campusFiltered == leCampus.id %} selected="selected" {% endif %}>
+                            {{ leCampus.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <input type="text" name="ville_filter_name" placeholder="Nom contient..."
+                       class="form-control form-control-sm" form="filters" value={{ nameFiltered }}>
+            </td>
+            <td>
+                <input type="text" name="ville_filter_codePostal" placeholder="Code postal contient..."
+                       class="form-control form-control-sm" form="filters" value={{ cpFiltered }}>
+            </td>
+            <td class="p-3">
+                <form method="POST" id="filters">
+                    <button type="submit" name="ville_filter" class="btn btn-sm btn-success">Filtrer</button>
+                </form>
+            </td>
+            <td class="p-3">
+                <form method="POST">
+                    <button type="submit" name="ville_reinit" class="btn btn-sm btn-secondary">Réinitialiser</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    {# tableau GESTION des villes #}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Campus</th>
+            <th>Nom</th>
+            <th>Code Postal</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {# CREATE #}
+        <tr>
+            <td>
+                <select name="{{ field_name(formCreate.campus) }}" id="{{ field_id(formCreate.campus) }}" form="create"
+                        class="form-select form-select-sm">
+                    {% for leCampus in campus %}
+                        <option value="{{ leCampus.id }}">{{ leCampus.name }}</option>
+                    {% endfor %}
+                </select>
+                <div class="information-container errors">
+                    {{ form_errors(formCreate.campus) }}
+                </div>
+            </td>
+            <td>
+                <input type="text" name="{{ field_name(formCreate.name) }}" form="create" required
+                       placeholder="Nom de la nouvelle ville" class="form-control form-control-sm">
+                <div class="information-container errors">
+                    {{ form_errors(formCreate.name) }}
+                </div>
+            </td>
+            <td>
+                <input type="text" name="{{ field_name(formCreate.codePostal) }}" form="create" required
+                       placeholder="Nom de la nouvelle ville" class="form-control form-control-sm">
+                <div class="information-container errors">
+                    {{ form_errors(formCreate.codePostal) }}
+                </div>
+            </td>
+            <td>
+                <form method="post" id="create">
+                    <button type="submit" class="btn btn-outline-success"
+                            name="{{ field_name(formCreate.save) }}">{{ field_label(formCreate.save) }}</button>
+                </form>
+            </td>
+        </tr>
+
+
+        {% if (villes|length) >0 %}
+
+            {# DISPLAY #}
+            {% for ville in villes %}
+                <tr id="ville_{{ ville.id }}" class="border-bottom-0">
+                    <td rowspan="2">
+                        <select name="ville_campus" class="form-select form-select-sm" form="edit_{{ ville.id }}">
+                            {% for leCampus in campus %}
+                                <option value="{{ leCampus.id }}"
+                                        {% if leCampus.id == ville.campus.id %}selected{% endif %}>
+                                    {{ leCampus.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td rowspan="2">
+                        <input type="text" name="ville_name" value="{{ ville.name }}"
+                               class="form-control form-control-sm" required form="edit_{{ ville.id }}">
+                    </td>
+                    <td rowspan="2">
+                        <input type="text" name="ville_codePostal" value="{{ ville.codePostal }}"
+                               class="form-control form-control-sm" required form="edit_{{ ville.id }}">
+                    </td>
+                    <td>
+                        {# BOUTON UPDATE #}
+                        <form method="POST" id="edit_{{ ville.id }}">
+                            <input type="hidden" name="ville_edit_id" value="{{ ville.id }}">
+                            <button type="submit" class="btn btn-outline-warning">Modifier</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="border-top-0">
+                    <td>
+                        {# BOUTON DELETE #}
+                        <form method="POST" class="d-inline"
+                              data-turbo-confirm="La suppression sera définitive et irréversible, souhaitez-vous continuer?">
+                            <input type="hidden" name="ville_delete_id" value="{{ ville.id }}">
+                            <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune ville trouvée</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
 {% endblock %}
 

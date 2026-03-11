@@ -3,14 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Ville;
-use App\Form\VilleFilterType;
 use App\Form\VilleType;
 use App\Repository\CampusRepository;
 use App\Repository\LieuRepository;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,9 +42,30 @@ final class VilleController extends AbstractController
         EntityManagerInterface $em
     ): Response
     {
-        //Initialisation de mes listes
-        $villes = $villeRepo->findAllVillesDesc();
+        //Initialisation de ma page
         $campus = $campusRepo->findAll();
+
+        $villes = $request->getSession()->get('lstVille');
+        if (!$villes) {
+            $request->getSession()->set('lstVille', $this->listeInitialeVilles($villeRepo));
+        }
+
+        $campusFiltered = $request->getSession()->get('campus');
+        if (!$campusFiltered) {
+            $this->initCampusSession($request, null);
+        }
+
+        $nameFiltered = $request->getSession()->get('name');
+        if (!$nameFiltered) {
+            $this->initNameSession($request, null);
+        }
+
+        $cpFiltered = $request->getSession()->get('codePostal');
+        if (!$cpFiltered) {
+            $this->initCodePostalSession($request, null);
+        }
+
+        dump($campusFiltered, $nameFiltered, $cpFiltered);
 
         /*************************** Partie Create **************************/
         //Initialisation des éléments du create
@@ -59,7 +78,11 @@ final class VilleController extends AbstractController
             $em->persist($newVille);
             $em->flush();
 
-            return $this->redirectDeTurbo('Votre ville a été ajoutée à la liste', $request, $villeRepo, $campus);
+            $villes[$newVille->getId()] = $newVille;
+            $request->getSession()->set('lstVille', $villes);
+
+            $this->addFlash('success', 'La ville a été ajoutée à la liste');
+            return $this->redirectToRoute('app_ville_admin');
         }
 
         /*************************** Partie Update **************************/
@@ -80,7 +103,11 @@ final class VilleController extends AbstractController
             $em->persist($ville);
             $em->flush();
 
-            return $this->redirectDeTurbo('Votre ville a bien été mise à jour', $request, $villeRepo, $campus);
+            $villes[$id] = $ville;
+            $request->getSession()->set('lstVille', $villes);
+
+            $this->addFlash('success', 'La ville a été lise à jour');
+            return $this->redirectToRoute('app_ville_admin');
         }
 
         /*************************** Partie Delete **************************/
@@ -97,38 +124,96 @@ final class VilleController extends AbstractController
             if ($lieuRepo->canVilleBeDeleted($id)) {
                 $em->remove($ville);
                 $em->flush();
-                return $this->redirectDeTurbo('Votre ville vient d\'être suprimée définitivement', $request, $villeRepo, $campus);
+
+                unset($villes[$id]);
+                $request->getSession()->set('lstVille', $villes);
+
+                $this->addFlash('warning', 'La ville a été supprimée');
+                return $this->redirectToRoute('app_ville_admin');
             } else {
                 throw new \Exception('La ville est utilisé pour une sortie. Elle ne peut être supprimée', 403);
             }
         }
 
         /*************************** Partie Filtre **************************/
-        if ($request->request->has('ville_filter')) {
-            $filterCampus = $request->request->get('ville_filter_campus');
-            $filterName = $request->request->get('ville_filter_name');
-            $filterCodePostal = $request->request->get('ville_filter_codePostal');
-            $villes = $villeRepo->findAllVillesDesc();
+        if ($request->request->has('ville_filter') || $request->request->has('ville_reinit')) {
+            $campusForFilter = null;
+            $nameForFilter = null;
+            $codePostalForFilter = null;
+            $lstVillesFiltered = [];
+
+            $successMsg = "Liste réinitialisée";
+
+            //Appliquer un filtre
+            if ($request->request->has('ville_filter')) {
+                $campusForFilter = $request->request->get('ville_filter_campus');
+                $nameForFilter = $request->request->get('ville_filter_name');
+                $codePostalForFilter = $request->request->get('ville_filter_codePostal');
+
+                $villesFiltered = $villeRepo->findVilleWithFilters($campusForFilter, $nameForFilter, $codePostalForFilter);
+                foreach ($villesFiltered as $ville) {
+                    $lstVillesFiltered[$ville->getId()] = $ville;
+                }
+
+                $successMsg = "Listre filtrée";
+
+            } //Réinitialiser la page
+            elseif ($request->request->has('ville_reinit')) {
+                $lstVillesFiltered = $this->listeInitialeVilles($villeRepo);
+            }
+
+            //Résultat des filtres
+            $request->getSession()->remove('lstVille');
+            $request->getSession()->set('lstVille', $lstVillesFiltered);
+
+            $request->getSession()->remove('campus');
+            $this->initCampusSession($request, $campusForFilter);
+
+            $request->getSession()->remove('name');
+            $this->initNameSession($request, $nameForFilter);
+
+            $request->getSession()->remove('codePostal');
+            $this->initCodePostalSession($request, $codePostalForFilter);
+
+            $this->addFlash('secondary', $successMsg);
+            return $this->redirectToRoute('app_ville_admin');
         }
+
 
         /*************************** Standard de la page **************************/
         return $this->render('ville/index.html.twig', [
             'villes' => $villes,
-            'formCreate' => $formCreate->createView(),
+            'formCreate' => $formCreate,
             'campus' => $campus,
+            'campusFiltered' => $campusFiltered,
+            'nameFiltered' => $nameFiltered,
+            'cpFiltered' => $cpFiltered,
         ]);
     }
 
-    private function redirectDeTurbo(string $successMsg, Request $request, VilleRepository $villeRepo, array $campus): Response
+    private function listeInitialeVilles(VilleRepository $repo): array
     {
-        $this->addFlash('success', $successMsg);
-        if ($request->headers->has('Turbo-Frame')) {
-            return $this->render('ville/index.html.twig', [
-                'villes' => $villeRepo->findAllVillesDesc(),
-                'formCreate' => $this->createForm(VilleType::class, new Ville())->createView(),
-                'campus' => $campus,
-            ]);
+        $lstVilles = $repo->findAllVillesDesc();
+
+        foreach ($lstVilles as $ville) {
+            $villes[$ville->getId()] = $ville;
         }
-        return $this->redirectToRoute('app_ville_admin');
+        return $villes;
+    }
+
+    private function initCampusSession(Request $request, ?string $campus): void
+    {
+        $request->getSession()->set('campus', $campus ?? "-1");
+
+    }
+
+    private function initNameSession(Request $request, ?string $name): void
+    {
+        $request->getSession()->set('name', $name ?? "");
+    }
+
+    private function initCodePostalSession(Request $request, ?string $codePostal): void
+    {
+        $request->getSession()->set('codePostal', $codePostal ?? "");
     }
 }
