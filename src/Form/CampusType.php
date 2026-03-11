@@ -30,6 +30,7 @@ class CampusType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Campus::class,
+            'csrf_protection' => false
         ]);
     }
 }
