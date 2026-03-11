@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: VilleRepository::class)]
 #[UniqueEntity(fields: 'name', message: 'Ville déjà existante')]
-class Ville
+class Ville implements Administrable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
