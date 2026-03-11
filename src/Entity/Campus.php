@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CampusRepository::class)]
 #[UniqueEntity(fields: ['name'], message: 'Ce campus existe déjà')]
-class Campus
+class Campus implements \App\Entity\Administrable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     ],
     )
 ]
-class Sortie implements Administrable
+class Sortie 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

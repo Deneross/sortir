@@ -9,7 +9,7 @@ class Filters
 {
 
     public function __construct(
-        protected readonly string $nomListSession = 'liste',
+        protected string $nomListSession = 'liste',
         protected readonly string $defaultInput = "",
     )
     {
@@ -32,12 +32,5 @@ class Filters
         }
         return $filtre;
     }
-
-    public function getNomListSession(): string
-    {
-        return $this->nomListSession;
-    }
-
-
 
 }

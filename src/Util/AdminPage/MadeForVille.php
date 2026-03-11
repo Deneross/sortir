@@ -5,11 +5,11 @@ namespace App\Util\AdminPage;
 use App\Repository\VilleRepository;
 use Symfony\Component\HttpFoundation\Request;
 
-class madeForVille extends Filters
+class MadeForVille extends Filters
 {
-    private const string SESSION_FILTER_NAME_CAMPUS = 'campus';
-    private const string SESSION_FILTER_NAME_VILLE_NAME = 'name';
-    private const string SESSION_FILTER_NAME_VILLE_CP = 'codePostal';
+    private const string SESSION_FILTER_NAME_CAMPUS = 'filter_ville_with_campus';
+    private const string SESSION_FILTER_NAME_VILLE_NAME = 'filter_ville_with_name';
+    private const string SESSION_FILTER_NAME_VILLE_CP = 'filter_ville_with_code_postal';
 
     public function __construct(
         private readonly VilleRepository $repo,
@@ -17,6 +17,7 @@ class madeForVille extends Filters
     )
     {
         parent::__construct();
+        $this->nomListSession .= '_ville';
     }
 
     /********* Fonctions au chargement de la page ********/
@@ -108,5 +109,12 @@ class madeForVille extends Filters
 
         return $villes;
     }
+
+    public function getNomListSession(): string
+    {
+        return $this->nomListSession;
+    }
+
+
 
 }

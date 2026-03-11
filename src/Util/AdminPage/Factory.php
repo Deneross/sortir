@@ -15,19 +15,18 @@ class Factory
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly LieuRepository $lieuRepo,
-        private readonly Filters $filters,
     )
     {
     }
 
-    public function sendToBDDAndUpdateSessionList(Administrable $entity, array $lstSession, Request $request): void
+    public function sendToBDDAndUpdateSessionList(Administrable $entity, array $lstSession, Request $request, Filters $filterService): void
     {
         $this->em->persist($entity);
         $this->em->flush();
 
         $lstSession[$entity->getId()] = $entity;
 
-        $request->getSession()->set($this->filters->getNomListSession(), $lstSession);
+        $request->getSession()->set($filterService->getNomListSession(), $lstSession);
     }
 
     public function foundEntity(string $inputIdKey, ServiceEntityRepository $repo, Request $request): Administrable
@@ -42,7 +41,7 @@ class Factory
         return $entity;
     }
 
-    public function deletingVille(Ville $ville, array $lstSession, Request $request): void
+    public function deletingVille(Ville $ville, array $lstSession, Request $request, Filters $filterService): void
     {
         $id=$ville->getId();
         if ($this->lieuRepo->canVilleBeDeleted($id)) {
@@ -50,7 +49,7 @@ class Factory
             $this->em->flush();
 
             unset($lstSession[$id]);
-            $request->getSession()->set($this->filters->getNomListSession(), $lstSession);
+            $request->getSession()->set($filterService->getNomListSession(), $lstSession);
 
         } else {
             throw new \Exception('La ou les villes concernées sont utilisés pour les sorties.', 403);

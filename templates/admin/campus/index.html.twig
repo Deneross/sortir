@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}Gérer les campus{% endblock %}
+
+{% block section %}
+    <h1 class="text-center">Gérer les campus</h1>
+
+    {# FILTRES #}
+    <table class="sticky-top bg-light">
+        <thead>
+        <tr>
+            <th colspan="4">Filtrer les campus</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <input type="text" name="campus_filter_name" placeholder="Nom contient..."
+                       class="form-control form-control-sm" form="filters" value={{ filtreNom }}>
+            </td>
+            <td class="p-3">
+                <form method="POST" id="filters">
+                    <button type="submit" name="campus_filter" class="btn btn-sm btn-success">Filtrer</button>
+                </form>
+            </td>
+            <td class="p-3">
+                <form method="POST">
+                    <button type="submit" name="campus_reinit" class="btn btn-sm btn-secondary">Réinitialiser</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    {# tableau GESTION des campus #}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {# CREATE #}
+        <tr>
+            <td>
+                <input type="text" name="{{ field_name(formCreate.name) }}" form="create" required
+                       placeholder="Nom de la nouvelle ville" class="form-control form-control-sm">
+                <div class="information-container errors">
+                    {{ form_errors(formCreate.name) }}
+                </div>
+            </td>
+            <td>
+                <form method="post" id="create">
+                    <button type="submit" class="btn btn-outline-success"
+                            name="{{ field_name(formCreate.save) }}">{{ field_label(formCreate.save) }}</button>
+                </form>
+            </td>
+        </tr>
+
+
+        {% if (lesCampus|length) >0 %}
+
+            {# DISPLAY #}
+            {% for campus in lesCampus %}
+                <tr id="campus_{{ campus.id }}" class="border-bottom-0">
+                    <td rowspan="2">
+                        <input type="text" name="campus_name" value="{{ campus.name }}"
+                               class="form-control form-control-sm" required form="edit_{{ campus.id }}">
+                    </td>
+                    <td>
+                        {# BOUTON UPDATE #}
+                        <form method="POST" id="edit_{{ campus.id }}">
+                            <input type="hidden" name="campus_edit_id" value="{{ campus.id }}">
+                            <button type="submit" class="btn btn-outline-warning">Modifier</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr class="border-top-0">
+                    <td>
+                        {# BOUTON DELETE #}
+                        <form method="POST" class="d-inline"
+                              data-turbo-confirm="La suppression sera définitive et irréversible, souhaitez-vous continuer?">
+                            <input type="hidden" name="campus_delete_id" value="{{ campus.id }}">
+                            <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun campus trouvé</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}

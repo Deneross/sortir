@@ -7,7 +7,7 @@ use App\Form\VilleType;
 use App\Repository\CampusRepository;
 use App\Repository\VilleRepository;
 use App\Util\AdminPage\Factory;
-use App\Util\AdminPage\madeForVille;
+use App\Util\AdminPage\MadeForVille;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -36,11 +36,11 @@ final class VilleController extends AbstractController
     #[Route('/admin', name: '_admin', methods: ['GET', 'POST'])]
     #[IsGranted("ROLE_ADMIN")]
     public function index(
-        Factory                $service,
-        madeForVille           $filters,
-        VilleRepository        $villeRepo,
-        CampusRepository       $campusRepo,
-        Request                $request,
+        Factory          $service,
+        MadeForVille     $filters,
+        VilleRepository  $villeRepo,
+        CampusRepository $campusRepo,
+        Request          $request,
     ): Response
     {
         //Initialisation de ma page
@@ -60,7 +60,7 @@ final class VilleController extends AbstractController
 
         //Gestion de la création d'une ville
         if ($formCreate->isSubmitted() && $formCreate->isValid()) {
-            $service->sendToBDDAndUpdateSessionList($newVille, $villes, $request);
+            $service->sendToBDDAndUpdateSessionList($newVille, $villes, $request, $filters);
 
             $this->addFlash('success', 'La ville a été ajoutée à la liste');
             return $this->redirectToRoute('app_ville_admin');
@@ -82,9 +82,9 @@ final class VilleController extends AbstractController
             $ville->setCodePostal($request->request->get('ville_codePostal'));
 
             //Update de ville
-            $service->sendToBDDAndUpdateSessionList($ville, $villes, $request);
+            $service->sendToBDDAndUpdateSessionList($ville, $villes, $request, $filters);
 
-            $this->addFlash('success', 'La ville a été lise à jour');
+            $this->addFlash('success', 'La ville a été mise à jour');
             return $this->redirectToRoute('app_ville_admin');
         }
 
@@ -93,11 +93,11 @@ final class VilleController extends AbstractController
             try {
                 $ville = $service->foundEntity('ville_delete_id', $villeRepo, $request);
                 try {
-                    $service->deletingVille($ville, $villes, $request);
+                    $service->deletingVille($ville, $villes, $request, $filters);
                     $this->addFlash('warning', 'La ville a été supprimée');
                     return $this->redirectToRoute('app_ville_admin');
                 } catch (\Exception $e) {
-                    $this->addFlash('error', $e->getMessage() . ' La suppression de la ville a été annulé.');
+                    $this->addFlash('error', $e->getMessage() . ' La suppression de la ville a été annulée.');
                 }
             } catch (\Exception $e) {
                 $this->addFlash('error', $e->getMessage() . ' La ville n\'existe pas.');
@@ -122,7 +122,7 @@ final class VilleController extends AbstractController
 
 
         /*************************** Standard de la page **************************/
-        return $this->render('ville/index.html.twig', [
+        return $this->render('admin/ville/index.html.twig', [
             'villes' => $villes,
             'formCreate' => $formCreate,
             'campus' => $campus,

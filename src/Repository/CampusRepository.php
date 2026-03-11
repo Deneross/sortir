@@ -17,34 +17,19 @@ class CampusRepository extends ServiceEntityRepository
     }
 
 
-    public function getOnlyCampusNames():array{
+    public function getOnlyCampusNames(): array
+    {
         $dql = 'SELECT c.name FROM App\Entity\Campus c';
         $query = $this->getEntityManager()->createQuery($dql);
         return $query->getResult();
     }
 
-    //    /**
-    //     * @return Campus[] Returns an array of Campus objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Campus
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findCampusWithFilters(string $nameForFilter)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.name LIKE :name')
+            ->setParameter('name', '%' . $nameForFilter . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }
