@@ -1,7 +1,8 @@
 const SEARCH_BTN = document.getElementById('search-place-btn');
 const SEARCH_WHAT = document.getElementById('sortie_lieuNom');
 const SEARCH_WHERE = document.getElementById('sortie_lieuVille');
-const SEARCH_RESULTS = document.getElementById('places_container');
+const SEARCH_RESULTS = document.getElementById('places_research_container');
+const SELECTION = document.getElementById('places_selected_container');
 
 document.addEventListener('DOMContentLoaded', () => {
     SEARCH_BTN.addEventListener('click', () => {
@@ -35,19 +36,24 @@ function searchPlaces(recherche, ville) {
         .then(res => res.json())
         .then(data => {
             if (data && data.length > 0) {
-                const select = document.createElement("select");
-                select.id='place-select';
-                select.className = 'form-select';
-                select.multiple = true;
+                const title = document.createElement("p");
+                title.textContent = "Résultat de la recherche : ";
+                SEARCH_RESULTS.appendChild(title);
 
                 data.forEach((place) => {
-                    const option = document.createElement("option");
-                    option.value = JSON.stringify(place);
-                    option.text=place.name + " (" + place.address + ")"
-                    select.appendChild(option);
-                });
+                    const placeDiv = document.createElement("div");
+                    placeDiv.dataset.place = JSON.stringify(place);
+                    placeDiv.classList.add("place-item");
 
-                SEARCH_RESULTS.appendChild(select);
+                    const label = document.createElement("span");
+                    label.textContent = place.name + " (" + place.address + ")";
+
+                    const ajout = creationBtnAjout(placeDiv)
+
+                    placeDiv.appendChild(label);
+                    placeDiv.appendChild(ajout);
+                    SEARCH_RESULTS.appendChild(placeDiv);
+                });
             } else {
                 const aucunReult = document.createElement("p");
                 aucunReult.textContent = "Aucun lieu trouvé pour votre recherche. Modifiez là et rechercher à nouveau";
@@ -56,4 +62,36 @@ function searchPlaces(recherche, ville) {
                 SEARCH_RESULTS.appendChild(aucunReult);
             }
         })
+}
+
+function ajouterLieu(place){
+    place.querySelector("button").remove();
+
+    const remove = document.createElement("button");
+    remove.classList.add("btn","btn-outline-danger","btn-sm","m-2");
+    remove.textContent = "retirer";
+
+    remove.addEventListener("click", ()=>removeLieu(place));
+
+    place.appendChild(remove);
+    SELECTION.appendChild(place);
+}
+
+function removeLieu(place) {
+    place.querySelector("button").remove();
+
+    const ajout = creationBtnAjout(place);
+    place.appendChild(ajout);
+
+    SEARCH_RESULTS.appendChild(place);
+}
+
+function creationBtnAjout(place){
+    const ajout = document.createElement("button");
+    ajout.classList.add("btn","btn-outline-success","btn-sm", "m-2");
+    ajout.textContent = "ajouter";
+
+    ajout.addEventListener("click", ()=>ajouterLieu(place));
+
+    return ajout;
 }

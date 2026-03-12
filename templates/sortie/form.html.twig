@@ -24,12 +24,11 @@
             {{ form_row(form.lieuCP) }}
             {{ form_row(form.lieuNom) }}
             <button type="button" id="search-place-btn" class="btn btn-sm btn-outline-primary mb-1">Rerchercher</button>
-            <div id="places_container">
-                <p class="text-secondary">Lancer une recherche sur le ou les lieux de votre sortie en indiquant la ville et un critère de lieu ci-dessus.</p>
-                <select name="1" id="1" class="form-switch" multiple>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                </select>
+            <div id="places_research_container">
+                <p class="text-secondary">Lancer une recherche sur le ou les lieux de votre sortie en indiquant la ville et un critère ci-dessus.</p>
+            </div>
+            <div id="places_selected_container">
+                <h6>Lieu(x) sélectionné(s) pour la sortie :</h6>
             </div>
             {#{{ form_row(form.lieuRue) }}
             {{ form_row(form.lieuCoordonnees) }}#}
