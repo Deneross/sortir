@@ -105,14 +105,7 @@ class SortieType extends AbstractType
                     'placeholder' => 'Indiquez où vous souhaitez organiser cette sortie',
                 ],
                 'mapped' => false,
-            ])/*
-            ->add('lieuRue', TextType::class, [
-                'label' => 'Rue',
-                'attr' => [
-                    'placeholder' => 'Indiquez l\'adresse correspondante',
-                ],
-                'mapped' => false,
-            ])*/
+            ])
             ->add('lieuCP', TextType::class, [
                 'label' => 'Code postal',
                 'attr' => [
@@ -121,16 +114,7 @@ class SortieType extends AbstractType
                 ],
                 'mapped' => false,
                 'required' => false,
-            ])/*
-            ->add('lieuCoordonnees', TextType::class, [
-                'label' => 'Latitude / Longitude',
-                'attr' => [
-                    'placeholder' => '41.40338, 2.17403',
-                ],
-                'mapped' => false,
-                'required' => false,
-                'help' => 'Si vous le souhaitez, facilitez vos retrouvailles en indiquant les coordonées GPS du lieu de rencontre',
-            ])*/
+            ])
             ->add('enregistrer', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr' => [

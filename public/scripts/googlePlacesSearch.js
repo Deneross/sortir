@@ -65,6 +65,7 @@ function searchPlaces(recherche, ville) {
 }
 
 function ajouterLieu(place){
+    place.dataset.selected="true";
     place.querySelector("button").remove();
 
     const remove = document.createElement("button");
@@ -78,6 +79,7 @@ function ajouterLieu(place){
 }
 
 function removeLieu(place) {
+    delete place.dataset.selected;
     place.querySelector("button").remove();
 
     const ajout = creationBtnAjout(place);

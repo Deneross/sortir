@@ -14,6 +14,7 @@ use App\Repository\SortieRepository;
 use App\Service\FromUserToParticipant;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class FormAndShow
 {
@@ -46,15 +47,19 @@ class FormAndShow
     public function createSortie(
         Campus        $campus,
         FormInterface $form,
-        Sortie        $sortie
+        Sortie        $sortie,
+        Request       $request,
     ): void
     {
         try {
-            //Gestion du lieu affilié à la sortie
+            //Nouvelle gestion du lieu en JSON traité dans son service
+            $this->lieuService->createLieuFromJSON($request, $sortie, $form, $this->em);
+
+            /*//Gestion du lieu affilié à la sortie
             $lieu = $this->lieuService->createLieuFromSortie($form);
             $this->em->persist($lieu);
+            $sortie->addLieux($lieu);*/
 
-            $sortie->addLieux($lieu);
             $sortie->setCampus($campus);
             $this->etatService->setSortieEtatFromForm($sortie, $form);
 
@@ -139,7 +144,7 @@ class FormAndShow
         $this->em->flush();
     }
 
-    public function cancelSortie(Sortie $sortie, String $motif): void
+    public function cancelSortie(Sortie $sortie, string $motif): void
     {
         $sortie->setCancel(true);
 
@@ -150,7 +155,8 @@ class FormAndShow
         $this->em->flush();
     }
 
-    public function exceptionIfCannotRead(Sortie $sortie): void {
+    public function exceptionIfCannotRead(Sortie $sortie): void
+    {
         if ($sortie->getEtat() === $this->etatRepo->find(7)) {
             throw new SortieIllegalDisplay(
                 'Le sortie est archivée, il n\'est plus possible de la consulter'

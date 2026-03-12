@@ -93,7 +93,7 @@ final class SortieController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $sortieService->createSortie($infoCampus, $form, $newSortie);
+                $sortieService->createSortie($infoCampus, $form, $newSortie, $request);
 
                 $this->addFlash('success', 'La sortie est prête ! Découvrez en tous les détails ici');
                 return $this->redirectToRoute('sortie_show', ['id' => $newSortie->getId()]);
