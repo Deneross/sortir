@@ -12,21 +12,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class PlacesApi extends AbstractController
 {
-    #[Route('/api/places', methods: ['POST'])]
+    #[Route('sortie/api/places', methods: ['POST'])]
     public function search(
         Request             $request,
         GooglePlacesService $api,
-        VilleRepository $repo
     ): JsonResponse
     {
         $data = $request->toArray();
 
-        //todo: remettre bien une fois qu'on passe par l'interface
-        /*$recherche = $data["recherche"] ?? null;
-        $ville = $data["ville"] ?? null;*/
-        $recherche = $data["recherche"] ?? null;
-        $ville = $repo->findOneBy(["name" => $data["ville"]]);
-
+        $recherche = $data["recherche"];
+        $ville = $data["ville"];
 
         if (!$recherche) {
             return $this->json([
@@ -39,7 +34,13 @@ class PlacesApi extends AbstractController
             ], 400);
         }
 
-        $resultat = $api->searchPlaces($recherche,$ville);
+        try {
+            $resultat = $api->searchPlaces($recherche, $ville);
+        } catch (\Exception $e) {
+            throw new \Exception(
+                'Une erreur est survenue avec l\'appel de l\'Api de recehrche ' . $e->getMessage(),
+                $e->getCode());
+        }
         return $this->json($resultat);
     }
 

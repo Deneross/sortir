@@ -23,8 +23,16 @@
             {{ form_row(form.lieuVille) }}
             {{ form_row(form.lieuCP) }}
             {{ form_row(form.lieuNom) }}
-            {{ form_row(form.lieuRue) }}
-            {{ form_row(form.lieuCoordonnees) }}
+            <button type="button" id="search-place-btn" class="btn btn-sm btn-outline-primary mb-1">Rerchercher</button>
+            <div id="places_container">
+                <p class="text-secondary">Lancer une recherche sur le ou les lieux de votre sortie en indiquant la ville et un critère de lieu ci-dessus.</p>
+                <select name="1" id="1" class="form-switch" multiple>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                </select>
+            </div>
+            {#{{ form_row(form.lieuRue) }}
+            {{ form_row(form.lieuCoordonnees) }}#}
         </div>
         <div class="col-12 ustify-content-center align-content-around">
             {{ form_row(form.infosSortie) }}
@@ -58,5 +66,6 @@
 
 {% block scriptComplementaire %}
     <script src="{{ asset('scripts/findVilleCp.js') }}" defer></script>
+    <script src="{{ asset('scripts/googlePlacesSearch.js') }}" defer></script>
 {% endblock %}
 

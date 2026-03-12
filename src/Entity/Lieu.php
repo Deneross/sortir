@@ -37,6 +37,12 @@ class Lieu
     #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'lieux')]
     private Collection $sorties;
 
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $latitude = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $longitude = null;
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
@@ -124,5 +130,29 @@ class Lieu
 
     public function __toString(): string{
         return $this->name;
+    }
+
+    public function getLatitude(): ?string
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?string $latitude): static
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?string
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?string $longitude): static
+    {
+        $this->longitude = $longitude;
+
+        return $this;
     }
 }

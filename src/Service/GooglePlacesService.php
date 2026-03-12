@@ -20,9 +20,9 @@ class GooglePlacesService
         $this->apiKey = $googlePlacesApiKey;
     }
 
-    public function searchPlaces(string $recherche, Ville $ville): array
+    public function searchPlaces(string $recherche, string $ville): array
     {
-        $searchText = $recherche . ' à ' . $ville->getName() . ', France';
+        $searchText = $recherche . ' à ' . $ville . ', France';
         $response = $this->httpClient->request(
             'POST',
             'https://places.googleapis.com/v1/places:searchText',
